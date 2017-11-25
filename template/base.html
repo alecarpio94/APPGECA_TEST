@@ -1,0 +1,94 @@
+{% load staticfiles %}
+
+{% block extrahead%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>{%block title%}{% endblock title%}</title> 
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ie10-viewport-bug-workaround.css' %}">
+  <script type="text/javascript" src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/starter-template.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/all.css' %}">
+</head>
+
+<body>
+  <div class="navbar-wrapper">
+    <div class="container">
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <label class="navbar-brand">APPGECA</label>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/">Inicio</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quienes Somos <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/quienes_somos/">Reseña Historica</a></li>
+                  <li><a href="/mision_vision/">Mision/Vision</a></li>
+                </ul>
+              </li>
+              <li><a href="/cronograma/">Cronograma</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contacto <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/preguntas/">Preguntas Frecuentes</a></li>
+                  <li><a href="/contacto/">Ubicanos</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">  
+              <li>
+               <li>
+                <a href="/login/" role="button" aria-haspopup="true">Intranet</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+{% block content%}
+{% endblock content %}
+{% endblock %}
+{% block footer %}
+<footer id="footer" class="midnight-blue" style="color: black;">
+  <p class="pull-right btn btn-primary"><a href="#" style="color: white;">Volver Arriba</a></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0; margin-left: 46%;margin-top: -7px;" src="https://i.creativecommons.org/l/by-nd/4.0/88x31.png" /></a>
+        <center>
+        &copy; |Programadores| |U.P.T.P .J.J "Montilla"|</c></maquee>
+        <c><la style="margin-top: 0%;">Carpio Jose, Morillo Miguel, Salazar Saddiell, Lopez Tomas |</la></c> <p>Derecho Reservado  2017-2018</p>
+      </center>
+    </div>
+  </div>
+</footer> 
+{% endblock footer %}
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{% static 'js/jquery.min.js'%}"><\/script>')</script>
+<script type="text/javascript" src="{% static 'js/holder.min.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/ie10-viewport-bug-workaround.js'%}"></script>
+{% endblock %}
+</html>

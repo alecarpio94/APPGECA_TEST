@@ -1,0 +1,55 @@
+{% extends  'base_admin.html' %}
+{%block title%}Editar Profesor{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Nuevo Profesor</h1>
+      <p>Actualizacion Del Profesor</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Actualizacion</li>
+        <li><a href="#">Profesor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <div class="Alumno">
+                <form class="form-horizontal" method="POST">{% csrf_token %}
+                  <fieldset>
+                    <legend>Actulizar</legend>
+                    <div class="FormGroup">
+                      {{ form.label_tag }}
+                      {{ form }}
+                    </div>
+                    {% if form.errors %}
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                          <h4>Alerta!</h4>                    
+                            {{ form.errors.cedula_profesor }}
+                            {{ form.errors.nombre_profesor }}
+                            {{ form.errors.apellido_profesor }}
+                            {{ form.errors.asignacion }}
+                      </div>
+                    {% endif %}
+                      <button class="btn btn-primary" value="Guardar"> Actualizar </button>  
+                    </div> 
+                  </form>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

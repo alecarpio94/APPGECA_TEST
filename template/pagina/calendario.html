@@ -1,0 +1,210 @@
+{% load staticfiles %}
+
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta charset='utf-8'>
+<head>
+    <title>Cronograma APPGECA</title>
+    <meta name="description" content="A method for responsive tables">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ie10-viewport-bug-workaround.css' %}">
+    <script type="text/javascript" src="{% static 'js/ie-emulation-modes-warning.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/starter-template.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body, html {
+			padding:0px;
+			margin:0px;
+			background: url('/static/img/background-1.jpg') center;
+			background-size:cover;
+			background-attachment: fixed;
+			text-align:center;
+			color:#fff;
+			line-height: 1.4em;
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+		}
+		body {
+			padding:10vh 0;
+		}
+		h1 {
+			font-family: 'Yanone Kaffeesatz', sans-serif;
+			text-align: center;
+			font-size: 77px;
+			text-shadow: 0 0px 30px rgba(0, 0, 0, 0.2);
+		}
+		h2 {
+			font-family: 'Yanone Kaffeesatz', sans-serif;
+			font-size:30px;
+			text-shadow: 0 0px 20px rgba(0, 0, 0, 0.3);
+			color:#fff;
+		}
+		.monthly {
+			box-shadow: 0 13px 40px rgba(0, 0, 0, 0.5);
+			font-size: 0.8em;
+		}
+
+		input[type="text"] {
+			padding: 15px;
+			border-radius: 2px;
+			font-size: 16px;
+			outline: none;
+			border: 2px solid rgba(255, 255, 255, 0.5);
+			background: rgba(63, 78, 100, 0.27);
+			color: #fff;
+			width: 250px;
+			box-sizing: border-box;
+			font-family: "Trebuchet MS", Helvetica, sans-serif;
+		}
+		input[type="text"]:hover {
+			border: 2px solid rgba(255, 255, 255, 0.7);
+		}
+		input[type="text"]:focus {
+			border: 2px solid rgba(255, 255, 255, 1);
+			background:#eee;
+			color:#222;
+		}
+
+		.button {
+			display: inline-block;
+			padding: 15px 25px;
+			margin: 25px 0 75px 0;
+			border-radius: 3px;
+			color: #fff;
+			background: #000;
+			letter-spacing: .4em;
+			text-decoration: none;
+			font-size: 13px;
+		}
+		.button:hover {
+			background: #3b587a;
+		}
+		.desc {
+			max-width: 250px;
+			text-align: left;
+			font-size:14px;
+			padding-top:30px;
+			line-height: 1.4em;
+		}
+		.resize {
+			background: #222;
+			display: inline-block;
+			padding: 6px 15px;
+			border-radius: 22px;
+			font-size: 13px;
+		}
+		@media (max-height: 700px) {
+			.sticky {
+				position: relative;
+			}
+		}
+		@media (max-width: 600px) {
+			.resize {
+				display: none;
+			}
+		}
+	</style>
+	<link rel="stylesheet" href="{% static 'css/monthly.css'%}">
+</head>
+<body>
+    <div class="navbar-wrapper">
+      <div class="container">
+      
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <label class="navbar-brand">APPGECA</label>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="/">Inicio</a></li>
+                  <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quienes Somos <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/quienes_somos/">Reseña Historica</a></li>
+                    <li><a href="/mision_vision/">Mision/Vision</a></li>
+                  </ul>
+                </li>
+                <li><a href="/cronograma/">Cronograma</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contacto <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/preguntas/">Preguntas Frecuentes</a></li>
+                    <li><a href="/contacto/">Ubicanos</a></li>
+                  </ul>
+                </li>
+
+              </ul>
+              <ul class="nav navbar-nav navbar-right">  
+                  <li>
+                  <a href="/login/" role="button" aria-haspopup="true">Intranet</a>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+
+<div class="page">
+		<h1>Cronograma De Actividades</h1>
+		<div style="width:100%; max-width:850px; display:inline-block;">
+			<div class="monthly" id="mycalendar"></div>
+		</div>
+		<br><br>
+		
+		<br>
+</div> 
+<footer id="footer" class="midnight-blue" style="color: black;">
+    <p class="pull-right btn btn-primary"><a href="#" style="color: white;">Volver Arriba</a></p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <a rel="license" href="http://creativecommons.org/licenses/by-nd/4.0/"><img alt="Licencia de Creative Commons" style="border-width:0; " src="https://i.creativecommons.org/l/by-nd/4.0/88x31.png" /></a>
+                <center>
+                   &copy; |Programadores| |U.P.T.P .J.J "Montilla"|</c></maquee>
+                    <c><la style="margin-top: -1%;">Carpio Jose, Morillo Miguel, Salazar Saddiell, Lopez Tomas |</la></c> <p>Derecho Reservado  2017-2018</p>
+                </center>
+            </div>
+        </div>
+</footer> 
+<!-- JS ======================================================= -->
+<script>window.jQuery || document.write('<script src="{% static 'js/jquery.min.js'%}"><\/script>')</script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
+<script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/monthly.js'%}"></script>
+<script type="text/javascript">
+	$(window).load( function() {
+
+		$('#mycalendar').monthly({
+			mode: 'event',
+			xmlUrl: 'eventos.xml'
+		});
+
+	switch(window.location.protocol) {
+	case 'http:':
+	case 'https:':
+	// running on a server, should be good.
+	break;
+	case 'file:':
+	alert('Just a heads-up, events will not work when run locally.');
+	}
+
+	});
+</script>
+
+</body>
+</html>
+
+{% endblock content %}

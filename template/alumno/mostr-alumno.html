@@ -1,0 +1,61 @@
+{% extends  'base_admin.html' %}
+{%block title%}Listado De Alumnos{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Lista De Alumnos</h1>
+      <ul class="breadcrumb side">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Movimiento</li>
+        <li class="active"><a href="#">Alumnos</a></li>
+      </ul>
+    </div>
+    <div><a class="btn btn-primary btn-flat" href="/nuevo_alumno/"><i class="fa fa-lg fa-plus"></i></a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Cedula</th>
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 89px;">Nombre</th>
+                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Apellido</th>
+                        <th> Editar </th>
+                        <th> Eliminar </th>
+                      </thead>
+
+                      <tbody>
+                        {% if object_list %}
+                        {% for alumno in object_list %}
+                        <tr class="odd">
+                          <td>{{ alumno.cedula_alumno }}</td>
+                          <td>{{ alumno.primer_nombre }}</td>
+                          <td>{{ alumno.primer_apellido }}</td>
+                          <td td class="active"><a href="{% url 'alumno:editar_alumno' alumno.cedula_alumno %}"  class="btn btn-info" >Editar</a>
+                            <td class="active"><a href="{% url 'alumno:eliminar_alumno' alumno.cedula_alumno %}" class="btn btn-danger">Eliminar</a></td>
+                          </tr>
+                          {% endfor %}
+                          {% else %}
+                          <td valign="top" colspan="3" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                          {% endif %}  
+                        </tbody></table></div></div>
+                      </div>              </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </body>
+{% endblock content %}

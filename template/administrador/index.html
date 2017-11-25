@@ -1,0 +1,18 @@
+{% extends  'base_admin.html' %}
+{%block title%}APPGECA Admin{% endblock title%}
+{% load staticfiles %}
+{% if USE_SESSION_AUTH %}
+    {% csrf_token %}
+    {% if request.user.is_authenticated %}
+		{% block content %}
+		<div class="content-wrapper">
+		  <div class="card" align="center">
+
+		    <h3>Bienvenido Nuevamente {{user.first_name}} {{user.last_name}}</h3>
+		    <h4>Inicio Sesión: {{ user.last_login }}</h4>
+
+		  </div>
+
+		{% endblock content %}
+	{% endif %}
+{% endif %}

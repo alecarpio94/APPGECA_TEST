@@ -1,0 +1,65 @@
+{% extends  'base_admin.html' %}
+{%block title%}Nuevo Instrumento{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Registrar Instrumento</h1>
+      <p>Inventario Para Un Instrumento</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Forms</li>
+        <li><a href="#">Form Components</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="POST">{% csrf_token %}
+                <fieldset>
+                  <legend>Registro</legend>
+                  <div class="FormGroup">
+                    <label>Instrumento</label>
+                    <div name="nombr_instr">{{ form.nombr_instr }}</div>
+
+                    <label>Stock Minimo</label>
+                    <input class="vIntegerField" id="id_stock_min" name="stock_min" required onKeyPress="return SoloNumeros(event);">
+
+                    <label>Stock Maximo</label>
+                    <input class="vIntegerField" id="id_stock_max" name="stock_max" required onKeyPress="return SoloNumeros(event);">
+
+                    <label>Disponibles</label>
+                    <input class="vIntegerField" id="id_disponibles" name="disponibles" required onKeyPress="return SoloNumeros(event);">
+
+                    <label>En Uso</label>
+                    <input class="vIntegerField" id="id_uso" name="uso" required onKeyPress="return SoloNumeros(event);">
+                    <hr>
+                    {% if form.erros %}
+                    <div class="alert alert-dismissible alert-danger">
+                      <button class="close" type="button" data-dismiss="alert">×</button>
+                      <h4>Alerta!</h4>
+                      {{ form.errors.nombr_instr }}
+                      {{ form.errors.stock_min }}
+                      {{ form.errors.stock_max }}
+                      {{ form.errors.disponibles }}
+                      {{ form.errors.uso }}
+                    </div>
+                    {% endif %}
+                    <button class="btn btn-primary">crear</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+{% endblock content %}

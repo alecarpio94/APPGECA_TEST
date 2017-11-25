@@ -1,0 +1,101 @@
+{% extends  'base_admin.html' %}
+{%block title%}Nuevo Usuario{% endblock title%}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Nuevo Usuario</h1>
+      <p>Formulario Para El Registro De Un Nuevo Usuario</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Registro</li>
+        <li><a href="#">Usuario</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="POST">{% csrf_token %}
+                {{form.as_tb}}
+                <fieldset>
+                  <legend>Registro</legend>
+
+                  <div class="title-flat-form"><h1>REGISTRA LA INSCRIPCION</h1></div>
+                  <div class="FormGroup">
+                    <label for="id_ci">Cédula:</label>
+                    <input autofocus="" id="id_ci" maxlength="8" name="ci" type="text" class="form-control" required="">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_username">Nombre de usuario:</label>
+                    <input id="id_username" maxlength="40" name="username" type="text" class="form-control">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_first_name">Nombre:</label>
+                    <input id="id_first_name" maxlength="40" name="first_name" class="form-control" type="text" required="">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_last_name">Apellidos:</label>
+                    <input id="id_last_name" maxlength="40" name="last_name" class="form-control" type="text" required="">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_is_administrador">Administrador:</label>
+                    <input type="checkbox" name="is_administrador" id="id_is_administrador" checked="checked">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_is_usuario">Usuario:</label>
+                    <input id="id_is_usuario" name="is_usuario" type="checkbox">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_is_staff">Staff Status:</label>
+                    <input id="id_is_staff" class="form-control" name="is_staff" type="checkbox">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_is_superuser">Superuser Status:</label>
+                    <input id="id_is_superuser" name="is_superuser" type="checkbox">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_password1">Contraseña:</label>
+                    <input id="id_password1" name="password1" type="password" class="form-control" required="">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <label for="id_password2">Contraseña (confirmación):</label>
+                    <input id="id_password2" name="password2" type="password" class="form-control" required="">
+
+                  </div>
+
+                  <div class="FormGroup">
+                    <button class="btn btn-primary" type="submit" href="/nuevo profesor/" value="siguiente">Submit</button>
+                  </div>
+                </fieldset></form></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}

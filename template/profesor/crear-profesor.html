@@ -1,0 +1,61 @@
+{% extends  'base_admin.html' %}
+{%block title%}Nuevo Profesor{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Nuevo Profesor</h1>
+      <p>Formulario Para El Registro De Un Nuevo Profesor</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Registro</li>
+        <li><a href="#">Profesor</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="well bs-component">
+              <form class="form-horizontal" id="form-prof" method="POST">{% csrf_token %}
+                <fieldset>
+                  <legend>Registro</legend>
+                  <div class="FormGroup">
+                    <label >Cedula:</label>
+                    <input required onKeyPress="return SoloNumeros(event);" name="cedula_profesor" id="id_cedula_profesor" minlength="8">
+                    
+                    <label >Nombre Del Profesor:</label>
+                    <input type="text" id="id_nombre_profesor" required onkeypress="return soloLetras(event);" name="nombre_profesor">
+                    
+                    <label >Apellido Del Profesor:</label>
+                    <input type="text" id="id_apellido_profesor" name="apellido_profesor" required onkeypress="return soloLetras(event);">
+
+                    <label >Asignacion:</label>
+                    <div name="asignacion">{{ form.asignacion }}</div>
+                    <hr>
+                    {% if form.errors %}
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                          <h4>Alerta!</h4>                    
+                            {{ form.errors.cedula_profesor }}
+                            {{ form.errors.nombre_profesor }}
+                            {{ form.errors.apellido_profesor }}
+                            {{ form.errors.asignacion }}
+                      </div>
+                    {% endif %}
+                  </div>
+                  <button class="btn btn-primary">Crear</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

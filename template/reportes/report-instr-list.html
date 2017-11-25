@@ -1,0 +1,62 @@
+{% extends  'base_admin.html' %}
+{%block title%}Reporte Alumnos{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title hidden-print">
+    <div>
+      <h1><i class="fa fa-file-text-o"></i> Reporte</h1>
+      <p>Reporte De La Lista De Instrumentos</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li><a href="/bienvenido/">Inicio</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <section class="invoice">
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 class="page-header"><i class="fa fa-globe"></i> Listado De Los Instrumentos<small class="pull-right">Fecha: {{ date }}</small></h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                    <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column descending" style="width: 89px;" aria-sort="ascending">Nombre</th>
+                    <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Stock Minimo</th>
+                    <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Stock Maximo</th>
+                    <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Cantidad En Uso</th>
+                    </tr>
+                <tbody>
+                {% if object_list %}
+                {% for instrumento in object_list %}
+                <tr class="odd">
+                  <td>{{ instrumento.nombr_instr }}</td>
+                  <td>{{ instrumento.stock_min }}</td>
+                  <td>{{ instrumento.stock_max }}</td>
+                  <td>{{ instrumento.uso }}</td>
+                  </tr>
+                {% endfor %}
+                {% else %}
+                <td valign="top" colspan="7" class="dataTables_empty" align="center">No hay instrumentos registrados</td>
+                {% endif %}  
+              </table>
+            </div>
+          </div>
+          <div class="row hidden-print mt-20">
+            <div class="col-xs-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Imprimir</a></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}  

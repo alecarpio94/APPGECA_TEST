@@ -1,0 +1,159 @@
+{% load staticfiles %}
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- CSS-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
+	<!-- Font-icon css-->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+	<script src="{% static 'js/form_validation.js' %}"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" charset="utf-8"  >
+	function nobackbutton(){
+	window.location.hash="no-back-button";
+	    window.location.hash="Again-No-back-button" //chrome
+	    window.onhashchange=function(){window.location.hash="no-back-button";}
+	  }    
+	  </script>  
+	<title>{%block title%}{% endblock title%}</title> 
+
+</head>
+<body class="sidebar-mini fixed">
+	<div class="wrapper">
+		<header class="main-header hidden-print" ><a class="logo" href="#">APPGECA</a>
+			<nav class="navbar navbar-static-top">
+				<a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
+				<div class="navbar-custom-menu">
+					<ul class="top-nav">
+						<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
+			              <ul class="dropdown-menu settings-menu">
+			                <li><a href="#"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
+							<li><a href="/logout/"><i class="fa fa-sign-out fa-lg"></i> Salir</a></li>
+			              </ul>
+			          	</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<aside class="main-sidebar hidden-print">
+			<section class="sidebar">
+				<div class="user-panel">
+					<div class="pull-left image"><img class="img-circle" src="{% static 'img/avatar-admin.png' %}" alt="User Image"></div>
+					<div class="pull-left info">
+						<p>Bienvenido</p>
+						{% if request.user.is_secretaria %}
+						<p class="designation">Administrador</p>
+						{% endif %}
+						{% if request.user.is_profesor %}
+						<p class="designation">Profesor</p>							    
+						{% endif %}
+						{% if request.user.is_alumno %}
+						<p class="designation">Alumno</p>							
+						{% endif %}
+					</div>
+				</div>
+				<!-- Sidebar Menu-->
+				<ul class="sidebar-menu">
+					<li class="active"><a href="/bienvenido/"><i class="fa fa-dashboard"></i><span>Inicio</span></a></li>
+					{% if request.user.is_secretaria %}
+					<li class="treeview"><a href="#"><i class="fa fa-edit"></i><span>Registro</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href="/nuevo_alumno/"><i class="fa fa-circle-o"></i> Registrar Alumno</a></li>
+							<li><a href="/nuevo_profesor/"><i class="fa fa-circle-o"></i> Registrar Profesor</a></li>
+							<li><a href="/nuevo_instrumento/"><i class="fa fa-circle-o"></i> Registrar Instrumento</a></li>
+							<li><a href="/nueva_actividad/"><i class="fa fa-circle-o"></i> Registrar Actividad</a></li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Listado</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href="/listado_de_alumno/"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
+							<li><a href="/listado_de_profesor/"><i class="fa fa-circle-o"></i> Listado De Profesores</a></li>
+							<li><a href="/listado_de_instrumento/"><i class="fa fa-circle-o"></i>Listado De Instrumentos</a></li>
+							<li><a href="/listado_de_actividades/"><i class="fa fa-circle-o"></i>Listado De Actividades</a></li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Movimiento</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href="/movimiento_de_alumno/"><i class="fa fa-circle-o"></i> Actulizar Alumno</a></li>
+							<li><a href="/movimiento_de_profesor/"><i class="fa fa-circle-o"></i> Actulizar Profesor</a></li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Reportes</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href=""><i class="fa fa-circle-o"></i> Constancia De Estudio</a></li>
+						 	<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i><span> Listados</span><i class="fa fa-angle-right"></i></a>
+			              	<ul class="treeview-menu">
+			                	<li><a href="/reporte_lista_alumnos/"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
+			                	<li><a href="/reporte_lista_profesores/"><i class="fa fa-circle-o"></i><span> Listado De Profesores</span></a></li>
+			                	<li><a href="/reporte_lista_instrumentos/"><i class="fa fa-circle-o"></i><span> Listado De Instrumentos</span></a></li>
+			              	</ul>
+			            	</li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Manual De Usuario</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href=""><i class="fa fa-circle-o"></i> Ayuda</a></li>
+						</ul>
+					</li>
+					{% endif %}
+					{% if request.user.is_profesor %}
+					<li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Listado</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href="#"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
+							<li><a href="/listado_de_actividades/"><i class="fa fa-circle-o"></i>Listado De Actividades</a></li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Reportes</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href=""><i class="fa fa-circle-o"></i> Constancia De Estudio</a></li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Manual De Usuario</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href=""><i class="fa fa-circle-o"></i> Ayuda</a></li>
+						</ul>
+					</li>
+					{% endif %}
+				</ul>
+			</section>
+		</aside>
+
+{% block content%}
+{% endblock content %}
+{% block javascript %}
+<!-- Javascripts-->
+<script src="{% static 'js/jquery-2.1.4.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/plugins/pace.min.js'%}"></script>
+<script src="{% static 'js/main.js'%}"></script>
+<script src="{% static 'js/form_validation.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.js'%}"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();
+$(document).ready(function() {
+	$('#example').dataTables_filter({
+		"language": {
+			"Search:": "Buscar:",
+			"paginate": {
+				"first":    "Primero",
+				"last":    "Último",
+				"next":    "Siguiente",
+				"previous": "Anterior"
+			},
+		}
+	});
+} );
+
+</script>
+{% endblock %}
+</body>
+</html>
