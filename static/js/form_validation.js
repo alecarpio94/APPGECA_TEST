@@ -1,27 +1,3 @@
-function alumForm(){
-  var regexp = /^[0-9a-zA-Z._.-]+\@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/;
-
-  if (document.form.nacionalidad.selectdIndex==0) {
-    alert("Debe Seleccionar Una Opcion!")
-  }
-  return 0;
-
-
-  cedula = document.form.cedula_alumno.value;
-  if( !(/^\d{8}$/.test(cedula)) ) {
-    alert("Debe Ingresar El Dato Correctamente");
-    document.form.cedula_alumno.focus();
-    return 0;
-  }
-
-  if (document.form.primer_nombre.value.length==0){
-    alert("Tiene que escribir su nombre");
-    document.form.primer_nombre.focus();
-    return 0;
-  }
-  
-}
-
 //Se utiliza para que el campo de texto solo acepte numeros
 function SoloNumeros(evt){
  if(window.event){//asignamos el valor de la tecla a keynum
@@ -55,41 +31,104 @@ function soloLetras(e) {
     }
 
     if(letras.indexOf(tecla) == -1 && !tecla_especial){
-alert('Tecla no aceptada');
+  //alert('Tecla no aceptada');
         return false;
       }
 }
 
-//$(document).ready(function()
-//  {
-//  $("#id_cedula_profesor").focus(function(){
-//        $(this).css("background-color", "#FFFFCC");
-//  });
- 
-// });
+function Disable()
+{
+  document.auth.id_is_secretaria.disabled=false;
+  document.auth.id_is_profesor.disabled=false;
+  document.auth.id_is_alumno.checked=false;
+  document.auth.id_is_superuser.disabled=false;
+  document.auth.id_is_staff.checked=false;
+}
+function Enable()
+{
+  document.auth.id_is_alumno.checked=false;
+  document.auth.id_is_secretaria.disabled=false;
+  document.auth.id_is_profesor.disabled=false;
+  document.auth.id_is_superuser.disabled=false;
+  document.auth.id_is_staff.checked=false;
+}
 
-$('.datepicker').datepicker()
-
-var nowTemp = new Date();
-var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+function habilitarCincoTextBox()
+{
+   var Check1 = document.getElementById('id_is_secretaria'); 
+   var Check2 = document.getElementById('id_is_profesor'); 
+   var Check3 = document.getElementById('id_is_alumno');
+   var Check4 = document.getElementById('id_is_superuser');
+   var Check5 = document.getElementById('id_is_staff');
  
-var checkin = $('#fecha_inic').datepicker({
-  onRender: function(date) {
-    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    if (Check1.checked==true) 
+    {
+        Check2.disabled = true;
+        Check3.disabled = true;
+        Check4.disabled = false;
+        Check5.disabled = true;
+    }
+    else
+    {   
+        Check2.disabled = false;
+        Check3.disabled = false;
+        Check4.disabled = true;
+        Check5.disabled = true;
+   }
   }
-}).on('changeDate', function(ev) {
-  if (ev.date.valueOf() > checkout.date.valueOf()) {
-    var newDate = new Date(ev.date)
-    newDate.setDate(newDate.getDate() + 1);
-    checkout.setValue(newDate);
+
+function habilitarCincoTextBox2()
+{
+  var Check1 = document.getElementById('id_is_secretaria'); 
+  var Check2 = document.getElementById('id_is_profesor'); 
+  var Check3 = document.getElementById('id_is_alumno');
+  var Check4 = document.getElementById('id_is_superuser');
+  var Check5 = document.getElementById('id_is_staff');
+ 
+  if (Check2.checked==true)
+  {
+    Check1.disabled = true;
+    Check3.disabled = true;
+    Check4.disabled = true;
+    Check5.disabled = false;
   }
-  checkin.hide();
-  $('#fecha_fina')[0].focus();
-}).data('datepicker');
-var checkout = $('#dpd2').datepicker({
-  onRender: function(date) {
-    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+  else
+  {   
+        Check1.disabled = false;
+        Check3.disabled = false;
+        Check4.disabled = true;
+        Check5.disabled = true;
+   }
+
+}
+
+function habilitarCincoTextBox3()
+{
+  var Check1 = document.getElementById('id_is_secretaria'); 
+  var Check2 = document.getElementById('id_is_profesor'); 
+  var Check3 = document.getElementById('id_is_alumno');
+  var Check4 = document.getElementById('id_is_superuser');
+  var Check5 = document.getElementById('id_is_staff');
+ 
+  if (Check3.checked==true)
+  {
+    Check1.disabled = true;
+    Check2.disabled = true;
+    Check4.disabled = true;
+    Check5.disabled = true;
   }
-}).on('changeDate', function(ev) {
-  checkout.hide();
-}).data('datepicker');
+  else
+  {   
+        Check1.disabled = false;
+        Check2.disabled = false;
+        Check4.disabled = true;
+        Check5.disabled = true;
+   }
+
+}
+
+function copiar()
+{
+  document.getElementById("id_password").value=document.getElementById("id_ci").value;
+  document.getElementById("id_password2").value=document.getElementById("id_ci").value;
+}

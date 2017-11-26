@@ -11,7 +11,7 @@
         <li class="active">Usuarios</li>
       </ul>
     </div>
-    <div><a class="btn btn-primary btn-flat" href="/new_user/"><i class="fa fa-lg fa-plus"></i></a></div>
+    <div><a class="btn btn-primary btn-flat" href="/add/"><i class="fa fa-lg fa-plus"></i></a></div>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -35,8 +35,8 @@
                         {% for Users in object_list %}
                         <tr class="odd">
                           <td>{{ Users.ci }}</td>
-                          <td td class="active"><a href="{% url 'login:update' Users.ci %}"  class="btn btn-info" >Editar</a>
-                            <td class="active"><a href="#" class="btn btn-danger">Eliminar</a></td>
+                          <td td class="active"><a href="{% url 'auth:update' Users.ci %}"  class="btn btn-info" >Editar</a>
+                            <td class="active"><a href="{% url 'auth:delete' Users.ci %}" class="btn btn-danger">Eliminar</a></td>
                           </tr>
                           {% endfor %}
                           {% else %}

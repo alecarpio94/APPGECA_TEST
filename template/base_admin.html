@@ -32,7 +32,9 @@
 					<ul class="top-nav">
 						<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
 			              <ul class="dropdown-menu settings-menu">
-			                <li><a href="#"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
+			              	{% if request.user.is_secretaria %}
+			                	<li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
+			              	{% endif %}
 							<li><a href="/logout/"><i class="fa fa-sign-out fa-lg"></i> Salir</a></li>
 			              </ul>
 			          	</li>
@@ -60,7 +62,7 @@
 				<!-- Sidebar Menu-->
 				<ul class="sidebar-menu">
 					<li class="active"><a href="/bienvenido/"><i class="fa fa-dashboard"></i><span>Inicio</span></a></li>
-					{% if request.user.is_secretaria %}
+					{% if request.user.is_superuser %}
 					<li class="treeview"><a href="#"><i class="fa fa-edit"></i><span>Registro</span><i class="fa fa-angle-right"></i></a>
 						<ul class="treeview-menu">
 							<li><a href="/nuevo_alumno/"><i class="fa fa-circle-o"></i> Registrar Alumno</a></li>
@@ -119,9 +121,38 @@
 						</ul>
 					</li>
 					{% endif %}
+					{% if request.user.is_alumno %}
+					<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Reportes</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href=""><i class="fa fa-circle-o"></i> Constancia De Estudio</a></li>
+						</ul>
+					</li>
+					<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Manual De Usuario</span><i class="fa fa-angle-right"></i></a>
+						<ul class="treeview-menu">
+							<li><a href=""><i class="fa fa-circle-o"></i> Ayuda</a></li>
+						</ul>
+					</li>
+					{% endif %}
 				</ul>
 			</section>
 		</aside>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel" align="center">Configuracion De Usuarios</h4>
+					</div>
+					<div class="modal-body" align="center">
+						<a href="#" class="btn btn-primary" type="submit"> Actualizar Datos </a> 
+						<a href="/list_user/" class="btn btn-primary" type="submit"> Lista De Usuarios </a>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
 
 {% block content%}
 {% endblock content %}
@@ -152,7 +183,13 @@ $(document).ready(function() {
 		}
 	});
 } );
-
+$('#demoDate').datepicker({
+      	format: "dd/mm/yyyy",
+      	autoclose: true,
+      	todayHighlight: true
+      });
+      
+$('#demoSelect').select2();
 </script>
 {% endblock %}
 </body>

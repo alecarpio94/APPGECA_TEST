@@ -13,6 +13,7 @@ urlpatterns = [
 	##############################################################
     url(r'^list_user/$', UsersListView.as_view(), name='list'),
 	url(r'^update_user/(?P<pk>\d+)$', UsersUpdateView.as_view(),name='update'),
+	url(r'^delete_user/(?P<pk>\d+)$', UsersDeleteView.as_view(),name='delete'),
 	##############################################################
 	url(r'^accounts/login/$', error404.as_view(),name="ERROR_404"),
 	##############################################################

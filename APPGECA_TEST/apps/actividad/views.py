@@ -36,7 +36,7 @@ class actiCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 	template_name = 'actividades/crear-actividad.html'
 	success_url = '/listado_de_actividades/'
 
-class activListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+class activListView(LoginRequiredMixin,ListView):
 	context_object_name = 'Listasactividades'
 	model = Actividad
 	template_name = 'actividades/list-actividad.html'

@@ -36,10 +36,19 @@
                     <textarea class="vLargeTextField form-control" cols="40" id="id_descripcio" maxlength="500" name="descripcio" rows="10" style="resize: none;" required></textarea>
 
                     <label>Fecha De Inicio:</label>
-                    <input class="vDateField form-control" onclick="TimeToTimeStamp();" id="id_fecha_inic" name="fecha_inic" type="date" required>
+                    <input class="vDateField form-control" id="id_fecha_inic" name="fecha_inic" type="date" required>
 
-                    <label>Fecha De Culminacion:</label>
-                    <input class="vDateField form-control" onclick="comparaFecha(document.miform.result.value, document.miform.fecha_actual.value);" id="id_fecha_fina datepicker" name="fecha_fina" type="date" required>
+                    <label>Fecha De Culminacion:</label>  
+                    
+                    {% if form.fecha_inic == True %}
+                        
+                      <input class="vDateField form-control" id="id_fecha_fina" name="fecha_fina" type="date" required>
+                        
+                    {% else %}
+                        
+                      <input class="vDateField form-control" id="id_fecha_fina" name="fecha_fina" type="date" required>
+
+                    {% endif %}
                     <hr>
                     {% if form.errors %}
                       <div class="alert alert-dismissible alert-danger">

@@ -6,7 +6,7 @@ from .models import Users
 # Register your models here.
 # admin.site.register(Account)
 @admin.register(Users)
-class Users(UserAdmin):
+class User(UserAdmin):
     list_display = ('ci','is_secretaria','is_profesor','is_alumno','is_staff')
     list_filter = ('is_secretaria','is_profesor','is_alumno','is_staff', 'is_superuser', 'is_active', 'groups')
     search_fields = ('username', 'ci', 'first_name', 'last_name', 'email','is_secretaria','is_profesor','is_alumno')

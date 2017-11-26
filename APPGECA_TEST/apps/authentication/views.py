@@ -56,7 +56,23 @@ class UsersUpdateView(LoginRequiredMixin, AdminRequiredMixin, UpdateView):
     template_name = 'administrador/update_user.html'
     model = Users
     fields = ['username','first_name','last_name','email']
+    exclude = ('created_at', 'updated_at', 'groups', 'user_permissions',
+            'last_login', 'is_active', 'date_joined', 'password')
     success_url = '/list_user/'
+
+class UsersUpdateView(LoginRequiredMixin, AdminRequiredMixin, UpdateView):
+    model = Users
+    form_class = UsersUpdateModelForm
+
+    def get_success_url(self):
+        return reverse_lazy('auth:list_user', args=(self.object.pk,))
+
+
+class UsersDeleteView(LoginRequiredMixin, AdminRequiredMixin, DeleteView):
+    
+    model = Users
+    template_name = 'administrador/user_confirm_delete.html'
+    success_url = reverse_lazy('auth:list')
 
 # logout
 class LogoutView(LoginRequiredMixin, View):

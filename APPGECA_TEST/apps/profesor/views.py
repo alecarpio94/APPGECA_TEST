@@ -41,7 +41,7 @@ class profCreateView(LoginRequiredMixin,AdminRequiredMixin, CreateView):
 	template_name = 'profesor/crear-profesor.html'
 	success_url = '/listado_de_profesor/'
 
-class profListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+class profListView(LoginRequiredMixin,AdminRequiredMixin,ProfesorRequiredMixin,ListView):
 	context_object_name = 'Listaprofesor'
 	model = Profesor
 	template_name = 'profesor/list-profesor.html'

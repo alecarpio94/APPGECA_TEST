@@ -21,75 +21,97 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="well bs-component">
-              <form class="form-horizontal" method="POST">{% csrf_token %}
-                {{form.as_tb}}
+              <form class="form-horizontal" name="auth" method="POST">{% csrf_token %}
                 <fieldset>
                   <legend>Registro</legend>
 
                   <div class="title-flat-form"><h1>REGISTRA LA INSCRIPCION</h1></div>
-                  <div class="FormGroup">
-                    <label for="id_ci">Cédula:</label>
-                    <input autofocus="" id="id_ci" maxlength="8" name="ci" type="text" class="form-control" required="">
-
+                  <hr>
+                  <div class="title-flat-form">
+                    <h3>Datos Personales</h3>
+                    <br>
                   </div>
-
-                  <div class="FormGroup">
-                    <label for="id_username">Nombre de usuario:</label>
+                    {{ form.ci.label_tag }}
+                    <input autofocus="" id="id_ci" maxlength="8" name="ci" onKeyPress="return SoloNumeros(event);" onkeyup="copiar()" value="" class="form-control" required="">
+                    
+                    {{ form.username.label_tag }}
                     <input id="id_username" maxlength="40" name="username" type="text" class="form-control">
 
-                  </div>
+                    {{ form.first_name.label_tag }}
+                    <input id="id_first_name" maxlength="40" name="first_name" type="text" class="form-control" required="" onkeypress="return soloLetras(event);">
 
-                  <div class="FormGroup">
-                    <label for="id_first_name">Nombre:</label>
-                    <input id="id_first_name" maxlength="40" name="first_name" class="form-control" type="text" required="">
+                    {{ form.last_name.label_tag }}
+                    <input id="id_last_name" maxlength="40" name="last_name" type="text" class="form-control" required="" onkeypress="return soloLetras(event);">
 
-                  </div>
+                    {{ form.email.label_tag }}
+                    <input id="id_email" maxlength="254" name="email" type="email" class="form-control" required="">
+                    
+                    {% if form.password.is_hidden and form.password2.is_hidden %}
+                      {{ form.password.label_tag }}
+                      <input type="password" class="form-control" value="{{ ci }}" disabled="" name="pass1" id="id_password">
+                  
 
-                  <div class="FormGroup">
-                    <label for="id_last_name">Apellidos:</label>
-                    <input id="id_last_name" maxlength="40" name="last_name" class="form-control" type="text" required="">
+                      {{ form.password2.label_tag }}
+                      <input type="password" class="form-control" value="{{ ci }}" disabled="" name="pass2" id="id_password2">
+                    {% endif %}
+                    
+                    <hr> 
+                    <div class="titlle-flat-form">
+                      <h3>Permisos</h3>
+                      <br>
+                    </div>
 
-                  </div>
-
-                  <div class="FormGroup">
-                    <label for="id_is_administrador">Administrador:</label>
-                    <input type="checkbox" name="is_administrador" id="id_is_administrador" checked="checked">
-
-                  </div>
-
-                  <div class="FormGroup">
-                    <label for="id_is_usuario">Usuario:</label>
-                    <input id="id_is_usuario" name="is_usuario" type="checkbox">
-
-                  </div>
-
-                  <div class="FormGroup">
-                    <label for="id_is_staff">Staff Status:</label>
-                    <input id="id_is_staff" class="form-control" name="is_staff" type="checkbox">
-
-                  </div>
-
-                  <div class="FormGroup">
-                    <label for="id_is_superuser">Superuser Status:</label>
-                    <input id="id_is_superuser" name="is_superuser" type="checkbox">
-
-                  </div>
-
-                  <div class="FormGroup">
-                    <label for="id_password1">Contraseña:</label>
-                    <input id="id_password1" name="password1" type="password" class="form-control" required="">
-
-                  </div>
-
-                  <div class="FormGroup">
-                    <label for="id_password2">Contraseña (confirmación):</label>
-                    <input id="id_password2" name="password2" type="password" class="form-control" required="">
-
-                  </div>
-
-                  <div class="FormGroup">
-                    <button class="btn btn-primary" type="submit" href="/nuevo profesor/" value="siguiente">Submit</button>
-                  </div>
+                    <ul>  
+                      <div class="animated-checkbox">
+                      {{ form.is_secretaria.label_tag }}
+                        <label>
+                          <input type="checkbox" id="id_is_secretaria" onclick="habilitarCincoTextBox()"
+                           name="is_secretaria"><span class="label-text"></span>
+                        </label>
+                      </div>
+                    </ul>
+                    <ul>
+                      <div class="animated-checkbox">
+                      {{ form.is_profesor.label_tag }}
+                        <label>
+                          <input type="checkbox" id="id_is_profesor" name="is_profesor" onclick="habilitarCincoTextBox2()"><span class="label-text"></span>
+                        </label>
+                      </div>
+                    </ul>
+                    <ul>
+                      <div class="animated-checkbox">
+                      {{ form.is_alumno.label_tag }}
+                        <label>
+                          <input type="checkbox" onclick="habilitarCincoTextBox3()" id="id_is_alumno" name="is_alumno"><span class="label-text"></span>
+                        </label>
+                      </div>
+                    </ul>
+                    <hr>
+                    <ul>
+                      <div class="animated-checkbox">
+                      {{ form.is_superuser.label_tag }}
+                        <label>
+                          <input type="checkbox"  id="id_is_superuser" name="is_superuser" disabled><span class="label-text"></span>
+                        </label>
+                      </div>
+                    </ul>
+                    <ul>
+                      <div class="animated-checkbox">
+                      {{ form.is_staff.label_tag }}
+                        <label>
+                          <input type="checkbox" id="id_is_staff" name="is_staff" disabled><span class="label-text"></span>
+                        </label>
+                      </div>
+                    </ul>
+                    <hr>
+                    {% if form.errors %}
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                        <h4>Alerta!</h4>
+                        {{ form.errors }}
+                      </div>
+                    {% endif %}
+                    <button class="btn btn-primary">crear</button>
                 </fieldset></form></div>
               </div>
             </div>
