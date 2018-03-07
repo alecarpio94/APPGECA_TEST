@@ -30,16 +30,16 @@
                     <div>
                       <div class="bs-component">
                         <ul class="nav nav-tabs">
-                          <li class="active"><a href="" data-toggle="tab">Alumno</a></li>
-                          <li><a href="" data-toggle="tab">Representante</a></li>
-                          <li><a href="" data-toggle="tab">Vivienda</a></li>
-                          <li><a href="" data-toggle="tab">Direccion</a></li>
-                          <li><a href="" data-toggle="tab">Familia</a></li>
-                          <li><a href="" data-toggle="tab">Educacion</a></li>
-                          <li><a href="" data-toggle="tab">Empresa</a></li>
-                          <li><a href="" data-toggle="tab">Educacion Musical</a></li>
-                          <li><a href="" data-toggle="tab">Percepcion Del Representante</a></li>
-                          <li><a href="" data-toggle="tab">Percepcion Del Alumno</a></li>
+                          <li id= "alu"class="active"><a href="" data-toggle="tab">Alumno</a></li>
+                          <li id="repre" ><a href="" data-toggle="tab">Representante</a></li>
+                          <li id="vivi" ><a href="" data-toggle="tab">Vivienda</a></li>
+                          <li id="dire"><a href="" data-toggle="tab">Direccion</a></li>
+                          <li id="fami"><a href="" data-toggle="tab">Familia</a></li>
+                          <li id="educ"><a href="" data-toggle="tab">Educacion</a></li>
+                          <li id="empre"><a href="" data-toggle="tab">Empresa</a></li>
+                          <li id="edumu"><a href="" data-toggle="tab">Educacion Musical</a></li>
+                          <li id="perep"><a href="" data-toggle="tab">Percepcion Del Representante</a></li>
+                          <li id="peralu"><a href="" data-toggle="tab">Percepcion Del Alumno</a></li>
                         </ul>
                         <br>
                         <form method="POST" id="alumForm">{% csrf_token %}
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-md-10">
                                    <label for="cedula_alumno" class="text-danger">Cedula Del Alumno</label>
-                                   {{ alumno.cedula_alumno | add_class:'form-control is-invalid'| attr:'placeholder:Ingrese La Cedula Del Alumno'|attr:'autocomplete:off' }}
+                                   {{ alumno.cedula_alumno | add_class:'form-control  focused'| attr:'placeholder:Ingrese La Cedula Del Alumno'|attr:'autocomplete:off' }}
                                 </div>
                               </div>
 
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <label for="fecha_nacimiento" class="text-danger">Fecha De Nacimiento</label>
-                                  {{ alumno.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:calendar'|attr:'placeholder:Ingrese La Fecha De Nacimiento'|attr:'onkeypress:return valida(event);' }}
+                                  {{ alumno.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:calendar'|attr:'placeholder:Ingrese La Fecha De Nacimiento' }}
                                 </div>
                               </div>
 
@@ -101,25 +101,25 @@
                               </div>
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Representante" data-toggle="tab" class="btn btn-primary active">Siguiente</a>
+                                <a href="#Representante" data-toggle="tab" class="btn btn-primary active" id="repree">Siguiente</a>
                               </div>
                             </div>
 
                             <!-- Formulario Del Representante -->
                             <div class="tab-pane fade" id="Representante">
-                              <div class="FormGroup col-md-6">
+                              <div class="FormGroup col-md-12">
                                   <label for="cedula_representante" class="text-danger">Cedula Del Representante</label>
-                                  {{ representante.cedula_repres|add_class:'form-control is-invalid'|attr:'placeholder:Ingrese Cedula Del Representante'|attr:'autocomplete:off' }}
+                                  {{ representante.cedula_repres|add_class:'form-control '|attr:'placeholder:Ingrese Cedula Del Representante'|attr:'autocomplete:off' }}
                               </div>
 
                               <div class="FormGroup">
                                 <div class="col-md-6">
                                   <label for="nombre_representante" class="text-danger">Nombre Del Representante</label>
-                                  {{ representante.nombre_repres|add_class:'form-control is-invalid'|attr:'placeholder:Nombre Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ representante.nombre_repres|add_class:'form-control '|attr:'placeholder:Nombre Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
                                 </div>
                                 <div class="col-md-6">
                                   <label for="apellido_representante" class="text-danger">Apellido Del Representante</label>
-                                  {{ representante.apelli_repres|add_class:'form-control is-invalid'|attr:'placeholder:Ingrese Apellido Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ representante.apelli_repres|add_class:'form-control '|attr:'placeholder:Ingrese Apellido Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
                                 </div>
                               </div>
 
@@ -137,11 +137,11 @@
                               <div class="FormGroup">
                                 <div class="col-md-6">
                                   <label for="telefono_repres" class="text-danger">Telefono Celular</label>
-                                  {{ representante.telef_cel|add_class:'form-control is-invalid'|attr:'placeholder:Numero Telefonico'|attr:'autocomplete:off' }}
+                                  {{ representante.telef_cel|add_class:'form-control '|attr:'placeholder:Numero Telefonico'|attr:'autocomplete:off' }}
                                 </div>
                                 <div class="col-md-6">
                                   <label for="telefono_cel">Telefono De Casa</label>
-                                  {{ representante.telef_res|add_class:'form-control is-invalid'|attr:'placeholder:Numero De Casa'|attr:'autocomplete:off' }}
+                                  {{ representante.telef_res|add_class:'form-control '|attr:'placeholder:Numero De Casa'|attr:'autocomplete:off' }}
                                 </div>
                               </div>
 
@@ -713,8 +713,5 @@
 {% block javascript %}
   <script src="{% static 'js/form_validation.js' %}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
-
-  <script>
-    $('#calendar').datepicker('setDate', new Date(2006, 11, 24));
-  </script>
+  <script src="{% static 'js/valinput/alumno.js' %}"></script>
 {% endblock %}
