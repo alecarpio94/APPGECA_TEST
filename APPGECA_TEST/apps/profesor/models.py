@@ -1,39 +1,54 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from django.contrib import admin
+from django.utils.translation import ugettext, ugettext_lazy as apodo
+from django.utils import timezone
 from django.db import models
+from django.conf import settings
 from ...apps.utils.selects import Selects
+from ...apps.alumno.models import Alumno
+from ...apps.instrumento.models import Instrumento
 
 # Create your models here.
 ####################MODELO PROFESOR########################
 class Profesor(models.Model):
 
-	asig = (('Programa Alma Llanera','Programa Alma Llanera'),
-		('Arpa Clasica','Arpa Clasica'),
-		('Orquesta Infantil','Orquesta Infantil'),
-		('Oboe','Oboe'),
-		('Cuatro','Cuatro'),
-		('Percusion','Percusion'),
-		('Violincello','Violincello'),
-		('Trombon','Trombon'),
-		('Coro/Lenguaje Musical','Coro/Lenguaje Musical'),
-		('Flauta/Lenguaje Musical','Flauta/Lenguaje Musical'),
-		('Corno','Corno'),
-		('Guitarra','Guitarra'),
-		('Violin','Violin'),
-		('Viola','Viola'),
-		('Viola/Lenguaje Musical','Viola/Lenguaje Musical'),
-		('Flauta','Flauta'),
-		('Clarinete','Clarinete'),
-		('Tuba','Tuba'),
-		('Trompeta/Lenguaje Musical','Trompeta/Lenguaje Musical'),
-		('Contrabajo','Contrabajo'),
-		('Pianista','Pianista'))
+	cedula_profesor = models.CharField(apodo('Cedula'),max_length=8,primary_key=True, null=False, unique=True)
+	nombre_profesor = models.CharField(apodo('Nombre'),max_length=40)
+	apellido_profesor = models.CharField(apodo('Apellido'),max_length=40)
+	asignacion = models.ForeignKey(Instrumento)
 
-	cedula_profesor = models.IntegerField('Cedula',primary_key=True, unique=True)
-	nombre_profesor = models.CharField('Nombre',max_length=100)
-	apellido_profesor = models.CharField('Apellido',max_length=100)
-	asignacion = models.CharField('Asignacion',max_length=40, choices=asig, default=0)
+	def __str__(self):
+		return '{} {} {}'.format(self.cedula_profesor, self.nombre_profesor, self.apellido_profesor)
+
+	def get_full_name(self):
+		return '{} {}'.format(self.nombre_profesor, self.apellido_profesor)
+
+class Asignados(models.Model):
 	
-	def __unicode__(self):
-		Dato = "%i"% (self.cedula_profesor)
-		return Dato
+	id = models.AutoField(primary_key=True)
+	profesor = models.ForeignKey(Profesor,null=True)
+	alumno = models.OneToOneField(Alumno,null=True)
+
+	def __str__(self):
+		return '{} {}'.format(self.profesor, self.alumno)
+
+	def get_full_name(self):
+		return '{}'.format(self.alumno)
+
+class Evaluado(models.Model):
+
+	id = models.AutoField(primary_key=True)
+	profesor = models.ForeignKey(Profesor,null=True)
+	asignados = models.ForeignKey(Asignados,null=True)
+	descripcion = models.TextField(max_length=200)
+	fecha = models.DateField(auto_now=False)
+	status = models.BooleanField(default=False, blank=True)
+	evaluado = models.BooleanField(default=False, blank=True)
+
+	def __str__(self):
+		return '{} {}'.format(self.profesor, self.asignados)
+
+	def get_full_name(self):
+		return '{}'.format(self.asignados)

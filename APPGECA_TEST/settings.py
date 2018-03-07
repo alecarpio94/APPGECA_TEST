@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'APPGECA_TEST.apps.actividad',
     'APPGECA_TEST.apps.alumno',
     'APPGECA_TEST.apps.authentication',
     'APPGECA_TEST.apps.inicio',
     'APPGECA_TEST.apps.instrumento',
     'APPGECA_TEST.apps.profesor',
+    'APPGECA_TEST.apps.reportes',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +134,9 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'authentication.Users'
+AUTH_PROFESOR_MODEL = 'profesor.Profesor'
+AUTH_ALUMNO_MODEL = 'alumno.Alumno'
+
 
 LOGIN_REDIRECT_URL = "/"
 
@@ -139,3 +144,5 @@ LOGIN_REDIRECT_URL = "/"
 import dj_database_url  
 db_from_env = dj_database_url.config(conn_max_age=500)  
 DATABASES['default'].update(db_from_env)  
+
+SILENCED_SYSTEM_CHECKS = ['auth.E003']

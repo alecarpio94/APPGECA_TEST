@@ -11,4 +11,4 @@ class InstrForm(forms.ModelForm):
 	class Meta:
 		model = Instrumento
 
-		fields = ['nombr_instr' , 'stock_min' , 'stock_max', 'uso',]
+		fields = ['nombr_instr']

@@ -22,9 +22,6 @@ class AlumForm(forms.ModelForm):
 		'lugar_nacimiento', 
 		'institucion'
 		]
-		widgets = {
-        'fecha_nacimiento': DateInput(format='%Y-%m-%d'),
-        }
 
 ######################FORMULARIO REPRESENTANTE####################
 class RepreForm(forms.ModelForm):
@@ -43,7 +40,7 @@ class VivienForm(forms.ModelForm):
 
 		fields = [
 		'cedula_alumno',
-		'id_vivienda',
+		#'id_vivienda',
 		'tipo_vivien',
 		'zona',
 		'agua',
@@ -85,16 +82,16 @@ class FamiliForm(forms.ModelForm):
 	class Meta:
 		model = Familia
 
-		fields = ['cedula_familia','nombre_familia','apelli_familia','profesion','ocupacion','direccion','telef_cel','telef_res','vive']
+		fields = ['cedula_familia','nombre_familia','apelli_familia','ocupacion_f','profesion_f','direccion','telef_cel_f','telef_res_f','vive']
 
 ########################FORMULARIO EDUACION#######################
 class EducaForm(forms.ModelForm):
 
 	css_error_class = 'has-error'
 	class Meta:
-		model = Educa_Alumno
+		model = EducaAlumno
 
-		fields = ['cedula_alumno','nivel_uno','nivel_dos','nivel_tres','nivel_cuar','primer_grado','segundo_grado','tercer_grado','cuarto_grado','quinto_grado','sexto_grado','educ_med_uno','educ_med_dos','primer','segund','tercer','cuarto','quinto','curso',]
+		fields = ['cedula_alumno','nivel_e','curso',]
 		exclude = ('cedula_alumno',)
 
 #########################FORMULARIO EMPRESA#######################
@@ -111,9 +108,9 @@ class EducaMusiForm(forms.ModelForm):
 
 	css_error_class = 'has-error'
 	class Meta:
-		model = Educa_Musi
+		model = EducaMusi
 
-		fields = ['cedula_alumno','progama_orque','instru_princi','prof_clas_ind','instru_secund','prof_clas_ind','academ_catedr','nombr_academi','clas_acad_cate','nom_aca_cate','inst_espc_mus','bec_est_esp','estu_cur','inst_empr_bec']
+		fields = ['cedula_alumno','progama_orque','instru_princi','prof_clas_ind','instru_secund','prof_clas_sec','academ_catedr','nombr_academi','clas_acad_cate','nom_aca_cate','inst_espc_mus','bec_est_esp','estu_cur','inst_empr_bec']
 		exclude = ('cedula_alumno',)
 
 ################FORMULARIO PERCEPCION REPRESENTANTE###############
@@ -121,7 +118,7 @@ class PercRepreForm(forms.ModelForm):
 
 	css_error_class = 'has-error'
 	class Meta:
-		model = Percep_Repre
+		model = PercepRepre
 
 		fields = ['cedula_repres','grup_fam_reco_com','asis_nin_act_mus','prac_mus_ent_eco','viv_mej','otra_razon',]
 		exclude = ('cedula_repres',)
@@ -131,7 +128,7 @@ class PercAlumForm(forms.ModelForm):
 
 	css_error_class = 'has-error'
 	class Meta:
-		model = Percep_nino
+		model = PercepNino
 
 		fields = ['cedula_alumno','m_sien_bie','m_sien_seg','sien_mejo','mas_apre_com','m_sien_cap','m_sien_mot',]
 		exclude = ('cedula_alumno',)

@@ -1,0 +1,56 @@
+{% extends  'base_admin.html' %}
+{%block title%}Retirar Alumno{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Retirar Alumno </h1>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <div class="Alumno">
+                <form method="POST" action="">
+                  {% csrf_token %}
+                  <h3 align="center">Seguro que desea retirar el siguiente alumno: <br> {{ object.alumno.primer_nombre }} {{ object.alumno.primer_apellido }} del Profesor(a) {{ object.profesor.nombre_profesor }} {{ object.profesor.apellido_profesor }} </h3>
+                  <div align="center">
+<br>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#DeleteProf"> Eliminar </button>
+                    <a href="{% url 'profesor:alumno_profesor' %}" class="btn btn-default">Volver</a>
+                  </div>
+
+                  <div class="modal fade" id="DeleteProf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel" align="center">Advertencia</h4>
+                        </div>
+                        <div class="modal-body">
+                          <h3 class="text-danger" align="center">
+                            Esta Seguro que desea retirar a: <br>{{ object.alumno.primer_nombre }} {{ object.alumno.primer_apellido }} del Profesor {{ object.profesor.nombre_profesor }} {{ object.profesor.apellido_profesor }}
+                          </h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-danger" type="submit"> Eliminar </button> 
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'base_admin.html' %}
+{% load staticfiles %}
+{%block title%}Listado De Alumnos{% endblock title%}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Lista De Alumnos</h1>
+      <ul class="breadcrumb side">
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th style="text-align: center;">Cedula</th>
+                        <th style="text-align: center;">Nombre</th>
+                        <th style="text-align: center;">Apellido</th>
+                        <th style="text-align: center;">Constancia De Estudio</th>
+                        <th style="text-align: center;">Constancia De Instrumento</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% if object_list %}
+                      {% for alumno in object_list %}
+                      <tr class="odd">
+                        <td>{{ alumno.cedula_alumno }}</td>
+                        <td>{{ alumno.primer_nombre }}</td>
+                        <td>{{ alumno.primer_apellido }}</td>
+                        <td><a href="{% url 'reportes:constan_alumnos' %}" class="btn btn-primary" style="margin-left: 75px; width: 100px;">Ver</a></td>
+                        <td><a href="{% url 'reportes:const_asign' alumno.pk %}" class="btn btn-primary" style="margin-left: 105px; width: 100px;" >Ver</a></td>
+                      </tr>
+                      {% endfor %}
+                      {% else %}
+                      <td valign="top" colspan="5" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      {% endif %}  
+                    </tbody>
+                  </table>
+                  </div>            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock content %}

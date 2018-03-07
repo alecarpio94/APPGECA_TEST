@@ -1,4 +1,6 @@
 {% load staticfiles %}
+
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,25 +13,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="{% static 'iziToast/css/iziToast.min.css' %}">
     <title>Login APPGECA</title>
  
   </head>
   <body>
     <section class="login-content">
       <div class="login-box">
-        <form class="login-form" method="POST">{% csrf_token %}
+        <form class="login-form" id="login" method="POST">{% csrf_token %}
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>Intranet APPGECA</h3>
+
           <div class="row margin">
             <div class="input-field col s12">
               <i class="mdi-social-person-outline prefix"></i>
               <label data-error="wrong" class="center-align"> &nbsp;Usuario</label>
-               <input autofocus="" id="id_username" placeholder="Ingrese Cedula" maxlength="254" class="form-control" name="username" type="text" required="">
+               <input autofocus="" id="id_username" placeholder="Ingrese Cedula" autocomplete=off maxlength="8" class="form-control" name="username" type="text" required="">
             </div>
           </div>
           <div class="row margin">
             <i class="mdi-action-lock-outline prefix"></i>
             <label class="" data-error="wrong"> &nbsp;Contraseña</label>
             <div class="input-field col s12" type="password" placeholder="Password">
+              {{ form.password.errors }}
              <input id="id_password" placeholder="Ingrese Contraseña" name="password" class="form-control" type="password" required="">
             </div>
           </div>
@@ -42,20 +47,15 @@
             </div>
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>Ingresar</button>
+            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw" ></i>Ingresar</button>
           </div>
-          {% if form.errors %}
-            <div class="alert alert-dismissible alert-danger">
-                <h4>Alerta!</h4>                    
-                  {{ form.errors.password }}
-            </div>
-          {% endif %}
+          <br>
         </form>
         <form class="forget-form">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Contraseña Olvidada ?</h3>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
-            <input class="form-control" type="text" placeholder="Email">
+            <input class="form-control" name="{{ form.email }}" type="text" placeholder="Email">
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>Restaurar</button>
@@ -63,7 +63,7 @@
           <div class="form-group mt-20">
             <p class="semibold-text mb-0"><a data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Volver </a></p>
           </div> 
-        </form> 
+        </form>
       </div>
     </section>
   </body>
@@ -71,6 +71,13 @@
   <script src="{% static 'js/bootstrap.min.js'%}"></script>
   <script src="{% static 'js/plugins/pace.min.js'%}"></script>
   <script src="{% static 'js/main.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap-notify.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap-notify.min.js' %}"></script>
+  <script src="{% static 'iziToast/js/iziToast.min.js' %}"></script>
+  <script src="{% static 'js/login.js' %}"></script>
+  {% if message != "" %}
+  <script> mal('{{ message }}') </script>
+  {% endif %}
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

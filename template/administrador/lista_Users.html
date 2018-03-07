@@ -1,0 +1,64 @@
+{% extends  'base_admin.html' %}
+{%block title%}Listado De Usuarios{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+      <div>
+        <h1>Lista De Usuarios</h1>
+        <ul class="breadcrumb side">
+          <li><i class="fa fa-home fa-lg"></i></li>
+          <li class="active">Usuarios</li>
+        </ul>
+      </div>
+    <div><a class="btn btn-primary btn-flat" href="{% url 'auth:add' %}"><i class="fa fa-lg fa-plus"></i></a></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+          <div class="row">
+            <div class="col-lg-12">
+              <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                <thead>
+                  <tr role="row">
+                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Cedula</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Nombre</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Apellido</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Secretaria</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Profesor</th>
+                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Activo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if object_list %}
+                  {% for Users in object_list %}
+                  <tr class="odd">
+                    <td>{{ Users.ci }}</td>
+                    <td>{{ Users.first_name }}</td>
+                    <td>{{ Users.last_name }}</td>
+                    <td>{% if Users.is_secretaria %}<img src="/static/img/icon-yes.svg" >{% else %}<img src="/static/img/icon-no.svg"> {% endif %}</td>
+                    <td>{% if Users.is_profesor %}<img src="/static/img/icon-yes.svg" >{% else %}<img src="/static/img/icon-no.svg"> {% endif %}</td>
+                    <td>{% if Users.is_active %}<img src="/static/img/icon-yes.svg" >{% else %}<img src="/static/img/icon-no.svg"> {% endif %}</td>
+                  </tr>
+                    {% endfor %}
+                    {% else %}
+                  <td valign="top" colspan="8" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                    {% endif %}  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+{% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

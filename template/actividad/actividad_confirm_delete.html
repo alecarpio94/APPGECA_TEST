@@ -1,0 +1,56 @@
+{% extends  'base_admin.html' %}
+{%block title%}Eliminar Actividad{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Eliminar Actividad</h1>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <div class="Actividad">
+                <form method="POST" action="">
+                  {% csrf_token %} <br>
+                  <h3 align="center">Seguro que desea eliminar la siguiente Actividad Programada: <br> {{ object.nombr_acti }} para el dia {{ object.fecha_inic }}</h3><br>
+                  <div align="center">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#DeleteAlumn"> Eliminar </button>
+                    <a href="{% url 'actividad:list_actividades' %}" class="btn btn-default">Volver</a>
+                  </div>
+                  
+                  <div class="modal fade" id="DeleteAlumn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Advertencia</h4>
+                        </div>
+                        <div class="modal-body">
+                          <h3 class="text-danger" align="center">
+                            Esta Seguro Que Desea Eliminar La Siguiente Actividad: {{ object.nombr_acti }}
+                          </h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-danger" type="submit"> Eliminar </button> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -2,17 +2,79 @@
 {%block title%}APPGECA Admin{% endblock title%}
 {% load staticfiles %}
 {% if USE_SESSION_AUTH %}
-    {% csrf_token %}
-    {% if request.user.is_authenticated %}
+  {% csrf_token %}
+  {% if request.user.is_authenticated %}
 		{% block content %}
-		<div class="content-wrapper">
-		  <div class="card" align="center">
-
-		    <h3>Bienvenido Nuevamente {{user.first_name}} {{user.last_name}}</h3>
-		    <h4>Inicio Sesión: {{ user.last_login }}</h4>
+		<div class="content-wrapper slimScrollBar">
+		  <div class="card" align="center" style="height: 175px;">
+			
+		    <h1>Bienvenido Nuevamente</h1>
+		    <h3>Inicio Sesión: {{ user.last_login }}</h3>
 
 		  </div>
-
+			<div class="card">
+				<h1 align="center">Cronograma De Actividades</h1>
+				<hr>
+	  		<div id='calendario' style="height: 525px;"></div>
+			</div>
+		
 		{% endblock content %}
 	{% endif %}
 {% endif %}
+
+{% block javascript %}
+<script type='text/javascript' src="{% static 'js/moment.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/fullcalendar.js' %}"></script>
+<script type='text/javascript' src="{% static 'js/locale-all.js' %}"></script>
+<script type='text/javascript'>
+    $(document).ready(function() {
+        $('#calendario').fullCalendar({
+            locale: 'es',
+            height: 475,
+			      header: {
+			        left: 'prev,next today',
+			        center: 'title',
+			        right: 'listDay,listWeek'
+			      },
+
+			      // customize the button names,
+			      // otherwise they'd all just say "list"
+			      views: {
+			        listDay: { buttonText: 'Dia' },
+			        listWeek: { buttonText: 'Semana' }
+			      },
+
+			      defaultView: 'listWeek',
+            events: [
+                {% for i in Actividad %}
+                {
+                    title: "{{ i.nombr_acti}}",
+                    start: '{{ i.fecha_inic|date:"d M Y " }}:{{ i.fecha_inic|time:"h:i: A" }}',
+                    end: '{{ i.fecha_fina|date:"d M Y"}} {{ i.fecha_fina|time:"h:i: A" }}',
+                    {% if i.status1 == True and i.status2 == False and i.status3 == False %}
+                      color:'159FFF'
+                    {% elif i.status1 == True and i.status2 == True and i.status3 == False %}
+                      color:'FF0000'
+                    {% elif i.status1 == True and i.status2 == False and i.status3 == True %}
+                      color:'FF0000'
+                    {% elif i.status1 == True and i.status2 == True and i.status3 == True %}
+                      color:'FF0000'
+                    {% elif i.status1 == False and i.status2 == True and i.status3 == True %}
+                      color:'FF0000'
+                    {% elif i.status3 == True %}
+                      color: '310563'
+                    {% endif %}
+                },
+                {% endfor %}
+
+            ]
+
+        });
+
+    });
+</script>
+{% endblock %}
+
+{% block css %} 
+  <link rel='stylesheet' type='text/css' href="{% static 'css/fullcalendar.css' %}" />
+{% endblock %}

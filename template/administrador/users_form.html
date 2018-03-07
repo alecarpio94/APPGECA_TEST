@@ -1,0 +1,111 @@
+{% extends  'base_admin.html' %}
+{%block title%}Nuevo Usuario{% endblock title%}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Nuevo Usuario</h1>
+      <p>Formulario Para El Registro De Un Nuevo Usuario</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Registro</li>
+        <li><a href="{% url 'auth:list' %}">Usuario</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal" id="form-prof" onkeydown="" method="POST">{% csrf_token %}
+                <fieldset>
+                  <legend>Registro</legend>
+                  <div class="FormGroup">
+                      <div class="ci">
+                      {{ form.ci.label_tag }}
+                      {{ form.ci | add_class:'form-control' | attr:'autocomplete:off'|attr:"placeholder:Ingrese Numero De Cedula"|attr:"minlength=8"|attr:'onkeypress:return valida(event);' |add_error_class:'form-control is-invalid' }}
+                      
+                    </div>
+
+                      {{form.username.as_hidden}}
+                      <label for="id_first_name">Nombre:</label>
+                      {{ form.first_name | add_class:'form-control'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event)' |attr:"placeholder: Nombre Del Usuario"}}
+
+                      <label for="id_last_name">Apellidos:</label>
+                      {{ form.last_name | add_class:'form-control' |attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event)' |attr:"placeholder: Apellido Del Usuario" }}
+
+                      <label for="id_last_name">Email:</label>
+                      {{ form.email | add_class:'form-control' |attr:'autocomplete:off' |attr:"placeholder: Email Del Usuario" |attr:"type: Email"}}
+
+                      <div class="animated-checkbox" hidden="">
+                        <label for="id_is_secretaria" >
+                          <input id="id_is_secretaria" name="is_secretaria" checked=True type="checkbox"><span class="label-text">- Secretaria</span>
+                        </label>
+                      </div>
+                      <br>
+
+                      <div class="animated-checkbox" hidden="">
+                        <label for="id_is_superuser">
+                           <input id="id_is_superuser" name="is_superuser" checked=True type="checkbox"><span class="label-text">Superuser:</span>
+                        </label>
+                      </div>
+
+                      <label for="id_password1">Contraseña:</label>
+                      {{ form.password1 | add_class:'form-control' | attr:"placeholder: Ingrese La Contraseña" }}
+                      
+                      <label for="id_password2">Repita Contraseña:</label>
+                      {{ form.password2 | add_class:'form-control' | attr:"placeholder: Repita La Contraseña" }}
+
+                      {% if hidden %}
+                        <div class="animated-checkbox">
+                          <label for="id_is_profesor">
+                            <input id="id_is_profesor" name="is_profesor" type="checkbox"><span class="label-text">- Profesor</span>
+                          </label>
+                        </div>
+                        <br>
+                        <div class="animated-checkbox">
+                          <label for="id_is_alumno">
+                            <input id="id_is_alumno" name="is_alumno" type="checkbox"><span class="label-text">- Alumno</span>
+                          </label>
+                        </div>
+                        
+                        <div class="animated-checkbox" hidden="">
+                          <label for="id_is_staff">
+                             <input id="id_is_staff" name="is_staff" type="checkbox"><span class="label-text">Staff:</span>
+                          </label>
+                        </div>
+                      {% endif %}
+                      <br>
+                      {% if form.ci.errors %}
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                        <h4>Alerta!</h4>
+                        <p>Esta Cedula ya ha sido registrada con otro usuario.</p>
+                      </div>
+                      {% endif %}
+                      {% if form.password2 != form.password1 %}
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                        <h4>Alerta!</h4>
+                        <p>Las Contraseñas no coinciden.</p>
+                      </div>
+                      {% endif %}
+                      <hr>
+                      <button class="btn btn-primary">crear</button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

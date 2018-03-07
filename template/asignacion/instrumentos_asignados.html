@@ -1,0 +1,66 @@
+{% extends 'base_admin.html' %}
+{% load staticfiles %}
+{%block title%}Listado De Alumnos{% endblock title%}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Lista De Alumnos Con Instrumentos</h1>
+    </div>
+    <div><a class="btn btn-primary btn-flat" href="{% url 'instrumento:asign_alumno' %}"><i class="fa fa-lg fa-plus"></i></a></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th>Cedula</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Instrumento</th>
+                        <th>Fecha De Entrega</th>
+                        <th>Fecha De Retiro</th>
+                        <th>Movimiento</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% if object_list %}
+                      {% for asignatura in object_list %}
+                      <tr class="odd">
+                        <td>{% if asignatura.alumno.cedula_alumno == "" %}R-{{ asignatura.alumno.representante.cedula_repres }} {% else %}{{ asignatura.alumno.cedula_alumno }}{% endif %}</td>
+                        <td>{{ asignatura.alumno.primer_nombre }}</td>
+                        <td>{{ asignatura.alumno.primer_apellido }}</td>
+                        <td>{{ asignatura.instrumento }}</td>
+                        <td>{% if asignatura.fecha_entrega == '' %} Sin Asignar {% else %} {{ asignatura.fecha_entrega }}{% endif %}</td>
+                        <td>{% if asignatura.fecha_retiro == None %} Sin Entregar {% else %} {{ asignatura.fecha_retiro }} {% endif %}</td>
+                        <td><a href="{% url 'instrumento:retir_instr' asignatura.pk %}" class="btn btn-primary" >Modificar</a></td>
+                      </tr>
+                      {% endfor %}
+                      {% else %}
+                      <td valign="top" colspan="7" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      {% endif %}  
+                    </tbody>
+                  </table>
+                  </div>            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

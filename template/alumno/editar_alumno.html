@@ -1,0 +1,100 @@
+{% extends  'base_admin.html' %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{%block title%}Editar Alumno{% endblock title%}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Nuevo Alumno</h1>
+      <p>Actualizacion Del Alumno</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Actualizacion</li>
+        <li><a href="{% url 'alumno:list_alumno' %}">Alumno</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <div class="Alumno">
+                <form class="form-horizontal" method="POST">{% csrf_token %}
+                  <fieldset>
+                    <legend>Actulizar</legend>
+                        <div class="tab-pane fade active in" id="Alumno">
+                          <div class="FormGroup">
+                            <div class="col-md-2">
+                              <label for="Nacionalidad" class="text-danger">Nacionalidad</label>
+                              {{ form.nacionalidad | add_class:'form-control' }}
+                            </div>
+                            <div class="col-md-10">
+                               <label for="cedula_alumno">Cedula Del Alumno</label>
+                               {{ form.cedula_alumno | add_class:'form-control'| attr:'placeholder:Ingrese La Cedula Del Alumno'|attr:'autocomplete:off' }}
+                            </div>
+                          </div>
+
+                          <div class="FormGroup">
+                            <div class="col-md-6">
+                              <label for="nombre_alumno" class="text-danger">Primer Nombre</label>
+                              {{ form.primer_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Primer Nombre'|attr:'autocomplete:off'|attr:'type:text'|attr:'onkeypress:return soloLetras(event);' }}
+                            </div>
+                            <div class="col-md-6">
+                              <label for="segundo_nombre">Segundo Nombre</label>
+                              {{ form.segundo_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Segundo Nombre'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                            </div>
+                          </div>
+
+                          <div class="FormGroup">
+                            <div class="col-md-6">
+                              <label for="primer_apellido" class="text-danger">Primer Apellido</label>
+                              {{ form.primer_apellido | add_class:'form-control'|attr:'placeholder:Ingrese El Primer Apellido'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                            </div>
+                            <div class="col-md-6">
+                              <label for="segundo_apellido">Segundo Apellido</label>
+                              {{ form.segundo_apellido| add_class:'form-control'|attr:'placeholder:Ingrese El Segundo Apellido'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                            </div>
+                          </div>
+
+                          <div class="FormGroup">
+                            <div class="col-md-6">
+                              <label for="sexo" class="text-danger">Sexo</label>
+                              {{ form.sexo_alumno | add_class:'form-control' }}
+                            </div>
+                            <div class="col-md-6">
+                              <label for="fecha_nacimiento" class="text-danger">Fecha De Nacimiento</label>
+                              {{ form.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:datepicker3'|attr:'placeholder:Ingrese La Fecha De Nacimiento'|attr:'onkeypress:return valida(event);' }}
+                            </div>
+                          </div>
+
+                          <div class="FormGroup col-md-6">
+                            <label for="lugar_nacimiento" class="text-danger">Lugar De Nacimiento</label>
+                            {{ form.lugar_nacimiento | add_class:'form-control'|attr:'placeholder:Nombre El Lugar De Nacimiento'| attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                          </div>
+
+                          <div class="FormGroup col-md-6">
+                            <label for="institucion" class="text-danger">Institución</label>
+                            {{ form.institucion|add_class:'form-control'|attr:'placeholder:Nombre De La Actual Institución Cursante'|attr:'autocomplete:off' }}
+                          </div>
+                        </div>
+                      <hr>
+                      <button class="btn btn-primary" value="Guardar"> Actualizar </button></i>  
+                    </div> 
+                  </form>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+{% endblock content %}

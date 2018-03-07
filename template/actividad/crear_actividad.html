@@ -1,0 +1,183 @@
+{% extends 'base_admin.html' %}
+
+{%block title%}Registrar Actividad{% endblock title%}
+
+{% load widget_tweaks %}
+
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Nueva Actividad</h1>
+      <p>Registro De Una Nueva Actividad</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Registro</li>
+        <li><a href="{% url 'actividad:list_actividades' %}">Actividad</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="">
+              <form class="form-horizontal" method="POST">{% csrf_token %}
+                <fieldset>
+                  <legend>Registro</legend>
+
+                  <div class="FormGroup">
+                    <div class="col-md-12">
+                      <div class="nombre">
+                        <label class="text-danger">Nombre De La Actividad</label>
+                        {{ form.nombr_acti | add_class:'form-control' | attr:"autocomplete:off" | attr:"placeholder:Ingrese Nombre De La Actividad" }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="FormGroup">
+                    <div class="descripcion">
+                      <div class="col-md-12">
+                        <label class="text-danger">Descripción</label>
+                        {{ form.descripcio | add_class:'form-control'|attr:"rows:4"|attr:"style: resize: none;" | attr:'placeholder:Descripcion De La Actividad'}}
+                      </div>
+                    </div>
+                  </div>  
+
+                  <div class="FormGroup">
+                    <div class="fecha">
+                      <div class="col-md-6">
+                        <label for="text-danger">Fecha De Inicio</label>
+                        {{ form.fecha_inic|add_class:'form-control'|attr:'id:datetimepicker6'|attr:'placeholder:Seleccione La Fecha De Inicio' }}
+                      </div>
+                    </div>
+
+                    <div class="fecha2">
+                      <div class="col-md-6">
+                        <label for="text-danger">Fecha De Culminacion</label>
+                        {{ form.fecha_fina|add_class:'form-control'|attr:'id:datetimepicker7'|attr:'placeholder:Seleccione La Fecha De Culminacion' }}
+                      </div>
+                    </div>
+                  </div>
+                
+                  <div class="FormGroup">
+                    <div class="horaI">
+                      <div class="col-md-6">
+                          <label class="text-danger">Hora De Inicio</label>
+                          {{ form.hora_inico|add_class:'form-control'|attr:'id:timepicker1'|attr:'placeholder:Ingrese La Hora De Inicio'}}
+                      </div>  
+                    </div>
+                    <div class="horaF">
+                      <div class="col-md-6">
+                        <label for="" class="text-danger">Hora De Culminacion</label>
+                        {{ form.hora_final|add_class:'form-control'|attr:'id:timepicker2'|attr:'placeholder:Ingrese La Hora De Culmincaion' }}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="FormGroup">
+                    <div class="animated-checkbox col-md-12">
+                      <label>
+                        {{ form.status1|attr:'type:checkbox' }}<span class="label-text">Actividad Activa</span>
+                      </label>
+                    </div>
+                  </div>
+                  
+                    <hr>                
+                    {% if form.fecha_inic.errors %}
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                          <h4>Alerta!</h4>                    
+                            <p>Fecha De Inicio Invalida! Favor de colocar una fecha valida.</p>
+                        </div>
+                    {% endif %}
+                    {% if form.fecha_fina.errors %}
+                      <div class="alert alert-dismissible alert-danger">
+                        <button class="close" type="button" data-dismiss="alert">×</button>
+                          <h4>Alerta!</h4>                    
+                            <p>Fecha De Culminación Invalida! Favor de colocar una fecha valida.</p>
+                        </div>
+                    {% endif %}
+
+                  <div class="col-md-12">
+                    <button class="btn btn-primary">Enviar</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+
+{% block javascript %}
+    <!--<script src="{% static 'js/mensajes.js'%}"></script> 
+     {% if message != "" %}
+      <script>error('{{ message }}')</script>
+    {% endif %}-->
+<!-- <script type="text/javascript" src="{% static 'js/bootstrap.js'%}"></script> -->
+
+<!-- <script src="{% static 'js/bootstrap-datetimepicker.min.js'%}"></script> -->
+<script src="{% static 'js/bootstrap-datetimepicker.es.js'%}"></script>
+<script src="{% static 'js/bootstrap-datepicker.js'%}"></script>
+<script type="text/javascript" src="{% static 'jquery/jquery-1.8.3.min.js'%}" charset="UTF-8"></script>
+<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.js'%}" charset="UTF-8"></script>
+
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker6').datepicker({
+        format: 'd/m/yyyy',
+        todayBtn:  1,
+        todayHighlight: 1,
+        autoclose: 1
+    });
+    $('#datetimepicker7').datepicker({
+      format: 'd/m/yyyy',
+      todayBtn:  1,
+      todayHighlight: 1,
+      autoclose: 1,
+      language: 'es',
+      useCurrent: false //Important! See issue #1075
+    });
+    $('#timepicker1').datetimepicker({
+        format: 'hh:ii',
+        width: 200,
+        heigth: 200,
+        language: 'es',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+    $('#timepicker2').datetimepicker({
+        format: 'hh:ii',
+        language: 'es',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+  });
+</script>
+{% endblock %}
+
+{% block css %}    
+    <link href="{% static 'css/bootstrap-datetimepicker.css' %}" rel="stylesheet" media="screen">  
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}"> 
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseForbidden, HttpResponseRedirect
 
 # Create your views here.
 
@@ -21,10 +22,6 @@ def somos(request):
 def mision(request):
 	
 	return render (request, 'pagina/mision.html')
-
-def calendario(request):
-	
-	return render (request, 'pagina/calendario.html')
 
 def catedra1(request):
 	

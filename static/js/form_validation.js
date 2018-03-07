@@ -1,26 +1,24 @@
-//Se utiliza para que el campo de texto solo acepte numeros
-function SoloNumeros(evt){
- if(window.event){//asignamos el valor de la tecla a keynum
-  keynum = evt.keyCode; //IE
- }
- else{
-  keynum = evt.which; //FF
- } 
- //comprobamos si se encuentra en el rango numérico y que teclas no recibirá.
- if((keynum > 47 && keynum < 58) || keynum == 8 || keynum == 13 || keynum == 6 ){
-  return true;
- }
- else{
-  return false;
- }
+// -------- Se utiliza para que el campo de texto solo acepte numeros -------- //
+function valida(e){
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    //Tecla de retroceso para borrar, siempre la permite
+    if (tecla==8){
+        return true;
+    }
+        
+    // Patron de entrada, en este caso solo acepta numeros
+    patron =/[0-9]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
 }
 
-//Se utiliza para que el campo de texto solo acepte letras
+// -------- Se utiliza para que el campo de texto solo acepte letras -------- //
 function soloLetras(e) {
     key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toString();
-    letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";//Se define todo el abecedario que se quiere que se muestre.
-    especiales = [8, 37, 39, 46, 6]; //Es la validación del KeyCodes, que teclas recibe el campo de texto.
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+    especiales = [8, 37, 39, 46];
 
     tecla_especial = false
     for(var i in especiales) {
@@ -30,105 +28,116 @@ function soloLetras(e) {
         }
     }
 
-    if(letras.indexOf(tecla) == -1 && !tecla_especial){
-  //alert('Tecla no aceptada');
+    if(letras.indexOf(tecla) == -1 && !tecla_especial)
         return false;
-      }
 }
 
-function Disable()
-{
-  document.auth.id_is_secretaria.disabled=false;
-  document.auth.id_is_profesor.disabled=false;
-  document.auth.id_is_alumno.checked=false;
-  document.auth.id_is_superuser.disabled=false;
-  document.auth.id_is_staff.checked=false;
-}
-function Enable()
-{
-  document.auth.id_is_alumno.checked=false;
-  document.auth.id_is_secretaria.disabled=false;
-  document.auth.id_is_profesor.disabled=false;
-  document.auth.id_is_superuser.disabled=false;
-  document.auth.id_is_staff.checked=false;
-}
+// -------------------------------------------------------------------------- //
 
-function habilitarCincoTextBox()
-{
-   var Check1 = document.getElementById('id_is_secretaria'); 
-   var Check2 = document.getElementById('id_is_profesor'); 
-   var Check3 = document.getElementById('id_is_alumno');
-   var Check4 = document.getElementById('id_is_superuser');
-   var Check5 = document.getElementById('id_is_staff');
+
+// ----- Desabilitar el autoincrementable de los number input de los formularios ----- //
+
+jQuery(document).ready( function($) {
  
-    if (Check1.checked==true) 
-    {
-        Check2.disabled = true;
-        Check3.disabled = true;
-        Check4.disabled = false;
-        Check5.disabled = true;
+    // Disable scroll when focused on a number input.
+    $('form').on('focus', 'input[type=number]', function(e) {
+        $(this).on('wheel', function(e) {
+            e.preventDefault();
+        });
+    });
+ 
+    // Restore scroll on number inputs.
+    $('form').on('blur', 'input[type=number]', function(e) {
+        $(this).off('wheel');
+    });
+ 
+    // Disable up and down keys.
+    $('form').on('keydown', 'input[type=number]', function(e) {
+        if ( e.which == 38 || e.which == 40 )
+            e.preventDefault();
+    });  
+});
+
+// -------------------------------------------------------------------------- //
+
+// -------------------- Habilitar/Deshabilitar Permisos En El Registro Del Usuario -------------------- //
+function validar(){
+
+  var Check = document.getElementById('id_is_profesor');
+
+  if (Check.checked == true) {
+    Check.checked = true;
+  }
+
+}
+// -------------------------------------------------------------------------- //
+
+
+// -------------------- Validacion Campos Educacion Musical -------------------- //
+function enableBox(){
+
+  var cat = document.getElementById('id_academ_catedr');
+  var nom_cat = document.getElementById('id_nombr_academi');
+
+  if (cat.checked == true){
+    nom_cat.disabled = false;
+  }
+  else{
+    nom_cat.disabled = true;
+  }
+}
+
+function enableBox2(){
+
+  var is_beca = document.getElementById('id_bec_est_esp');
+  var curs = document.getElementById('id_estu_cur');
+  var inst = document.getElementById('id_inst_empr_bec');
+
+  if (is_beca.checked == true){
+    curs.disabled = false;
+    inst.disabled = false;
+  }
+  else{
+    curs.disabled = true;
+    inst.disabled = true;
+  }
+}
+
+
+function activaBox(){
+  var act = document.getElementById('id_status1');
+  var fin = document.getElementById('id_status2');
+  var sus = document.getElementById('id_status3');
+
+  if (act.checked == true){
+    fin.disabled = true;
+    sus.disabled = true;
+  }
+}
+// ----------------------------------------------------------------- //
+
+// -------------------- Asignacion Del Profesor -------------------- //
+function asig(ci){
+  var ac = document.getElementById("formcedula")
+  document.getElementById("apretar").onclick=function(){
+    ci2 = document.getElementById("id_cedula").value;
+    if (ci === ci2){
+      console.log("si")
+      $.ajax({
+        url: url,
+        type: 'POST',
+        datatype:'json',
+        data:{
+           'csrfmiddlewaretoken':document.getElementsByName("csrfmiddlewaretoken")[0].value,
+           'cedu1':ci,
+           'cedu2':ci2 
+        }  
+      }).done(function(data){
+        alert("Guardado exitosamente")
+        window.location= despues
+      })
+    }else{
+      alert("No Coincide")
     }
-    else
-    {   
-        Check2.disabled = false;
-        Check3.disabled = false;
-        Check4.disabled = true;
-        Check5.disabled = true;
-   }
   }
-
-function habilitarCincoTextBox2()
-{
-  var Check1 = document.getElementById('id_is_secretaria'); 
-  var Check2 = document.getElementById('id_is_profesor'); 
-  var Check3 = document.getElementById('id_is_alumno');
-  var Check4 = document.getElementById('id_is_superuser');
-  var Check5 = document.getElementById('id_is_staff');
- 
-  if (Check2.checked==true)
-  {
-    Check1.disabled = true;
-    Check3.disabled = true;
-    Check4.disabled = true;
-    Check5.disabled = false;
-  }
-  else
-  {   
-        Check1.disabled = false;
-        Check3.disabled = false;
-        Check4.disabled = true;
-        Check5.disabled = true;
-   }
-
-}
-
-function habilitarCincoTextBox3()
-{
-  var Check1 = document.getElementById('id_is_secretaria'); 
-  var Check2 = document.getElementById('id_is_profesor'); 
-  var Check3 = document.getElementById('id_is_alumno');
-  var Check4 = document.getElementById('id_is_superuser');
-  var Check5 = document.getElementById('id_is_staff');
- 
-  if (Check3.checked==true)
-  {
-    Check1.disabled = true;
-    Check2.disabled = true;
-    Check4.disabled = true;
-    Check5.disabled = true;
-  }
-  else
-  {   
-        Check1.disabled = false;
-        Check2.disabled = false;
-        Check4.disabled = true;
-        Check5.disabled = true;
-   }
-
-}
-
-function copiar()
-{
-  document.getElementById("id_password").value=document.getElementById("id_ci").value;
-  document.getElementById("id_password2").value=document.getElementById("id_ci").value;
-}
+} 

@@ -1,0 +1,114 @@
+{% extends  'base_admin.html' %}
+{%block title%}Listado De Profesores{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Lista De Profesores</h1>
+      <ul class="breadcrumb side">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li class="active">Profesores</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Cedula</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Nombre</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Apellido</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Asignacion</th>
+                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 99px;">Activar</th>
+                    </thead>
+                    <tbody>
+                        {% for Profesor in object_list %}
+                        <tr class="odd">
+                        <td>{{ Profesor.cedula_profesor }}</td>
+                        <td>{{ Profesor.nombre_profesor }}</td>
+                        <td>{{ Profesor.apellido_profesor }}</td>
+                        <td>{{ Profesor.asignacion }}</td>
+                        <td><a href="#!" data-toggle="modal" data-target="#Asignar" class="btn btn-primary" id="{{ profesor.cedula_profesor }}" onclick="asig('{{ profesor.cedula_profesor }}')"> Asignar </a></td>
+                        </tr>
+                        {% empty %}
+                        <td valign="top" colspan="5" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                        {% endfor %}
+                    </tbody>
+                    
+                      <div class="modal fade" id="Asignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="myModalLabel" align="center">Activacion Del Profesor</h4>
+                            </div>
+                            <div class="modal-body" align="center">
+                              <form action="" class="form-group" name="auth" method="POST"  id="formcedula">{% csrf_token %}
+                                <input type="text" class="form-control" maxlength="8" placeholder="Confirmar Cedula" onkeypress="return valida(event);" autocomplete=off name="cedula", id="id_cedula"><hr>
+                               <a class="btn btn-primary"  id="apretar">Activar Profesor </a>                             
+                              </form>
+                              </div>
+                            <div class="modal-footer">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock content %}
+
+{% block javascript %}
+  <script>
+    var verifcar = true;
+
+    var url = {% url 'auth:permiso' %}
+      var despues = "{% url 'auth:list' %}"
+      function asig(ci){
+      var ac = document.getElementById("formcedula")
+      document.getElementById("apretar").onclick=function(){
+        ci2 = document.getElementById("id_cedula").value;
+        if (ci === ci2){
+          console.log("si")
+          $.ajax({
+            url: url,
+            type: 'POST',
+            datatype:'json',
+            data:{
+               'csrfmiddlewaretoken':document.getElementsByName("csrfmiddlewaretoken")[0].value,
+               'cedu1':ci,
+               'cedu2':ci2 
+            }  
+          }).done(function(data){
+            alert("Guardado exitosamente")
+            window.location= despues
+          })
+        }else{
+          alert("No Coincide")
+        }
+      }
+    }
+  </script>
+
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/form_validation.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

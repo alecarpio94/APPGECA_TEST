@@ -11,20 +11,19 @@ class ActivForm(forms.ModelForm):
 	class Meta:
 		model = Actividad
 
-		fields = ['codigo_act', 'nombr_acti', 'descripcio', 'fecha_inic', 'fecha_fina']
+		fields = ['nombr_acti', 'descripcio', 'fecha_inic', 'fecha_fina']
 		labels = {
-		'codigo_act': 'Codigo De La Actividad',
 		'nombr_acti': 'Nombre De La Actividad',
 		'descripcio': 'Descripcion',
 		'fecha_inic': 'Fecha De Inicio',
+		'hora_inic': 'Hora De Inicio',
 		'fecha_fina': 'Fecha De Culminacion',
+		'hora_final': 'Hora De Culminacion',
+		'status1':'status1',
+		'status2':'status2',
+		'status3':'status3',
 		}
 		widgets = {
-        'fecha_inic': DateInput(format='%Y-%m-%d'),
-        'fecha_fina': DateInput(format='%Y-%m-%d'),
+        'fecha_inic': DateInput(format='%b %d, %Y'),
+        'fecha_fina': DateInput(format='%b %d, %Y'),
         }
-
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-		for fields in self.fields:
-			self.fields[filed].widgets.attrs.update({'class':'form-control'})

@@ -1,48 +1,30 @@
 from __future__ import unicode_literals
-
+from django.utils import timezone
+import datetime
 from django.db import models
+from APPGECA_TEST.apps.alumno.models import Alumno
 
 # Create your models here.
 ######################MODELO INSTRUMENTO###################
 class Instrumento(models.Model):
 
-	inst = (('Programa Alma Llanera','Programa Alma Llanera'),
-		('Arpa Clasica','Arpa Clasica'),
-		('Orquesta Infantil','Orquesta Infantil'),
-		('Oboe','Oboe'),
-		('Cuatro','Cuatro'),
-		('Percusion','Percusion'),
-		('Violincello','Violincello'),
-		('Trombon','Trombon'),
-		('Coro/Lenguaje Musical','Coro/Lenguaje Musical'),
-		('Flauta/Lenguaje Musical','Flauta/Lenguaje Musical'),
-		('Corno','Corno'),
-		('Guitarra','Guitarra'),
-		('Violin','Violin'),
-		('Viola','Viola'),
-		('Viola/Lenguaje Musical','Viola/Lenguaje Musical'),
-		('Flauta','Flauta'),
-		('Clarinete','Clarinete'),
-		('Tuba','Tuba'),
-		('Trompeta/Lenguaje Musical','Trompeta/Lenguaje Musical'),
-		('Contrabajo','Contrabajo'),
-		('Pianista','Pianista'))
+	id = models.AutoField(primary_key=True)
+	nombr_instr = models.CharField('Nombre', max_length=50, unique=True)
 
-	nombr_instr = models.CharField('Nombre',primary_key=True,choices=inst, max_length=50, unique=True)
-	stock_min = models.IntegerField('Cantidad Minima',default=1)
-	stock_max = models.IntegerField('Cantidad Maxima',default=0)
-	disponibles = models.IntegerField('Disponibles',default=0)
-	uso = models.IntegerField('Uso',default=0)
+	def __str__(self):
+		return '{}'.format(self.nombr_instr)
 
-	def save(self, *args, **kwargs):
-		if (self.stock_max) > (self.stock_min):
-			super(Instrumento, self).save(*args, **kwargs)
-			if (self.disponibles+1)< (self.stock_max):
-				super(Instrumento, self).save(*args, **kwargs)
-			else:
-				self.disponibles = 0
-				super(Instrumento, self).save(*args, **kwargs)
+class Asignatura(models.Model):
 
-	def __unicode__(self):
-		Dato = "%s"% (self.nombr_instr)
-		return Dato
+	id = models.AutoField(primary_key=True, unique=True)
+	instrumento = models.ForeignKey(Instrumento)
+	alumno = models.OneToOneField(Alumno, on_delete=models.CASCADE)
+	descripcion = models.TextField()
+	fecha_entrega = models.CharField(max_length=10)
+	fecha_retiro = models.CharField(max_length=10,blank=True, null=True)
+
+	def __str__(self):
+		return '{} {}'.format(self.alumno, self.instrumento)
+
+	def instrumentos(self):
+		return '{} {}'.format(self.instrumento)

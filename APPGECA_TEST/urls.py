@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^', include('APPGECA_TEST.apps.alumno.urls', namespace='alumno')),
     url(r'^', include('APPGECA_TEST.apps.profesor.urls', namespace='profesor')),
     url(r'^', include('APPGECA_TEST.apps.instrumento.urls', namespace='instrumento')),
-    url(r'^', include('APPGECA_TEST.apps.alumno.urls', namespace='alumno')),
+    url(r'^', include('APPGECA_TEST.apps.reportes.urls', namespace='reportes')),
     ##################################################################################
     url(r'^', include('APPGECA_TEST.apps.authentication.urls', namespace='auth')),
     url(r'^', include('APPGECA_TEST.apps.inicio.urls', namespace='inicio')),

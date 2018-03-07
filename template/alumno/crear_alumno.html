@@ -1,0 +1,720 @@
+{% extends  'base_admin.html' %}
+{% load staticfiles %}
+{% block content %}
+{% load widget_tweaks %}
+{%block title%}Registrar Alumno{% endblock title%}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Nuevo Alumno</h1>
+      <p>Formulario Para El Registro De Un Nuevo Alumno</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Registro</li>
+        <li><a href="{% url 'alumno:list_alumno' %}">Alumno</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal " id="form" onkeypress="" method="POST" role="form">
+                <div class="Alumno">
+                  <fieldset>
+                    <legend>Registro</legend>
+                    <div>
+                      <div class="bs-component">
+                        <ul class="nav nav-tabs">
+                          <li class="active"><a href="" data-toggle="tab">Alumno</a></li>
+                          <li><a href="" data-toggle="tab">Representante</a></li>
+                          <li><a href="" data-toggle="tab">Vivienda</a></li>
+                          <li><a href="" data-toggle="tab">Direccion</a></li>
+                          <li><a href="" data-toggle="tab">Familia</a></li>
+                          <li><a href="" data-toggle="tab">Educacion</a></li>
+                          <li><a href="" data-toggle="tab">Empresa</a></li>
+                          <li><a href="" data-toggle="tab">Educacion Musical</a></li>
+                          <li><a href="" data-toggle="tab">Percepcion Del Representante</a></li>
+                          <li><a href="" data-toggle="tab">Percepcion Del Alumno</a></li>
+                        </ul>
+                        <br>
+                        <form method="POST" id="alumForm">{% csrf_token %}
+                        <div class="tab-content" id="myTabContent">
+                            <!-- Formulario Del Alumno -->
+                            <div class="tab-pane fade active in" id="Alumno">
+                              <div class="FormGroup">
+                                <div class="col-md-2">
+                                  <label for="Nacionalidad" class="text-danger">Nacionalidad</label>
+                                  {{ alumno.nacionalidad | add_class:'form-control' }}
+                                </div>
+                                <div class="col-md-10">
+                                   <label for="cedula_alumno" class="text-danger">Cedula Del Alumno</label>
+                                   {{ alumno.cedula_alumno | add_class:'form-control is-invalid'| attr:'placeholder:Ingrese La Cedula Del Alumno'|attr:'autocomplete:off' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="nombre_alumno" class="text-danger">Primer Nombre</label>
+                                  {{ alumno.primer_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Primer Nombre'|attr:'autocomplete:off'|attr:'type:text'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="segundo_nombre">Segundo Nombre</label>
+                                  {{ alumno.segundo_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Segundo Nombre'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="primer_apellido" class="text-danger">Primer Apellido</label>
+                                  {{ alumno.primer_apellido | add_class:'form-control'|attr:'placeholder:Ingrese El Primer Apellido'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="segundo_apellido">Segundo Apellido</label>
+                                  {{ alumno.segundo_apellido| add_class:'form-control'|attr:'placeholder:Ingrese El Segundo Apellido'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="sexo" class="text-danger">Sexo</label>
+                                  {{ alumno.sexo_alumno | add_class:'form-control' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="fecha_nacimiento" class="text-danger">Fecha De Nacimiento</label>
+                                  {{ alumno.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:calendar'|attr:'placeholder:Ingrese La Fecha De Nacimiento'|attr:'onkeypress:return valida(event);' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup col-md-6">
+                                <label for="lugar_nacimiento" class="text-danger">Lugar De Nacimiento</label>
+                                {{ alumno.lugar_nacimiento | add_class:'form-control'|attr:'placeholder:Nombre El Lugar De Nacimiento'| attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                              </div>
+
+                              <div class="FormGroup col-md-6">
+                                <label for="institucion" class="text-danger">Institución</label>
+                                {{ alumno.institucion|add_class:'form-control'|attr:'placeholder:Nombre De La Actual Institución Cursante'|attr:'autocomplete:off' }}
+                              </div>
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Representante" data-toggle="tab" class="btn btn-primary active">Siguiente</a>
+                              </div>
+                            </div>
+
+                            <!-- Formulario Del Representante -->
+                            <div class="tab-pane fade" id="Representante">
+                              <div class="FormGroup col-md-6">
+                                  <label for="cedula_representante" class="text-danger">Cedula Del Representante</label>
+                                  {{ representante.cedula_repres|add_class:'form-control is-invalid'|attr:'placeholder:Ingrese Cedula Del Representante'|attr:'autocomplete:off' }}
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="nombre_representante" class="text-danger">Nombre Del Representante</label>
+                                  {{ representante.nombre_repres|add_class:'form-control is-invalid'|attr:'placeholder:Nombre Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="apellido_representante" class="text-danger">Apellido Del Representante</label>
+                                  {{ representante.apelli_repres|add_class:'form-control is-invalid'|attr:'placeholder:Ingrese Apellido Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="ocupacion" class="text-danger">Ocupación Del Representante</label>
+                                  {{ representante.ocupacion|add_class:'form-control' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="profesion">Profesión Del Representante</label>
+                                  {{ representante.profesion|add_class:'form-control'|attr:'placeholder:Profesión Actual'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="telefono_repres" class="text-danger">Telefono Celular</label>
+                                  {{ representante.telef_cel|add_class:'form-control is-invalid'|attr:'placeholder:Numero Telefonico'|attr:'autocomplete:off' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="telefono_cel">Telefono De Casa</label>
+                                  {{ representante.telef_res|add_class:'form-control is-invalid'|attr:'placeholder:Numero De Casa'|attr:'autocomplete:off' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup col-md-6">
+                                <label for="direccion_repres" class="text-danger">Dirección</label>
+                                {{ representante.direccion|add_class:'form-control'|attr:'placeholder:Direccion Del Representante'|attr:'autocomplete:off' }}
+                              </div>
+                              <br>
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Alumno" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Vivienda" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div> 
+                            
+                            <!-- Formulario De La Vivienda -->
+                            <div class="tab-pane fade" id="Vivienda">
+                              <div class="panel panel-info">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title" align="center">Información</h3>
+                                </div>
+                                <div class="panel-body" align="center">Marque La Opcion -> (Si) / Deje Sin Marcar La Opcion -> (No)</div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="tipo_vivi">Tipo De Vivienda</label>
+                                  {{ vivienda.tipo_vivien|add_class:'form-control' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="" class="text-danger">Zona</label>
+                                  {{ vivienda.zona|add_class:'form-control'|attr:'autocomplete:off'|attr:'Zona En La Que Vive' }}
+                                </div>
+                              </div>
+                              <hr>
+                              <h3>Datos Del Hogar</h3>
+                              <br>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.agua|attr:'type:checkbox' }}<span class="label-text">Agua</span>
+                                  </label>
+                                </div>
+
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.aseo_urbano|attr:'type:checkbox' }}<span class="label-text">Aseo Urbano</span>
+                                  </label>
+                                </div>
+
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.cloacas|attr:'type:checkbox' }}<span class="label-text">Cloacas</span>
+                                  </label>
+                                </div>
+
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.telefono_fijo|attr:'type:checkbox'}}<span class="label-text">Telefono Fijo</span>
+                                  </label>
+                                </div>
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{  vivienda.internet|attr:'type:checkbox' }}<span class="label-text">Internet</span>
+                                  </label>
+                                </div>
+                                 <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.nevera|attr:'type:checkbox' }}<span class="label-text">Nevera</span>
+                                  </label>
+                                </div>
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.cocina|attr:'type:checkbox' }}<span class="label-text">Cocina</span>
+                                  </label>
+                                </div>
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.lavadora|attr:'type:checkbox' }}<span class="label-text">Lavadora</span>
+                                  </label>
+                                </div>
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.secadora|attr:'type:checkbox' }}<span class="label-text">Secadora</span>
+                                  </label>
+                                </div>
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.computadora|attr:'type:checkbox' }}<span class="label-text">Computadora</span>
+                                  </label>
+                                </div>
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    <input type="checkbox" id="id_celular"><span class="label-text">Celular</span>
+                                  </label>
+                                </div>
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ vivienda.calentador_de_agua|attr:'type:checkbox' }}<span class="label-text">Calentador De Agua</span>
+                                  </label>
+                                </div>
+                              </div>
+                              <hr>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Numero De Habitaciones En La Vivienda</label>
+                                  {{ vivienda.habitacione|add_class:'form-control'|attr:'placeholder:Cuantas Habitaciones Hay En La Vivienda'|attr:'autocomplete:off' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Numero De Habitantes En La Vivienda</label>
+                                  {{ vivienda.num_habitan|add_class:'form-control'|attr:'placeholder:Cantidad De Personas Viviendo En El Hogar'|attr:'autocomplete:off' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Numero De Baños</label>
+                                  {{ vivienda.num_bano|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Cantidad De Baños En El Hogar' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Habitantes Que Trabajan</label>
+                                  {{ vivienda.habitan_tra|add_class:'form-control'|attr:'placeholder:Cantidad De Habitantes Que Trabajan'|attr:'autocomplete:off' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Habitantes Que Aportan</label>
+                                  {{ vivienda.habitan_apo|add_class:'form-control'|attr:'placeholder:Cantidad De Habitantes Que Aportan En El Hogar'|attr:'autocomplete:off' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Monto Aproximado De Ingresos Mensuales En El Hogar</label>
+                                  {{ vivienda.mon_apr_men|add_class:'form-control'|attr:'placeholder:Cantidad Aproximanda En Bolivares(Bs)'|attr:'autocomplete:off' }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Representante" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Direccion" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div>
+
+                            <!-- Formulario De la Direccion -->
+                            <div class="tab-pane fade" id="Direccion">
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="" class="text-danger">Entidad Federal</label>
+                                  {{ direccion.entid_feder|add_class:'form-control' }}
+                                </div>
+                              </div>
+                              
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="" class="text-danger">Ciudad</label>
+                                  {{ direccion.ciudad|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ciudad En La Que Vive Actualmente' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="" class="text-danger">Parroquia</label>
+                                  {{ direccion.parroquia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Parroquia A La Que Pertenece' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="" class="text-danger">Sector</label>
+                                  {{ direccion.sector|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Sector En Que Se Encuentra Ubicado' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="" class="text-danger">Barrio/Urbanización</label>
+                                  {{ direccion.barri_urban|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Barrio Ó Urbanizacón En Cual Vive' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="" class="text-danger">Calle/Avenida</label>
+                                  {{ direccion.calle_avend|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Calle Y/Ó Avenida De La Casa' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="" class="text-danger">Apartamento/Casa</label>
+                                  {{ direccion.apt_casa|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Numero De La Casa Y/Ó Apartamento' }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Vivienda" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Familia" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div>
+
+                            <!-- Formulario De Un Familiar -->
+                            <div class="tab-pane fade" id="Familia">
+                              <div class="panel panel-info">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title" align="center">Información</h3>
+                                </div>
+                                <div class="panel-body" align="center">Marque La Opcion -> (Si) / Deje Sin Marcar La Opcion -> (No)</div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Cedula Del Familiar</label>
+                                  {{ familia.cedula_familia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Numero De Cedula Del Familiar' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Nombre Del Familiar</label>
+                                  {{ familia.nombre_familia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese Nombre Del Familiar'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Apellido Del Familiar</label>
+                                  {{ familia.apelli_familia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese El Apellido Del Familiar'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Ocupación</label>
+                                  {{ familia.ocupacion_f|add_class:'form-control'|attr:'autocomplete:off' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Profesión</label>
+                                  {{ familia.profesion_f|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Profesión Del Familiar'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Direccion</label>
+                                  {{ familia.direccion|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Direccion Del Familiar' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Telefono Celular</label>
+                                  {{ familia.telef_cel_f|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Telefono Celular Del Familiar' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Telefono Residencial</label>
+                                  {{ familia.telef_res_f|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Numero De La Casa Del Familiar' }}
+                                </div>
+                              </div>
+
+                              <br><br>
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-6">
+                                  <label>
+                                    {{ familia.vive|attr:'type:checkbox' }}<span class="label-text">Vive Con El Alumno?</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Direccion" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Educacion" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div>
+
+                            <!-- Formulario Eduacion Del Alumno -->
+                            <div class="tab-pane fade" id="Educacion">
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="" class="text-danger">Nivel Educativo Actual</label>
+                                  {{ educacion.nivel_e|add_class:'form-control' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Cursos</label>
+                                  {{ educacion.curso|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Curso En El Cual Es Participe Actualmente' }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Familia" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Empresa" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div>
+                            
+                            <!-- Formulario Del Trabajo Del Alumno -->
+                            <div class="tab-pane fade" id="Empresa">
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Nombre De La Empresa</label>
+                                  {{ empresa.nombre_empre|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre De La Empresa En La Que Trabaja El Alumno' }}
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Nombre Del Jefe De La Empresa</label>
+                                  {{ empresa.nombre_jefe|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre El Jefe De La Empresa' }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Educacion" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Educa_Musi" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div>
+
+                            <!-- Formulario Eduacion Musical Del Alumno -->
+                            <div class="tab-pane fade" id="Educa_Musi">
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                <label for="">Programas Orquestales Y/O Corales En Los Que Participa</label>
+                                {{ educamusi.progama_orque|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre De Los Programas Los Cuales Participa' }}
+                                </div>
+                                <br>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Instrumento Principal</label>
+                                  {{ educamusi.instru_princi|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Instrumento Principal Del Alumno'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Profesor De Clase Individual</label>
+                                  {{ educamusi.prof_clas_ind|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre Del Profesor Que Imparte La Clase'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+                              <hr>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Instrumento Secundario</label>
+                                  {{ educamusi.instru_secund|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Instrumento Principal Del Alumno'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Profesor De Clase Individual</label>
+                                  {{ educamusi.prof_clas_sec|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre Del Profesor Que Imparte La Clase'|attr:'onkeypress:return soloLetras(event);' }}
+                                </div>
+                              </div>
+                              <hr>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ educamusi.academ_catedr|attr:'type:checkbox'|attr:'onclick: return enableBox();' }}<span class="label-text">El Alumno Recibe Clases En Una Academia O Catedra Nacional?</span>
+                                  </label>
+                                </div>
+                              </div>
+                              <br>
+
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Nombre De La Academia Y/O Catedra</label>
+                                  {{ educamusi.nombr_academi|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Escriba El Nombre De La Catedra Nacional En La Cual Cursa Estudios'|attr:'disabled:True' }}
+                                </div>
+                              </div>
+                              <hr>
+
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Ha Sido Selecionado Para Pertenecer A Una Orquesta/Coro Nacional</label>
+                                  {{ educamusi.clas_acad_cate|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre De La Orquesta Y/Ó Coro Nacional' }}
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="">Ha Sido Selecionado Para Pertenecer A Una Orquesta/Coro Regional</label>
+                                  {{ educamusi.nom_aca_cate|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre De La Orquesta Y/Ó Coro Regional' }}
+                                </div>
+                              </div>
+                              
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Cursa Estudios En Una Institucion Especializada En Musica</label>
+                                  {{ educamusi.inst_espc_mus|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre De La Institución' }}
+                                </div>
+                              </div>
+                              <hr> 
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ educamusi.bec_est_esp|attr:'type:checkbox'|attr:'onclick:return enableBox2();' }}<span class="label-text">Recibe Alguna Beca O Ayuda Para Cursar Estudios Especializados En Musica?</span>
+                                  </label>
+                                </div>
+                                <br>
+                              </div>
+                                  
+                              <div class="FormGroup">
+                                <div class="col-md-6">
+                                  <label for="">Que Estudios Cursa</label>
+                                  {{ educamusi.estu_cur|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Escriba El Nombre Del Curso'|attr:'disabled:True' }}
+                                </div>
+                   
+                                <div class="col-md-6">
+                                  <label for="">Que Institucion O Empresa Otorga La Beca</label>
+                                  {{ educamusi.inst_empr_bec|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Institución Y/Ó Empresa Que Otorga La Beca'|attr:'disabled:True' }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Empresa" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Percepcion_Representante" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div>
+
+                            <!-- Formulario De la Percepcion Del Representante -->
+                            <div class="tab-pane fade" id="Percepcion_Representante">
+                              <div class="panel panel-info">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title" align="center">Información</h3>
+                                </div>
+                                <div class="panel-body" align="center">Marque La Opcion -> (Si) / Deje Sin Marcar La Opcion -> (No)</div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percrepre.grup_fam_reco_com|attr:'type:checkbox' }}<span class="label-text">Como Grupo Familiar Somos Reconocidos En La Comunidad (Nos Respetan Mas)</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percrepre.asis_nin_act_mus|attr:'type:checkbox' }}<span class="label-text">La Asistencia De Mis Niños Al La Actividad Musical, Mejoro Las Relaciones Familiares</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percrepre.prac_mus_ent_eco|attr:'type:checkbox' }}<span class="label-text">La Practica Musical Produce Una Entrada Economica Mas En El Grupo Familiar</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percrepre.viv_mej|attr:'type:checkbox' }}<span class="label-text">Ahora Vivo Mejor</span>
+                                  </label>
+                                </div>
+                              </div>
+                                <br>
+
+                              <div class="FormGroup">
+                                <div class="col-md-12">
+                                  <label for="">Otra Razón</label>
+                                  {{ percrepre.otra_razon|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Otra Razón' }}
+                                </div>
+                              </div>
+
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Educa_Musi" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Percepcion_Alumno" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                              </div>
+                            </div>  
+
+                            <!-- Formulario De la Percepcion Del Alumno -->
+                            <div class="tab-pane fade" id="Percepcion_Alumno">
+                              <div class="panel panel-info">
+                                <div class="panel-heading">
+                                  <h3 class="panel-title" align="center">Información</h3>
+                                </div>
+                                <div class="panel-body" align="center">Marque La Opcion -> (Si) / Deje Sin Marcar La Opcion -> (No)</div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percalum.m_sien_bie|attr:'type:checkbox' }}<span class="label-text">Me Siento Bien</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percalum.m_sien_seg|attr:'type:checkbox' }}<span class="label-text">Me Siento Seguro</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percalum.sien_mejo|attr:'type:checkbox' }}<span class="label-text">Siento Que He Mejorado Como Ser Humano</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percalum.mas_apre_com |attr:'type:checkbox' }}<span class="label-text">Soy Mas Apreciado En La Comunidad</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percalum.m_sien_cap|attr:'type:checkbox' }}<span class="label-text">Me Siento Cansado</span>
+                                  </label>
+                                </div>
+                              </div>
+                              
+                              <div class="FormGroup">
+                                <div class="animated-checkbox col-md-12">
+                                  <label>
+                                    {{ percalum.m_sien_mot|attr:'type:checkbox' }}<span class="label-text">Me Siento Desmotivado</span>
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-md-12" align="right">
+                                <hr>
+                                <a href="#Percepcion_Representante" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <button class="btn btn-primary" value="Guardar"> Guardar </button></i> 
+                              </div>
+                            </div> 
+
+                          <!-- Errores -->
+                        {% if alumno.form or representante.form or vivienda.form or direccion.form or familia.form or educacion.form or empresa.form or educamusi.form or percrepre.form or percalum.form %}
+                          <div class="alert">
+                            <div class="alert alert-dismissible alert-danger">
+                              <button class="close" type="button" data-dismiss="alert">×</button>
+                              <h4>Alerta!</h4>
+                              <p>
+                                {{ alumno.errors }}
+                                {{ representante.errors }}
+                                {{ vivienda.errors }}
+                                {{ direccion.errors }}
+                                {{ familia.errors }}
+                                {{ educacion.errors }}
+                                {{ empresa.errors }}
+                                {{ educamusi.errors }}
+                                {{ percrepre.errors  }}
+                                {{ percalum.errors  }} 
+                              </p>
+                            </div>
+                          </div>
+                        {% endif %}
+                        </div>
+                      </div>
+                      <div class="FormGroup col-md-6">
+                        <br>
+                      </div>  
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+{% endblock content %}
+
+{% block javascript %}
+  <script src="{% static 'js/form_validation.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
+
+  <script>
+    $('#calendar').datepicker('setDate', new Date(2006, 11, 24));
+  </script>
+{% endblock %}

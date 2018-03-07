@@ -1,0 +1,50 @@
+{% extends  'base_admin.html' %}
+{%block title%}Nuevo Instrumento{% endblock title%}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1><i class="fa fa-edit"></i> Registrar Instrumento</h1>
+      <p>Inventario Para Un Instrumento</p>
+    </div>
+    <div>
+      <ul class="breadcrumb">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Registro</li>
+        <li><a href="#">Instrumento</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="POST">{% csrf_token %}
+                <fieldset>
+                  <legend>Registro</legend>
+                  <div class="FormGroup">
+                    <label>Nombre Del Instrumento</label>
+                    <div name="nombr_instr">{{ form.nombr_instr | add_class:'form-control'| attr:"autocomplete:off" | attr:'placeholder: Ingrese Nombre Del Instrumento'}}</div>
+                    <hr>
+                    {% if form.nombr_instr.errors %}
+                    <div class="alert alert-dismissible alert-danger">
+                      <button class="close" type="button" data-dismiss="alert">×</button>
+                      <h4>Alerta!</h4>
+                      <p>Este Instrumento ya ha sido registrado.</p>
+                    </div>
+                    {% endif %}
+                    <button class="btn btn-primary">crear</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+{% endblock content %}

@@ -29,23 +29,17 @@
               <table class="table table-striped">
                   <thead>
                     <tr role="row">
-                    <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column descending" style="width: 89px;" aria-sort="ascending">Nombre</th>
-                    <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Stock Minimo</th>
-                    <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Stock Maximo</th>
-                    <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Cantidad En Uso</th>
+                    <th style="text-align: justify;">Nombre</th>
                     </tr>
                 <tbody>
                 {% if object_list %}
                 {% for instrumento in object_list %}
                 <tr class="odd">
                   <td>{{ instrumento.nombr_instr }}</td>
-                  <td>{{ instrumento.stock_min }}</td>
-                  <td>{{ instrumento.stock_max }}</td>
-                  <td>{{ instrumento.uso }}</td>
                   </tr>
                 {% endfor %}
                 {% else %}
-                <td valign="top" colspan="7" class="dataTables_empty" align="center">No hay instrumentos registrados</td>
+                <td valign="top" colspan="1" class="dataTables_empty" align="center">No hay instrumentos registrados</td>
                 {% endif %}  
               </table>
             </div>

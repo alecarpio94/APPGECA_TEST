@@ -1,0 +1,55 @@
+{% extends 'base_admin.html' %}
+{% load staticfiles %}
+{%block title%}Listado De Alumnos Asignados{% endblock title%}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Lista De Alumnos Asignados</h1>
+      <ul class="breadcrumb side">
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th>Nombre</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for asignados in object_list%}
+                        <tr class="odd">
+                          <td>{{ asignados.alumno.primer_nombre }} {{ asignados.alumno.primer_apellido }}</td>
+                          <td>{% if asignados.status == True and asignados.evaluado == True %}Aprovado <img src="/static/img/icon-yes.svg" > {% elif asignados.status == False and asignados.evaluado == True %}Reprobado <img src="/static/img/icon-no.svg"> {% else %} Sin Evaluar {% endif %}</td>
+                        </tr>
+                      {% empty %}
+                      <td valign="top" colspan="3" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      {% endfor %}
+                    </tbody></table></div></div>
+                  </div>              </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

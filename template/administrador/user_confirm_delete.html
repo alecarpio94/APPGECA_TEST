@@ -22,11 +22,11 @@
                   <h3 align="center">Seguro que desea eliminar a: {{ object.first_name }} {{ object.last_name }} </h3>
                   <div align="center">
 
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal"> Eliminar </button>
-                    <a href="/list_user/" class="btn btn-default">Volver</a>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#Delete"> Eliminar </button>
+                    <a href="{% url 'auth:list' %}" class="btn btn-default">Volver</a>
                   </div>
 
-                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal fade" id="Delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">

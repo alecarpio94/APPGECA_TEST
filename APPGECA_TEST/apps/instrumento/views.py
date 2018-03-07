@@ -1,3 +1,4 @@
+
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Create your views here.
@@ -15,11 +16,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from datetime import date, datetime
-from django.views.generic import CreateView 
-from django.views.generic import ListView 
-from django.views.generic import UpdateView
-from django.views.generic import DeleteView
-from django.views.generic import TemplateView, FormView
+from django.views.generic import CreateView, ListView,UpdateView,DeleteView
+from django.views.generic import TemplateView, FormView, DetailView
 from django.views.generic import ListView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
@@ -27,26 +25,31 @@ from django.db.models import Q
 from django.core.urlresolvers import reverse_lazy
 #paginacion de django#
 from ...apps.instrumento.models import *
+from ...apps.alumno.models import Alumno
 from ...apps.instrumento.forms import *
 from ...apps.authentication.models import Users
 from ...apps.utils.mixins import AdminRequiredMixin, ProfesorRequiredMixin
 from ...apps.utils.forms_date import DateInput
 from django.utils.decorators import method_decorator
 import os
+from datetime import date, datetime
+
 
 ##################INSTRUMENTO ADMIN#####################
-class instruCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
-	template_name = 'instrumentos/crear-instrumento.html'
+class InstruCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
+	template_name = 'instrumentos/crear_instrumento.html'
 	model = Instrumento
-	fields = ['nombr_instr' , 'stock_min' , 'stock_max', 'uso',]
-	success_url = '/listado_de_instrumento/'
+	fields = ['nombr_instr']
+	success_url = reverse_lazy('instrumento:list_instrumento')
 
-class instruListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+######################LISTA DE INSTRUMENTOS######################
+class InstruListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 	context_object_name = 'Listainstrumento'
 	model = Instrumento
-	template_name = 'instrumentos/list-instrumentos.html'
+	template_name = 'instrumentos/lista_instrumentos.html'
 
-class instListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+######################REPORTE DE LOS INSTRUMENTOS######################
+class InstListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 	def get_context_data(self, **kwargs):
 	    context = super(instListAllView, self).get_context_data(**kwargs)
 	    context['date'] = datetime.now().strftime("%d/%m/%Y")
@@ -55,3 +58,22 @@ class instListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 	context_object_name = 'ListaAllintrumentos'
 	model = Instrumento
 	template_name = 'reportes/report-instr-list.html'
+
+######################ASIGNANDO INSTRUMENTO######################
+class AsigInstrumentoView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
+	template_name = 'instrumentos/asignacion_del_alumno.html'
+	model = Asignatura
+	fields = ['instrumento','alumno','descripcion','fecha_entrega']
+	success_url = reverse_lazy('instrumento:asig_instrumento')
+
+######################LISTADO DE ALUMNOS######################
+class AlumnoListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+	context_object_name = 'ListasalumnoI'
+	model = Asignatura
+	template_name = 'asignacion/instrumentos_asignados.html'
+
+class UpdateAsigAlumnView(LoginRequiredMixin,AdminRequiredMixin,UpdateView):
+	template_name = 'instrumentos/update_instrumento.html'
+	model = Asignatura
+	fields = ['instrumento','alumno','descripcion','fecha_entrega','fecha_retiro']
+	success_url = reverse_lazy('instrumento:asig_instrumento')

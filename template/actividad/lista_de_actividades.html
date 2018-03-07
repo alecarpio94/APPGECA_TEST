@@ -1,0 +1,100 @@
+{% extends  'base_admin.html' %}
+{%block title%}Listado De Las Actividades{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Lista De Actividades</h1>
+      <ul class="breadcrumb side">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Listado</li>
+        <li class="active"><a href="#">Actividades</a></li>
+      </ul>
+    </div>
+    {% if request.user.is_secretaria %}
+      <div><a class="btn btn-primary btn-flat" href="/nueva_actividad/"><i class="fa fa-lg fa-plus"></i></a></div>
+    {% endif %}
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                      <th>Nombre</th>
+                      <th>Fecha De Inicio</th>
+                      <th>Fecha Final</th>
+                      <th>Estado</th>
+                      {% if request.user.is_secretaria %}
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                      {% endif %}
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {% if object_list %}
+                    {% for actividad in object_list %}
+                    <tr class="odd">
+                      <td>{{ actividad.nombr_acti }}</td>
+                      <td>{% if actividad.fecha_inic == "" %} Sin Programar {% else %} {{ actividad.fecha_inic }}{% endif %}</td>
+                      <td>{% if actividad.fecha.fina == "" %} Sin Programar {% else %} {{ actividad.fecha_fina }}{% endif %}</td>
+                      <td>
+                        {% if actividad.status1 == True and actividad.status2 == False and actividad.status3 == False %}
+                        Activa<img src="/static/img/icon-yes.svg" > 
+                          
+                        {% elif actividad.status1 == True and actividad.status2 == True and actividad.status3 == False %} 
+                        Finalizada<img src="/static/img/icon-yes.svg" > 
+
+                        {% elif actividad.status1 == False and actividad.status2 == True and actividad.status3 == False %} 
+                        Finalizada<img src="/static/img/icon-yes.svg" > 
+
+                        {% elif actividad.status1 == True and actividad.status2 == False and actividad.status3 == True %} 
+                        Pospuesta<img src="/static/img/icon-no.svg">
+                        
+                        {% elif actividad.status1 == True and actividad.status2 == True and actividad.status3 == True %}
+                        Pospuesta<img src="/static/img/icon-no.svg">
+                        
+                        {% elif actividad.status1 == False and actividad.status2 == True and actividad.status3 == True %} 
+                        Pospuesta<img src="/static/img/icon-no.svg"> 
+                        
+                        {% elif  actividad.status3 == True %}
+                        Pospuesta<img src="/static/img/icon-no.svg"> 
+                        
+                        {% elif actividad.status1 == False and actividad.status2 == False and actividad.status3 == False %} 
+                        Pospuesta<img src="/static/img/icon-no.svg"> 
+
+                      {% endif %}</td>
+                      {% if request.user.is_secretaria %}
+                        <td><a href="{% url 'actividad:editar_acti' actividad.id %}" class="btn btn-primary" >Editar</a></td>
+                        <td><a href="{% url 'actividad:eliminar_acti' actividad.id %}" class="btn btn-danger" >Eliminar</a></td>
+                      {% endif %}
+                      </tr>
+                    {% endfor %}
+                    {% else %}
+                      <td valign="top" colspan="7" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                    {% endif %}  
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

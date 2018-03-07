@@ -1,0 +1,58 @@
+{% extends  'base_admin.html' %}
+{%block title%}Listado De Instrumentos{% endblock title%}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Inventario De Instrumentos</h1>
+      <ul class="breadcrumb side">
+        <li><i class="fa fa-home fa-lg"></i></li>
+        <li>Listado</li>
+        <li class="active"><a href="#">Inventario</a></li>
+      </ul>
+    </div>
+  {% if request.user.is_secretaria %}
+    <div><a class="btn btn-primary btn-flat" href="/nuevo_instrumento/"><i class="fa fa-lg fa-plus"></i></a></div>
+  {% endif %}
+  </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                      <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column descending" style="width: 89px;" aria-sort="ascending">Nombre</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% if object_list %}
+                      {% for instrumento in object_list %}
+                      <tr class="odd">
+                        <td>{{ instrumento.nombr_instr }}</td>
+                        </tr>
+                      {% endfor %}
+                      {% else %}
+                      <td valign="top" colspan="1" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      {% endif %}  
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}
