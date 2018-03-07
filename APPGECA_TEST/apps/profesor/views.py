@@ -39,7 +39,7 @@ import os
 class ProfCreateView(LoginRequiredMixin,AdminRequiredMixin, CreateView):
 	model = Profesor
 	fields = ['cedula_profesor', 'nombre_profesor', 'apellido_profesor','asignacion']
-	templalumnos_asignadoste_name = 'profesor/crear_profesor.html'
+	template_name = 'profesor/crear_profesor.html'
 	success_url = reverse_lazy('profesor:list_profesor')
 
 ######################LISTADO DE LOS PROFESORES######################

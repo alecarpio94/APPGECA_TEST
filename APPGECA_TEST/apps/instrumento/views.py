@@ -60,11 +60,26 @@ class InstListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 	template_name = 'reportes/report-instr-list.html'
 
 ######################ASIGNANDO INSTRUMENTO######################
+from ...apps.profesor.models import Asignados
 class AsigInstrumentoView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 	template_name = 'instrumentos/asignacion_del_alumno.html'
 	model = Asignatura
 	fields = ['instrumento','alumno','descripcion','fecha_entrega']
 	success_url = reverse_lazy('instrumento:asig_instrumento')
+	message = ""
+
+	def form_valid(self, form):
+		alumno = form.save(commit=False)
+		halumno = Asignados.objects.filter(alumno=alumno.alumno.pk).first()
+		if halumno:
+			if alumno.instrumento.pk == halumno.profesor.asignacion.pk:
+				return super(AsigInstrumentoView, self).form_valid(form)
+			else:
+				self.message = "Lo siento el alumno no debe tener el instrumento {}".format(alumno.instrumento.nombr_instr)
+				return render(self.request, self.template_name, {'form':form, 'message':self.message})
+		else:
+			self.message = "Lo siento el alumno no tiene docente asignado"
+			return render(self.request, self.template_name, {'form':form, 'message':self.message})
 
 ######################LISTADO DE ALUMNOS######################
 class AlumnoListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
