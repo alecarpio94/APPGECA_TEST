@@ -6,7 +6,7 @@ urlpatterns = [
 
 	url(r'^lista_alumnos/$',ListaReporteListView.as_view(), name='reporte_alumnos'),
 
-	url(r'^constancia_alumnos/',AlumnoPDF, name='constan_alumnos'),
+	url(r'^constancia_alumnos/(?P<pk>[-\ \w]+)',AlumnoPDF.as_view(), name='constan_alumnos'),
 	
 	url(r'^constancia_instrumento/(?P<pk>\d+)$', AlumnoInstrListView.as_view(),name="const_asign"),
 

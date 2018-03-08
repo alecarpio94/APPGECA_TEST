@@ -15,19 +15,15 @@ from ...apps.instrumento.models import Asignatura
 from ...apps.alumno.models import Alumno
 from datetime import date, datetime
 from django import http
-from django.template.loader import get_template
-from django.template import Context
 from io import BytesIO
 import cStringIO as StringIO
 import cgi
-
-
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
 
 # Create your views here.
-def write_pdf(template_src, context_dict):
-    template = get_template(template_src)
-    context = Context(context_dict)
-    html  = template.render(context)
+def write_pdf(template, context):
+    html  = render_to_string(template, context)
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
     if not pdf.err:
@@ -35,10 +31,12 @@ def write_pdf(template_src, context_dict):
     return http.HttpResponse('Ocurrio un error al genera el reporte %s' % cgi.escape(html))
 
 
-def AlumnoPDF(request):
-    alumn=Alumno.objects.all()
-    return write_pdf('reportes/constancia_alumno.html',{'pagesize':'legal','alumn':alumn,})
-
+class AlumnoPDF(View):
+	def get(self, *args, **kwargs):	
+		alumn = Alumno.objects.filter(pk=self.kwargs['pk']).first()
+		return write_pdf('reportes/constancia_alumno.html',{'alumn':alumn, 'request':self.request})
+		
+    
 class ListaReporteListView(LoginRequiredMixin,ListView):
 	context_object_name = 'ListasalumnoR'
 	model = Alumno

@@ -36,7 +36,7 @@
                         <td>{{ alumno.cedula_alumno }}</td>
                         <td>{{ alumno.primer_nombre }}</td>
                         <td>{{ alumno.primer_apellido }}</td>
-                        <td><a href="{% url 'reportes:constan_alumnos' %}" class="btn btn-primary" style="margin-left: 75px; width: 100px;">Ver</a></td>
+                        <td><a href="{% url 'reportes:constan_alumnos' pk=alumno.pk %}" class="btn btn-primary" style="margin-left: 75px; width: 100px;">Ver</a></td>
                         <td><a href="{% url 'reportes:const_asign' alumno.pk %}" class="btn btn-primary" style="margin-left: 105px; width: 100px;" >Ver</a></td>
                       </tr>
                       {% endfor %}
