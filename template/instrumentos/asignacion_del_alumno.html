@@ -8,14 +8,9 @@
     <div>
       <h1><i class="fa fa-edit"></i> Asignando Instrumento</h1>
     </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Asignando</li>
-        <li><a href="{% url 'instrumento:asig_instrumento' %}">Instrumento</a></li>
-      </ul>
-    </div>
   </div>
+
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -82,6 +77,11 @@
 {% endblock content %}
 
 {% block javascript %}
+
+  {% if mensaje %}
+    <script>no('{{ mensaje }}')</script>
+  {% endif %}
+  <script src="{% static 'iziToast/js/iziToast.min.js' %}"></script>
   <script src="{% static 'js/forms.js'%}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
   <script>
@@ -92,3 +92,7 @@
     });
   </script>
 {% endblock javascript %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'iziToast/css/iziToast.min.css' %}">
+{% endblock %}

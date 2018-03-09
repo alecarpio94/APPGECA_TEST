@@ -6,11 +6,24 @@
 {% block content %}
 <br><br><br><br>
 <body>
-    <div class="card">
-      <p>Actividad Cancelada</p><div style="width: 20px; height: 20px; border-radius: 90px; background: red;"></div>
+      <div class="row">
+        <div class="card text-center">
+          <div class="header">
+            <h5>Leyenda de Actividades</h5>     
+          </div>
+          <div class="body">
+            <div class="col-md-4 col-lg-4 text-center" style="height: 20px; border-radius: 7px; background: #40B1FF;"><p style="color: white;">Activa</p></div>
+
+            <div class="col-md-4 col-lg-4 text-center" style="height: 20px; border-radius: 7px; background: #CF9C1A;"><p style="color: white;">Pospuesta</p></div>
+
+            <div class="col-md-4 col-lg-4 text-center" style="height: 20px; border-radius: 7px; background: #E63D51;"><p style="color: white;">Cancelada</p></div>
+            <br><br>
+          </div>
+        </div>
+      </div>
+    <div id="calendar" class="card" style="width: auto;">
+      
     </div>
-    <div id="calendar" class="card">
-  </div>
 </body>
 {% endblock %}
 
@@ -55,8 +68,9 @@
               var ini = start;
               var date = new Date(ini);
               var content = '<h3>'+data.title+'</h3>' + 
-                '<p><b>Inicia:</b> '+data.start.format("DD/MM/YYYY " + "h:mmA") +'<br />' +
-                (data.end && '<p><b>Culmina:</b> '+data.end.format("DD/MM/YYYY " + "h:mmA") +'</p>' + 
+                '<p><b>Inicia:</b> '+data.start.format("DD/MM/YYYY ") +'<br />' + 
+                '<p><b>Hora:</b>'+data.start.format("h:mmA") + (" - ") + data.end.format("h:mmA") + '<br />' + 
+                (data.end && '<p><b>Culmina:</b> '+data.end.format("DD/MM/YYYY") +'</p>' + 
                 '<p><b>Descripcion:</b> '+data.description+'<br />' || '');
 
               tooltip.set({
@@ -73,15 +87,25 @@
                 {% for i in Actividad %}
                 {
                     title: "{{ i.nombr_acti }}",
-                    start: '{{ i.fecha_inic|date:"d M Y " }}:{{ i.fecha_inic|time:"h:i: A" }}',
-                    end: '{{ i.fecha_fina|date:"d M Y"}} {{ i.fecha_fina|time:"h:i: A" }}',
+                    start: '{{ i.fecha_inic|date:"d M Y " }} {{ i.hora_inico|time:"h:i: A" }}',
+                    end: '{{ i.fecha_fina|date:"d M Y"}} {{ i.hora_final|time:"h:i: A" }}',
                     description: '{{ i.descripcio }}',
-                    {% if i.status1 == True  %}
-                      backgroundColor:'#159FFF'
-                    {% elif i.status2 == True %}
-                      color: '#893A'
+                    {% if i.status1 == True and i.status2 == False and i.status3 == False %}
+                      backgroundColor:'#40B1FF'
+
+                    {% elif i.status2 == True and i.status1 == True and i.status3 == True %}
+                      color: '#CF9C1A'
+                  {% elif i.status2 == True and i.status1 == False and i.status3 == False %}
+                      color: '#CF9C1A'
+                    {% elif i.status2 == True and i.status1 == False and i.status3 == True %}
+                      color: '#CF9C1A'
+                    {% elif i.status2 == True and i.status1 == True and i.status3 == False %}
+                      color: '#CF9C1A'
+                    {% elif i.status2 == True and i.status1 == False and i.status3 == False %}
+                      color: '#CF9C1A'
+                    
                     {% elif i.status3 == True %}
-                      color: '#310563'
+                      color: '#E63D51'
                     {% endif %}
                 },
                 {% endfor %}

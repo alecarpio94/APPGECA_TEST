@@ -37,17 +37,20 @@ class ActiCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 	template_name = 'actividad/crear_actividad.html'
 	success_url = reverse_lazy('actividad:list_actividades')
 	
-	def save(self, *args, **kwargs):
-		fecha = self.fecha_inic
-		fecha_dada = self.fecha_fina
-		horaI = self.hora_inico
-		horaF = self.hora_final
+	def form_valid(self, form):
+		p = form.save(commit=False)
+		fecha = p.fecha_inic
+		fecha_dada = p.fecha_fina
+		horaI = p.hora_inico
+		horaF = p.hora_final
 		if fecha_dada >= fecha:
 			if horaF >= horaI:
 				print ("Si Paso")
-				super(ActiCreateView, self).save(*args, **kwargs)
+				return super(ActiCreateView, self).form_valid(form)
 			else:
-				print "No Paso"
+				return render(self.request,'actividad/crear_actividad.html', {'form':form})
+		else:
+			return render(self.request,'actividad/crear_actividad.html', {'form':form})
 			
 ######################LISTA DE ACTIVIDADES######################
 class ActivListView(LoginRequiredMixin,ListView):

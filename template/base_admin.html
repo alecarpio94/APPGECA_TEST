@@ -5,7 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- CSS-->
-	<link rel="stylesheet" type="text/css" href="{% static 'css/main_base.css'%}">
+	{# <link rel="stylesheet" type="text/css" href="{% static 'css/main1.css'%}"> #}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
 	<!-- Font-icon css-->
 	<link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.css' %}">
 	<link rel="shortcut icon" href="{% static 'images/icon.png' %}">
@@ -46,7 +47,7 @@
 				<div class="user-panel">
 					<div class="pull-left image"><img class="img-circle" src="{% static 'img/avatar-admin.png' %}" alt="User Image"></div>
 					<div class="pull-left info">
-						<p>{{user.first_name}} {{user.last_name}}</p>
+						<p>{{user.first_name|title}} {{user.last_name|title}}</p>
 						{% if request.user.is_secretaria %}
 						<p class="designation">Administrador</p>
 						{% endif %}
@@ -92,9 +93,9 @@
 								<li><a href="{% url 'reportes:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Constancia De Estudio</a></li>
 							 	<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i><span> Listados</span><i class="fa fa-angle-right"></i></a>
 				              	<ul class="treeview-menu">
-				                	<li><a href="{% url 'alumno:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
-				                	<li><a href="{% url 'profesor:reporte_profesor' %}"><i class="fa fa-circle-o"></i><span> Listado De Profesores</span></a></li>
-				                	<li><a href="{% url 'instrumento:reporte_instrumentos' %}"><i class="fa fa-circle-o"></i><span> Listado De Instrumentos</span></a></li>
+				                	<li><a href="{% url 'reportes:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
+				                	<li><a href="{% url 'reportes:reporte_profesor' %}"><i class="fa fa-circle-o"></i><span> Listado De Profesores</span></a></li>
+				                	<li><a href="{% url 'reportes:reporte_instrumentos' %}"><i class="fa fa-circle-o"></i><span> Listado De Instrumentos</span></a></li>
 				              	</ul>
 				            	</li>
 							</ul>
@@ -111,12 +112,12 @@
 						<li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Listado</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
 								<li><a href="{% url 'profesor:list_alumn' %}"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
-								<li><a href="{% url 'actividad:list_actividades' %}"><i class="fa fa-circle-o"></i> Listado De Actividades</a></li>
+								<li><a href="{% url 'profesor:alumn_evalu' %}"><i class="fa fa-circle-o"></i> Alumnos Evaluados </a></li>
 							</ul>
 						</li>
 						<li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Movimiento</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
-								<li><a href="{% url 'profesor:eva_alumn' %}"><i class="fa fa-circle-o"></i> Evaluar Alumno</a></li>
+								<li><a href="{% url 'profesor:eva_alumn' user.ci %}"><i class="fa fa-circle-o"></i> Evaluar Alumno</a></li>
 							</ul>
 						</li>
 						<li class="treeview"><a href="{% url 'reportes:const_trab' user.ci %}"><i class="fa fa-file-text"></i><span>Reportes</span><i></i></a>

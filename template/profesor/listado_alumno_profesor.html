@@ -22,15 +22,13 @@
                     <thead>
                       <tr role="row">
                         <th>Nombre</th>
-                        <th>Status</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      {% for asignados in object_list%}
+                      {% for asginados in object_list %}
                         <tr class="odd">
-                          <td>{{ asignados.alumno.primer_nombre }} {{ asignados.alumno.primer_apellido }}</td>
-                          <td>{% if asignados.status == True and asignados.evaluado == True %}Aprovado <img src="/static/img/icon-yes.svg" > {% elif asignados.status == False and asignados.evaluado == True %}Reprobado <img src="/static/img/icon-no.svg"> {% else %} Sin Evaluar {% endif %}</td>
+                          <td>{{ asginados.alumno.primer_nombre }} {{ asginados.alumno.primer_apellido }}</td>
                         </tr>
                       {% empty %}
                       <td valign="top" colspan="3" class="dataTables_empty">No hay datos disponibles en la tabla</td>

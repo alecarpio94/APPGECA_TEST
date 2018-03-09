@@ -13,21 +13,18 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from ...apps.profesor.models import Profesor
 from ...apps.instrumento.models import Asignatura
 from ...apps.alumno.models import Alumno
+from ...apps.instrumento.models import Instrumento
 from datetime import date, datetime
 from django import http
-from django.template.loader import get_template
-from django.template import Context
 from io import BytesIO
 import cStringIO as StringIO
 import cgi
-
-
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
 
 # Create your views here.
-def write_pdf(template_src, context_dict):
-    template = get_template(template_src)
-    context = Context(context_dict)
-    html  = template.render(context)
+def write_pdf(template, context):
+    html  = render_to_string(template, context)
     result = StringIO.StringIO()
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("UTF-8")), result)
     if not pdf.err:
@@ -35,15 +32,74 @@ def write_pdf(template_src, context_dict):
     return http.HttpResponse('Ocurrio un error al genera el reporte %s' % cgi.escape(html))
 
 
-def AlumnoPDF(request):
-    alumn=Alumno.objects.all()
-    return write_pdf('reportes/constancia_alumno.html',{'pagesize':'legal','alumn':alumn,})
+class AlumnoPDF(LoginRequiredMixin,View):
+	def get(self, *args, **kwargs):	
+		alumn = Alumno.objects.filter(pk=self.kwargs['pk']).first()
+		return write_pdf('reportes/constancia_alumno.html',{'alumn':alumn, 'request':self.request})
 
+class AlumnoInstrumentoPDF(LoginRequiredMixin,View):
+	def get(self, *args, **kwargs):
+		instrum = Asignatura.objects.filter(pk=self.kwargs['pk']).first()
+		return write_pdf('reportes/constancia_instrumento_alumno.html',{'Asignatura':instrum, 'request':self.request})
+
+class ProfesorPDF(LoginRequiredMixin,View):
+	def get(self, *args, **kwargs):
+		prof = Profesor.objects.filter(pk=self.kwargs['pk']).first()
+		return write_pdf('reportes/constancia_trabajo.html',{'prof':prof, 'request':self.request})
+		
 class ListaReporteListView(LoginRequiredMixin,ListView):
 	context_object_name = 'ListasalumnoR'
 	model = Alumno
 	second_model = Asignatura
 	template_name = 'reportes/lista_constancia_alumno.html'
+
+class ListaAlumnosPDF(LoginRequiredMixin, View):
+	def get(self, *args, **kwargs):
+		alumno = Alumno.objects.all()
+		return write_pdf('reportes/report-alumn-list.html', {'alumno':alumno})
+
+class ListaProfesoresPDF(LoginRequiredMixin, View):
+	def get(self, *args, **kwargs):
+		profesor = Profesor.objects.all()
+		return write_pdf('reportes/report-prof-list.html', {'profesor':profesor})
+
+class ListaInstrumentosPDF(LoginRequiredMixin, View):
+	def get(self, *args, **kwargs):
+		instrumento = Instrumento.objects.all()
+		return write_pdf('reportes/report-instr-list.html', {'instrumento':instrumento})
+
+######################REPORTE DE LOS INSTRUMENTOS######################
+# class InstListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+# 	def get_context_data(self, **kwargs):
+# 	    context = super(InstListAllView, self).get_context_data(**kwargs)
+# 	    context['date'] = datetime.now().strftime("%d/%m/%Y")
+# 	    return context
+	    
+# 	context_object_name = 'ListaAllintrumentos'
+# 	model = Instrumento
+# 	template_name = 'reportes/report-instr-list.html'
+
+######################REPORTE DE LA LISTA DE LOS PROFESORES######################
+# class ProfListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+# 	def get_context_data(self, **kwargs):
+# 	    context = super(ProfListAllView, self).get_context_data(**kwargs)
+# 	    context['date'] = datetime.now().strftime("%d/%m/%Y")
+# 	    return context
+
+# 	context_object_name = 'ListaAllprofesor'
+# 	model = Profesor
+# 	template_name = 'reportes/report-prof-list.html'
+
+#######################REPORTE DE LA LISTA DE ALUMNOS#######################
+# class AlumListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
+# 	def get_context_data(self, **kwargs):
+# 	    context = super(AlumListAllView, self).get_context_data(**kwargs)
+# 	    context['date'] = datetime.now().strftime("%d/%m/%Y")
+# 	    return context
+
+# 	context_object_name = 'ListaAllalumnos'
+# 	model = Alumno
+# 	template_name = 'reportes/report-alumn-list.html'
 
 # class ConstanciaAlumnoDetailView(LoginRequiredMixin,DetailView):
 	# def get_context_data(self, **kwargs):
@@ -56,23 +112,23 @@ class ListaReporteListView(LoginRequiredMixin,ListView):
 	# model = Alumno
 	# template_name = 'reportes/constancia_alumno.html'
 
-class AlumnoInstrListView(LoginRequiredMixin,DetailView):	
-	def get_context_data(self, **kwargs):
-	    context = super(AlumnoInstrListView, self).get_context_data(**kwargs)
-	    context['dia'] = datetime.now().strftime("%d")
-	    context['mes'] = datetime.now().strftime("%m")
-	    context['ano'] = datetime.now().strftime("%Y")
-	    return context
-	model = Asignatura
-	template_name = 'reportes/constancia_instrumento_alumno.html'
+# class AlumnoInstrListView(LoginRequiredMixin,DetailView):	
+# 	def get_context_data(self, **kwargs):
+# 	    context = super(AlumnoInstrListView, self).get_context_data(**kwargs)
+# 	    context['dia'] = datetime.now().strftime("%d")
+# 	    context['mes'] = datetime.now().strftime("%m")
+# 	    context['ano'] = datetime.now().strftime("%Y")
+# 	    return context
+# 	model = Asignatura
+# 	template_name = 'reportes/constancia_instrumento_alumno.html'
 
-class ProfeConsListView(LoginRequiredMixin,DetailView):	
-	def get_context_data(self, **kwargs):
-	    context = super(ProfeConsListView, self).get_context_data(**kwargs)
-	    context['dia'] = datetime.now().strftime("%d")
-	    context['mes'] = datetime.now().strftime("%m")
-	    context['ano'] = datetime.now().strftime("%Y")
-	    return context
+# class ProfeConsListView(LoginRequiredMixin,DetailView):	
+# 	def get_context_data(self, **kwargs):
+# 	    context = super(ProfeConsListView, self).get_context_data(**kwargs)
+# 	    context['dia'] = datetime.now().strftime("%d")
+# 	    context['mes'] = datetime.now().strftime("%m")
+# 	    context['ano'] = datetime.now().strftime("%Y")
+# 	    return context
 
-	model = Profesor
-	template_name = 'reportes/constancia_trabajo.html'
+# 	model = Profesor
+# 	template_name = 'reportes/constancia_trabajo.html'

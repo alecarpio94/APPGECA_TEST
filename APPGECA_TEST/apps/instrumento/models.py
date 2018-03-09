@@ -27,4 +27,4 @@ class Asignatura(models.Model):
 		return '{} {}'.format(self.alumno, self.instrumento)
 
 	def instrumentos(self):
-		return '{} {}'.format(self.instrumento)
+		return '{}'.format(self.instrumento)

@@ -27,10 +27,12 @@
                     </div>
 									<form action="" method="POST" id="asignados">{% csrf_token %}
                     
+                    {{ form.profesor|attr:'value:id_user.ci' }}
+
                     <div class="FormGroup">
-                      <div class="col-md-5">
+                      <div class="col-md-6">
                         <label class="text-danger">Alumno</label>
-                        {{ form.asignados|add_class:'js-example-basic-multiple'| attr:'id:alumno' }}
+                        {{ form.asignados|add_class:'js-example-basic-multiple form-control'| attr:'id:alumno' }}
                       </div>
 
                       <div class="col-md-6">
@@ -40,14 +42,14 @@
                     </div>
 
                     <div class="FormGroup">
-                      <div class="col-lg-12">
-                        <label for="">Descripción</label>
-                          {{ form.descripcion|add_class:'form-control'|attr:'style: resize: none; margin-top: 0px; margin-bottom: 0px; width: 770px;'|attr:'rows:4' }}
+                      <div class="col-md-12">
+                        <label for="" class="text-danger">Descripción</label>
+                          {{ form.descripcion|add_class:'form-control'|attr:'style: resize: none; margin-top: 0px; margin-bottom: 0px; width: 100%;'|attr:'rows:4' }}
                       </div>
-                      <br>
                     </div>
 
-										<div class="FormGroup">
+										<div class="FormGroup text-center">
+                      <br>
 										  <div class="animated-checkbox col-md-6">
 											  <label>
 											    {{ form.evaluado|attr:'type:checkbox' }}<span class="label-text">Ha sido Evaluado</span>
@@ -56,13 +58,12 @@
 
 											<div class="animated-checkbox col-md-6">
 											  <label>
-											    {{ form.status|attr:'type:checkbox' }}<span class="label-text">Aprovo</span>
+											    {{ form.status|attr:'type:checkbox' }}<span class="label-text">Aprobo</span>
 											  </label>
 											</div>	
 										</div>
 										<hr>
-                    {{ form.errors }}
-                    <button class="btn btn-primary col-md-12" value="Guardar"> Actualizar </button></i> 
+                    <button class="btn btn-primary col-md-12" value="Guardar"> Enviar </button></i> 
 									</form>
 								</div>
 							</div>

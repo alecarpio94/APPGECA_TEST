@@ -36,8 +36,8 @@
                         <td>{{ alumno.cedula_alumno }}</td>
                         <td>{{ alumno.primer_nombre }}</td>
                         <td>{{ alumno.primer_apellido }}</td>
-                        <td><a href="{% url 'reportes:constan_alumnos' %}" class="btn btn-primary" style="margin-left: 75px; width: 100px;">Ver</a></td>
-                        <td><a href="{% url 'reportes:const_asign' alumno.pk %}" class="btn btn-primary" style="margin-left: 105px; width: 100px;" >Ver</a></td>
+                        <td><a href="{% url 'reportes:constan_alumnos' pk=alumno.pk %}" class="btn btn-primary" style="margin-left: 75px; width: auto;">Ver</a></td>
+                        <td><a href="{% url 'reportes:const_asign' pk=alumno.cedula_alumno %}" class="btn btn-primary" style="margin-left: 105px; width: auto;" >Ver</a></td>
                       </tr>
                       {% endfor %}
                       {% else %}
@@ -55,3 +55,9 @@
     </div>
   </body>
 {% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

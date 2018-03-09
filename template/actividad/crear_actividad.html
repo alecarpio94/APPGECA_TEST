@@ -51,15 +51,15 @@
                   <div class="FormGroup">
                     <div class="fecha">
                       <div class="col-md-6">
-                        <label for="text-danger">Fecha De Inicio</label>
-                        {{ form.fecha_inic|add_class:'form-control'|attr:'id:datetimepicker6'|attr:'placeholder:Seleccione La Fecha De Inicio' }}
+                        <label class="text-danger">Fecha De Inicio</label>
+                        {{ form.fecha_inic|add_class:'form-control'|attr:'id:dtp1'|attr:'name:datefilter'|attr:'placeholder:Seleccione La Fecha De Inicio' }}
                       </div>
                     </div>
 
                     <div class="fecha2">
                       <div class="col-md-6">
-                        <label for="text-danger">Fecha De Culminacion</label>
-                        {{ form.fecha_fina|add_class:'form-control'|attr:'id:datetimepicker7'|attr:'placeholder:Seleccione La Fecha De Culminacion' }}
+                        <label class="text-danger">Fecha De Culminacion</label>
+                        {{ form.fecha_fina|add_class:'form-control'|attr:'id:dtp2'|attr:'placeholder:Seleccione La Fecha De Culminacion' }}
                       </div>
                     </div>
                   </div>
@@ -122,57 +122,68 @@
      {% if message != "" %}
       <script>error('{{ message }}')</script>
     {% endif %}-->
-<!-- <script type="text/javascript" src="{% static 'js/bootstrap.js'%}"></script> -->
+  <!-- <script type="text/javascript" src="{% static 'js/bootstrap.js'%}"></script> -->
 
-<!-- <script src="{% static 'js/bootstrap-datetimepicker.min.js'%}"></script> -->
-<script src="{% static 'js/bootstrap-datetimepicker.es.js'%}"></script>
-<script src="{% static 'js/bootstrap-datepicker.js'%}"></script>
-<script type="text/javascript" src="{% static 'jquery/jquery-1.8.3.min.js'%}" charset="UTF-8"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.js'%}" charset="UTF-8"></script>
+  <!-- <script src="{% static 'js/bootstrap-datetimepicker.min.js'%}"></script> -->
+
+  <!-- <script src="{% static 'js/bootstrap-datetimepicker.es.js'%}"></script> -->
+  <script src="{% static 'js/bootstrap-datepicker.js'%}"></script>
+  <!-- <script type="text/javascript" src="{% static 'jquery/jquery-1.8.3.min.js'%}" charset="UTF-8"></script> -->
+  <!-- <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script> -->
+  <script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.js'%}" charset="UTF-8"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      $('#dtp1').datepicker({
+          format: 'dd/m/yyyy',
+          todayBtn:  1,
+          todayHighlight: 1,
+          minDate: 0,
+          autoclose: 1
+      });
+      $('#dtp2').datepicker({
+        format: 'dd/m/yyyy',
+        todayBtn:  1,
+        todayHighlight: 1,
+        autoclose: 1,
+        language: 'es',
+        useCurrent: false //Important! See issue #1075
+      });
+    });
+    $(function () {
+      $("#dtp1").datepicker({
+        onClose: function (selectedDate) {
+          $("#dtp2").datepicker("option", "minDate", selectedDate);
+        }
+      });
+      
+      $("#dtp2").datepicker({
+        onClose: function (selectedDate) {
+          $("#dtp1").datepicker("option", "maxDate", selectedDate);
+        }
+      });
+    });
+  </script>
 
 <script type="text/javascript">
-  $(function () {
-    $('#datetimepicker6').datepicker({
-        format: 'd/m/yyyy',
-        todayBtn:  1,
-        todayHighlight: 1,
-        autoclose: 1
-    });
-    $('#datetimepicker7').datepicker({
-      format: 'd/m/yyyy',
-      todayBtn:  1,
-      todayHighlight: 1,
-      autoclose: 1,
-      language: 'es',
-      useCurrent: false //Important! See issue #1075
-    });
-    $('#timepicker1').datetimepicker({
-        format: 'hh:ii',
-        width: 200,
-        heigth: 200,
-        language: 'es',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 1,
-        minView: 0,
-        maxView: 1,
-        forceParse: 0
-    });
-    $('#timepicker2').datetimepicker({
-        format: 'hh:ii',
-        language: 'es',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 1,
-        minView: 0,
-        maxView: 1,
-        forceParse: 0
-    });
+  $('#timepicker1').timepicker({
+    timeFormat: 'hh:mm:ss',
+    timepicker: true,
+    language: 'es',
+    todayBtn:  1,
+    autoclose: 1,
+    minView: 0,
+    maxView: 1,
+    forceParse: 0,
+  });
+  $('#timepicker2').timepicker({
+    timeFormat: 'hh:mm:ss',
+    language: 'es',
+    autoclose: 1,
+    minView: 0,
+    maxView: 1,
+    forceParse: 0
   });
 </script>
 {% endblock %}
@@ -180,4 +191,5 @@
 {% block css %}    
     <link href="{% static 'css/bootstrap-datetimepicker.css' %}" rel="stylesheet" media="screen">  
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}"> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 {% endblock %}

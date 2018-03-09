@@ -159,7 +159,7 @@ class GuardarPermiso(View):
             profesor = Profesor.objects.filter(cedula_profesor=cedula1).first()
             if profesor:
                 a = self.model(ci=cedula1, is_staff=True, is_profesor=True, first_name=profesor.nombre_profesor, last_name=profesor.apellido_profesor)
-                a.set_password("hola1234")
+                a.set_password("appgeca1234")
                 a.save()
                 return JsonResponse({'si':'si'})
         return JsonResponse({'No':'No'})

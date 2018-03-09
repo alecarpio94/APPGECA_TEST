@@ -4,3 +4,10 @@ iziToast.error({
     message: 'Fecha Invalida',
 });
 }
+
+function no(men){
+	iziToast.error({
+		title: 'Error',
+		message: men,
+	})
+}

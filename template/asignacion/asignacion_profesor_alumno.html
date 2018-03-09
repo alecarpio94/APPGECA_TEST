@@ -8,14 +8,6 @@
   <div class="page-title">
     <div>
       <h1><i class="fa fa-edit"></i>Asignacion De Un Alumno</h1>
-      <p>Control De Asignacion Profesor / Alumno</p>
-    </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Asignacion</li>
-        <li><a href="#">Alumno</a></li>
-      </ul>
     </div>
   </div>
   	<div class="row">
@@ -26,7 +18,8 @@
             	<div class="well bs-component">
               	<form class="form-horizontal" method="POST">{% csrf_token %}
 		              <fieldset>
-		                <div class="FormGroup">
+		                
+                    <div class="FormGroup">
                       <div class="col-md-6">
                         <label for="" class="text-danger">Profesor</label>
                         {{ form.profesor|add_class:'js-example-basic-multiple'|attr:'id:profesor' }}
@@ -37,16 +30,26 @@
                         {{ form.alumno|add_class:'js-example-basic-multiple'|attr:'id:alumno' }}
                       </div>
                     </div>
-                    {% if form.errors %}
-                      <div class="alert alert-dismissible alert-danger">
+                    
+                    <hr>
+                    
+                    {% if form.profesor.errors %}
+                      <div class="alert alert-dismissible alert-danger col-md-12">
                         <button class="close" type="button" data-dismiss="alert">×</button>
-                          <h4>Alerta!</h4>                    
-                            {{ form.errors.profesor }}
-                            {{ form.errors.alumno }}
+                          <h4>Alerta!</h4>          
+                          <p>El Profesor Ya Ha Sido Asignado.</p>
                       </div>
                     {% endif %}
-                    <hr>
-                    <button class="btn btn-primary">asignar</button>
+                    {% if form.alumno.errors %}
+                        <div class="alert alert-dismissible alert-danger col-md-12">
+                          <button class="close" type="button" data-dismiss="alert">×</button>
+                            <h4>Alerta!</h4>   
+                            <p>El Alumno ya ha sido asignado a un profesor.</p>                 
+                        </div>
+                    {% endif %}
+                    <div class="col-md-12">
+                      <button class="btn btn-primary col-md-12">asignar</button>
+                    </div>
 		              </fieldset>
                 </form>
               </div>
@@ -60,5 +63,9 @@
 {% endblock content %}
 
 {% block javascript %}
-  <script src="{% static 'js/forms.js'%}"></script>
+  <script>
+    $(document).ready(function() {
+      $('.js-example-basic-multiple').select2();
+    });
+  </script>
 {% endblock javascript %}

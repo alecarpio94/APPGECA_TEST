@@ -1,0 +1,44 @@
+{% extends 'base_admin.html' %}
+{% load staticfiles %}
+{%block title%}Detalles Del Evaluado{% endblock title%}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Detalles De la Evaluación de {{ Detalles.asignados.alumno.primer_nombre|title }} {{ Detalles.asignados.alumno.primer_apellido|title }} </h1>
+      <ul class="breadcrumb side">
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div class="row">
+              
+              <h1 class="text-center">Datos</h1>
+              
+              <div class="col-md-6 text-center">
+                <h3>Datos Del Estudiante</h3>
+                <p>{{ Detalles.get_full_name }}</p>
+              </div>
+
+              <div class="col-md-6 text-center">
+                <h3>Fecha De La Evaluacion</h3>
+                <p>{{ Detalles.fecha }}</p>
+              </div>
+
+              <div class="col-md-12 text-center">
+                <h3>Descripción De La Evaluacion</h3>
+                <p>{{ Detalles.descripcion }}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock content %}

@@ -1,7 +1,21 @@
-{% extends  'base_admin.html' %}
-{%block title%}Reporte Profesor{% endblock title%}
-{% load staticfiles %}
+{% extends 'base_reportes.html' %}
 {% block content %}
+<style>
+    @page {
+    size: letter;
+    margin: 1cm;
+    margin-top: 1.5cm;
+    margin-right: 1.5cm;
+    margin-left: 1.5cm;
+    margin-bottom: 1cm;
+    }
+  h1{
+    text-align: center;
+  }
+  p{
+    text-align: center;
+  }
+</style>
 <div class="content-wrapper">
   <div class="row">
     <div class="col-xs-12">
@@ -9,39 +23,37 @@
         <section class="invoice">
           <div class="row">
             <div class="col-xs-12">
-              <h2 class="page-header"><i class="fa fa-globe"></i> Listado De Los Profesores<small class="pull-right">Fecha: {{ date }}</small></h2>
+              <img src="static/img/banner.png" class="imagen" alt="">
+              <h1 align="center">Listado De Los Profesores</h1>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 table-responsive">
               <table class="table table-striped">
-            <thead>
-              <tr role="row">
-                <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Cedula</th>
-                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 89px;">Nombre</th>
-                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Apellido</th>
-                <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 51px;">Asignacion</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% if object_list %}
-              {% for profesor in object_list %}
-              <tr class="odd">
-                <td>{{ profesor.cedula_profesor }}</td>
-                <td>{{ profesor.nombre_profesor }}</td>
-                <td>{{ profesor.apellido_profesor }}</td>
-                <td>{{ profesor.asignacion }}</td>
-              </tr>
-              {% endfor %}
-              {% else %}
-              <td valign="top" colspan="4" class="dataTables_empty" align="center">No hay datos disponibles en la tabla</td>
-              {% endif %}  
-            </tbody>
+                <thead>
+                  <tr role="row" style="border: 1px solid black; padding: 1 1 1 1px; font-size: 14px; font-weight: 400;">
+                    <th>Cedula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Asignacion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if profesor %}
+                  {% for object_list in profesor %}
+                  <tr class="odd" style="border: 1px solid black; padding: 1 1 1 1px; text-align: center; font-size: 12px;">
+                    <td>{{ object_list.cedula_profesor|title }}</td>
+                    <td>{{ object_list.nombre_profesor|title }}</td>
+                    <td>{{ object_list.apellido_profesor|title }}</td>
+                    <td>{{ object_list.asignacion|title }}</td>
+                  </tr>
+                  {% endfor %}
+                  {% else %}
+                  <td align="center">No hay Profesores Registrados</td>
+                  {% endif %}  
+                </tbody>
               </table>
             </div>
-          </div>
-          <div class="row hidden-print mt-20">
-            <div class="col-xs-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Imprimir</a></div>
           </div>
         </section>
       </div>

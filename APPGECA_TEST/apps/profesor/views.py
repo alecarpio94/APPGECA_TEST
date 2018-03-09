@@ -4,7 +4,7 @@
 from django.views.generic import View
 #________________________________________
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.template import Context
 from django.template.context import RequestContext
@@ -20,7 +20,7 @@ from django.views.generic import ListView
 from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.views.generic import TemplateView, FormView
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 from django.db.models import Q
@@ -39,8 +39,48 @@ import os
 class ProfCreateView(LoginRequiredMixin,AdminRequiredMixin, CreateView):
 	model = Profesor
 	fields = ['cedula_profesor', 'nombre_profesor', 'apellido_profesor','asignacion']
-	templalumnos_asignadoste_name = 'profesor/crear_profesor.html'
+	template_name = 'profesor/crear_profesor.html'
 	success_url = reverse_lazy('profesor:list_profesor')
+
+######################PONDERACION DEL ALUMNOS PROFESOR######################
+class EvaAlumListView(LoginRequiredMixin,ProfesorRequiredMixin,CreateView):
+	model = Evaluado
+	second_model = Asignados
+	fields = ['asignados','descripcion','fecha','status','evaluado']
+	template_name = 'profesor/evaluacion_del_alumno.html'
+	success_url = reverse_lazy('profesor:alumn_evalu')
+
+	def form_valid(self, form):
+		docente = get_object_or_404(Profesor, cedula_profesor=self.kwargs['pk'])
+		evaluacion = form.save(commit=False)
+		evaluacion.profesor =  docente
+		evaluacion.save()
+		return super(EvaAlumListView, self).form_valid(form)
+		
+
+	def get_context_data(self, **kwargs):
+	    context = super(EvaAlumListView, self).get_context_data(**kwargs)
+	    user_login = self.request.user
+	    if user_login:
+	    	profesor_login = user_login.ci_profesor
+	    	if profesor_login:
+	    		alumnos_profesor = Evaluado.objects.filter(profesor = profesor_login)
+	    		if alumnos_profesor:
+	    			context['Evaluado'] = alumnos_profesor
+	    		else:
+	    			context['Evaluado'] = None
+	    	else:
+	    		context['Evaluado'] = None
+	    else:
+	    	context['Evaluado'] = None
+	    return context
+
+#######################ASIGNAR ALUMNO AL PROFESOR################################
+class AlumAsigView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
+	model = Asignados
+	fields = ['profesor','alumno']
+	template_name = 'asignacion/asignacion_profesor_alumno.html'
+	success_url = reverse_lazy('profesor:alumno_profesor')
 
 ######################LISTADO DE LOS PROFESORES######################
 class ProfListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
@@ -62,13 +102,13 @@ class ProfAlumListView(LoginRequiredMixin,ListView):
 	    	if profesor_login:
 	    		alumnos_profesor = Asignados.objects.filter(profesor = profesor_login)
 	    		if alumnos_profesor:
-	    			context['object_list'] = alumnos_profesor
+	    			context['Asignados'] = alumnos_profesor
 	    		else:
-	    			context['object_list'] = None
+	    			context['Asignados'] = None
 	    	else:
-	    		context['object_list'] = None
+	    		context['Asignados'] = None
 	    else:
-	    	context['object_list'] = None
+	    	context['Asignados'] = None
 	    return context
 
 class AsigAlumListView(LoginRequiredMixin,ListView):
@@ -76,30 +116,17 @@ class AsigAlumListView(LoginRequiredMixin,ListView):
 	model = Asignados
 	template_name = 'asignacion/listado_alumnos_asignados.html'
 
-######################PONDERACION DEL ALUMNOS PROFESOR######################
-class EvaAlumListView(LoginRequiredMixin,ProfesorRequiredMixin,CreateView):
+class ListaAlumEvaluados(LoginRequiredMixin, ProfesorRequiredMixin, ListView):
+	context_object_name = 'ListaEvalua'
 	model = Evaluado
-	fields = ['asignados','descripcion', 'fecha' ,'status' , 'evaluado']
-	template_name = 'profesor/evaluacion_del_alumno.html'
-	success_url = reverse_lazy('profesor:list_alumn')
-
-	def get_context_data(self, **kwargs):
-	    context = super(EvaAlumListView, self).get_context_data(**kwargs)
-	    user_login = self.request.user
-	    if user_login:
-	    	profesor_login = user_login.ci_profesor
-	    	if profesor_login:
-	    		alumnos_profesor = Evaluado.objects.filter(profesor = profesor_login)
-	    		if alumnos_profesor:
-	    			context['Evaluado'] = alumnos_profesor
-	    		else:
-	    			context['Evaluado'] = None
-	    	else:
-	    		context['Evaluado'] = None
-	    else:
-	    	context['Evaluado'] = None
-	    return context
-
+	template_name = 'profesor/lista_alumno_evaluado.html'
+		
+##########################DETALLES DE LA EVALUACION###############################
+class DetallesEvaluacionView(LoginRequiredMixin, ProfesorRequiredMixin, DetailView):
+	context_object_name = 'Detalles'
+	model = Evaluado
+	template_name = 'profesor/detalles_evaluacion.html'
+		
 ######################ACTUALIZAR PROFESOR######################
 class ProfUpdateView(LoginRequiredMixin,AdminRequiredMixin,UpdateView):
 	template_name = 'profesor/editar_profesor.html'
@@ -112,24 +139,6 @@ class ProfDeleteView(LoginRequiredMixin,AdminRequiredMixin, DeleteView):
 	model = Profesor
 	template_name = 'profesor/profesor_confirm_delete.html'
 	success_url = reverse_lazy('profesor:list_profesor')
-
-######################REPORTE DE LA LISTA DE LOS PROFESORES######################
-class ProfListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
-	def get_context_data(self, **kwargs):
-	    context = super(ProfListAllView, self).get_context_data(**kwargs)
-	    context['date'] = datetime.now().strftime("%d/%m/%Y")
-	    return context
-
-	context_object_name = 'ListaAllprofesor'
-	model = Profesor
-	template_name = 'reportes/report-prof-list.html'
-
-#######################ASIGNAR ALUMNO AL PROFESOR################################
-class AlumAsigView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
-	model = Asignados
-	fields = ['profesor','alumno']
-	template_name = 'asignacion/asignacion_profesor_alumno.html'
-	success_url = reverse_lazy('profesor:alumno_profesor')
 
 #######################RETIRAR ALUMNO DEL PROFESOR#######################
 class RetiroAlumnoView(LoginRequiredMixin,AdminRequiredMixin, DeleteView):

@@ -131,17 +131,6 @@ class AlumDeleteView(LoginRequiredMixin,AdminRequiredMixin, DeleteView):
 	template_name = 'alumno/alumno_confirm_delete.html'
 	success_url = reverse_lazy('alumno:list_alumno')
 
-#######################REPORTE DE LA LISTA DE ALUMNOS#######################
-class AlumListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
-	def get_context_data(self, **kwargs):
-	    context = super(AlumListAllView, self).get_context_data(**kwargs)
-	    context['date'] = datetime.now().strftime("%d/%m/%Y")
-	    return context
-
-	context_object_name = 'ListaAllalumnos'
-	model = Alumno
-	template_name = 'reportes/report-alumn-list.html'
-
 #######################INFORMACION GENERAL DEL ALUMNO#######################
 class AlumnAllListView(LoginRequiredMixin, AdminRequiredMixin, DetailView):
 	context_object_name = 'ListarAll'

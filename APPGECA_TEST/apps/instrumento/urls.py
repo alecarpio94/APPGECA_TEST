@@ -11,6 +11,4 @@ urlpatterns = [
 	
 	url(r'^editarA/(?P<pk>\d+)$', UpdateAsigAlumnView.as_view(), name="retir_instr"),
 
-	url(r'^reporte_lista_instrumentos/$',InstListAllView.as_view(), name='reporte_instrumentos'),
-
 ]
