@@ -42,19 +42,8 @@ class AlumnoPDF(LoginRequiredMixin,View):
 from ...apps.alumno.models import Alumno
 class AlumnoInstrumentoPDF(LoginRequiredMixin,DetailView):
 	def get(self, *args, **kwargs):
-		# alumno =  Alumno.objects.filter(Alumno, cedula_alumno=self.kwargs['pk'])
-		# instru =  Asignatura.objects.filter(Asignatura, alumno=self.kwargs['pk'])
-		alum = Asignatura.objects.get(pk=Asignatura.alumno).first()
-		return write_pdf('reportes/constancia_instrumento_alumno.html',{'asignatura':alum,'request':self.request})
-
-		# alumno =  Alumno.objects.filter(alumno=Alumno.cedula_alumno)
-		# instru =  Asignatura.objects.filter(asignatura=asignatura.alumno.cedula_alumno) 
-		# if alumno == instru:
-		# 	  ialumno = Asignatura.alumno.filter(self.Asignatura.alumno == self.Alumno.cedula_alumno)
-		# 	return HttpResponse("Si")
-		# 	  return write_pdf('reportes/constancia_instrumento_alumno.html',{'asignatura':ialumno,'request':self.request})
-		# else:
-		# 	return HttpResponse("PORQUE :'v")
+		asig = Asignatura.alumno.filter(Asignatura['alumno']).first()
+		return write_pdf('reportes/constancia_instrumento_alumno.html', {'asignatura':asig, 'request':request})
 
 #####################################################################################
 class ProfesorPDF(LoginRequiredMixin,View):

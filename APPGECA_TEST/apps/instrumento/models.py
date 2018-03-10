@@ -16,7 +16,7 @@ class Instrumento(models.Model):
 
 class Asignatura(models.Model):
 
-	id = models.AutoField(primary_key=True, unique=True)
+	# id = models.AutoField(primary_key=True, unique=True)
 	instrumento = models.ForeignKey(Instrumento)
 	alumno = models.OneToOneField(Alumno, on_delete=models.CASCADE, related_name='Alumno')
 	descripcion = models.TextField()

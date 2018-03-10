@@ -44,34 +44,17 @@ urlpatterns = [
 
     ##########################RESTAURAR CONTRASEÑA##########################
 
-    url(r'^reset/password_reset', password_reset, 
-        {'template_name':'auth/password_reset_form.html',
-        'email_template_name': 'auth/password_reset_email.html'}, 
-        name='password_reset'), 
-    url(r'^password_reset_done', password_reset_done, 
-        {'template_name': 'auth/password_reset_done.html'}, 
-        name='password_reset_done'),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', password_reset_confirm, 
-        {'template_name': 'auth/password_reset_confirm.html'},
-        name='password_reset_confirm'
-        ),
-    # url(r'^reset/done',password_reset_complete,{'template_name':'auth/password_reset_complete.html'},
-        # name='password_reset_complete'),
-    url(r'^reset/done',password_reset_complete,{'template_name':'auth/password_reset_complete.html'},name='password_reset_complete'),
-
-    # url(r'^password_reset/$', views.PasswordResetView.as_view(), name='password_reset'),
-    # url(r'^password_reset/done/$', views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    # url(r'^password/reset/(?P<uidb36>[0-9A-Za-z]+)/(?P<token>.+)/$$',
-    #     views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    # url(r'^reset/fin/$', views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-
+    url(r'^user/password/reset/$', password_reset, {'post_reset_redirect' : '/user/password/reset/done/'}, name='password_reset'),
+    url(r'^user/password/reset/done/$',password_reset_done),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', password_reset_confirm, {'post_reset_redirect': '/user/reset/done/'}, name='password_reset_confirm'),
+    url(r'^user/reset/done/$', password_reset_complete, name='password_reset_complete'),
 
     ##########################CAMBIO DE CONTRASEÑA##########################
     url(
         r'^password_update/$',
         auth_views.password_change,
         {
-            'template_name': 'auth/password_change_form.html',
+            'template_name': 'registration/password_change_form.html',
             'post_change_redirect': 'auth:auth_password_change_done',
         },
         name='auth_password_change',
@@ -81,7 +64,7 @@ urlpatterns = [
         r'^password_update_done/$',
         auth_views.password_change_done,
         {
-            'template_name': 'auth/password_change_done.html',
+            'template_name': 'registration/password_change_done.html',
         },
         name='auth_password_change_done',
     ),

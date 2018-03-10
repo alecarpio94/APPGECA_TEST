@@ -150,10 +150,9 @@ SILENCED_SYSTEM_CHECKS = ['auth.E003']
 
 
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 25
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'alecarpio94@gmail.com'
 EMAIL_HOST_PASSWORD = 'oversoul94'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = ''
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

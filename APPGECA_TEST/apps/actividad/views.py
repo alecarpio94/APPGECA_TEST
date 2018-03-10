@@ -47,6 +47,7 @@ class ActiCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 		if fecha_dada >= fecha:
 			if horaF >= horaI:
 				print ("Si Paso")
+				self.mensaje = "Actividad guardada con exito."
 				return super(ActiCreateView, self).form_valid(form)
 			else:
 				self.mensaje = "La hora seleccionada no es valida"
