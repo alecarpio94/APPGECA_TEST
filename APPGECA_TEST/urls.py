@@ -19,6 +19,7 @@ from django.contrib import admin
 urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
+    # url(r'^', include('django.contrib.auth.urls',namespace='pass')),
     ##################################################################################
     url(r'^', include('APPGECA_TEST.apps.actividad.urls', namespace='actividad')),
     url(r'^', include('APPGECA_TEST.apps.alumno.urls', namespace='alumno')),

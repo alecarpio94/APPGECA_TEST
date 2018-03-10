@@ -30,7 +30,7 @@ class Actividad(models.Model):
 				print ("Si Paso")
 				super(Actividad, self).save(*args, **kwargs)
 			else:
-				print "No Paso"
+				print ("No Paso")
 
 	def fecha(self):		
 		 return datetime.strptime(str(self.fecha_inic.date()), "%Y-%m-%d").strftime("%Y-%m-%d")

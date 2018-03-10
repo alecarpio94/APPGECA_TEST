@@ -9,6 +9,6 @@ urlpatterns = [
 	url(r'^alumno_listado/$', AlumnoListView.as_view(),name="asig_instrumento"),
 	url(r'^asignacion_instrumento/$', AsigInstrumentoView.as_view(),name="asign_alumno"),
 	
-	url(r'^editarA/(?P<pk>\d+)$', UpdateAsigAlumnView.as_view(), name="retir_instr"),
+	url(r'^retirar/(?P<pk>\d+)$', DeleteAsigAlumnView.as_view(), name="retir_instr"),
 
 ]

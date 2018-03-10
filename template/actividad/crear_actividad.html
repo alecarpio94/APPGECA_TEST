@@ -1,23 +1,13 @@
 {% extends 'base_admin.html' %}
-
 {%block title%}Registrar Actividad{% endblock title%}
-
 {% load widget_tweaks %}
-
 {% load staticfiles %}
 {% block content %}
 <div class="content-wrapper">
   <div class="page-title">
     <div>
       <h1><i class="fa fa-edit"></i> Nueva Actividad</h1>
-      <p>Registro De Una Nueva Actividad</p>
-    </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Registro</li>
-        <li><a href="{% url 'actividad:list_actividades' %}">Actividad</a></li>
-      </ul>
+      <p><b>NOTA: Los campos marcados de rojo son obligadorios.</b></p>
     </div>
   </div>
   <div class="row">
@@ -29,7 +19,6 @@
               <form class="form-horizontal" method="POST">{% csrf_token %}
                 <fieldset>
                   <legend>Registro</legend>
-
                   <div class="FormGroup">
                     <div class="col-md-12">
                       <div class="nombre">
@@ -52,14 +41,14 @@
                     <div class="fecha">
                       <div class="col-md-6">
                         <label class="text-danger">Fecha De Inicio</label>
-                        {{ form.fecha_inic|add_class:'form-control'|attr:'id:dtp1'|attr:'name:datefilter'|attr:'placeholder:Seleccione La Fecha De Inicio' }}
+                        {{ form.fecha_inic|add_class:'form-control'|attr:'autocomplete:off'|attr:'id:dtp1'|attr:'name:datefilter'|attr:'placeholder:Seleccione La Fecha De Inicio' }}
                       </div>
                     </div>
 
                     <div class="fecha2">
                       <div class="col-md-6">
                         <label class="text-danger">Fecha De Culminacion</label>
-                        {{ form.fecha_fina|add_class:'form-control'|attr:'id:dtp2'|attr:'placeholder:Seleccione La Fecha De Culminacion' }}
+                        {{ form.fecha_fina|add_class:'form-control'|attr:'autocomplete:off'|attr:'id:dtp2'|attr:'placeholder:Seleccione La Fecha De Culminacion' }}
                       </div>
                     </div>
                   </div>
@@ -68,19 +57,19 @@
                     <div class="horaI">
                       <div class="col-md-6">
                           <label class="text-danger">Hora De Inicio</label>
-                          {{ form.hora_inico|add_class:'form-control'|attr:'id:timepicker1'|attr:'placeholder:Ingrese La Hora De Inicio'}}
+                          {{ form.hora_inico|add_class:'form-control'|attr:'autocomplete:off'|attr:'id:timepicker1'|attr:'placeholder:Ingrese La Hora De Inicio'}}
                       </div>  
                     </div>
                     <div class="horaF">
                       <div class="col-md-6">
                         <label for="" class="text-danger">Hora De Culminacion</label>
-                        {{ form.hora_final|add_class:'form-control'|attr:'id:timepicker2'|attr:'placeholder:Ingrese La Hora De Culmincaion' }}
+                        {{ form.hora_final|add_class:'form-control'|attr:'autocomplete:off'|attr:'id:timepicker2'|attr:'placeholder:Ingrese La Hora De Culmincaion' }}
                       </div>
                     </div>
                   </div>
 
                   <div class="FormGroup">
-                    <div class="animated-checkbox col-md-12">
+                    <div class="animated-checkbox col-md-12" style="padding-left: 18px; margin-top: 10px;">
                       <label>
                         {{ form.status1|attr:'type:checkbox' }}<span class="label-text">Actividad Activa</span>
                       </label>
@@ -104,7 +93,7 @@
                     {% endif %}
 
                   <div class="col-md-12">
-                    <button class="btn btn-primary">Enviar</button>
+                    <button class="btn btn-primary col-md-12 col-xs-12">Crear</button>
                   </div>
                 </form>
               </div>
@@ -118,6 +107,11 @@
 
 
 {% block javascript %}
+  {% if mensaje %}
+    <script>fecha('{{ mensaje }}')</script>
+  {% endif %}
+  <script src="{% static 'iziToast/js/iziToast.min.js' %}"></script>
+  <script src="{% static 'js/forms.js'%}"></script>
     <!--<script src="{% static 'js/mensajes.js'%}"></script> 
      {% if message != "" %}
       <script>error('{{ message }}')</script>
@@ -168,7 +162,7 @@
 
 <script type="text/javascript">
   $('#timepicker1').timepicker({
-    timeFormat: 'hh:mm:ss',
+    timeFormat: 'H:mm:ss',
     timepicker: true,
     language: 'es',
     todayBtn:  1,
@@ -178,7 +172,7 @@
     forceParse: 0,
   });
   $('#timepicker2').timepicker({
-    timeFormat: 'hh:mm:ss',
+    timeFormat: 'H:mm:ss',
     language: 'es',
     autoclose: 1,
     minView: 0,
@@ -192,4 +186,5 @@
     <link href="{% static 'css/bootstrap-datetimepicker.css' %}" rel="stylesheet" media="screen">  
     <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}"> 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="{% static 'iziToast/css/iziToast.min.css' %}">
 {% endblock %}

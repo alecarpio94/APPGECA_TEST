@@ -6,11 +6,6 @@
   <div class="page-title">
     <div>
       <h1>Lista De Actividades</h1>
-      <ul class="breadcrumb side">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Listado</li>
-        <li class="active"><a href="#">Actividades</a></li>
-      </ul>
     </div>
     {% if request.user.is_secretaria %}
       <div><a class="btn btn-primary btn-flat" href="/nueva_actividad/"><i class="fa fa-lg fa-plus"></i></a></div>
@@ -72,13 +67,13 @@
 
                       {% endif %}</td>
                       {% if request.user.is_secretaria %}
-                        <td><a href="{% url 'actividad:editar_acti' actividad.id %}" class="btn btn-primary" >Editar</a></td>
-                        <td><a href="{% url 'actividad:eliminar_acti' actividad.id %}" class="btn btn-danger" >Eliminar</a></td>
+                        <td><a href="{% url 'actividad:editar_acti' actividad.id %}" style="width: 100%;" class="btn btn-primary" >Editar</a></td>
+                        <td><a href="{% url 'actividad:eliminar_acti' actividad.id %}" style="width: 100%;" class="btn btn-danger" >Eliminar</a></td>
                       {% endif %}
                       </tr>
                     {% endfor %}
                     {% else %}
-                      <td valign="top" colspan="7" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      <td valign="top" colspan="7" class="dataTables_empty">No hay Actividades Registradas</td>
                     {% endif %}  
                     </tbody>
                   </table>

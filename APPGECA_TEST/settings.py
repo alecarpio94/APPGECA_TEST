@@ -25,7 +25,7 @@ SECRET_KEY = 'qs5ui9lg3k@0)1447^71a1+1@%_dn2miagb8ay_3-h%$6p%pf^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'APPGECA_TEST.apps.profesor',
     'APPGECA_TEST.apps.reportes',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,3 +147,13 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)  
 
 SILENCED_SYSTEM_CHECKS = ['auth.E003']
+
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'alecarpio94@gmail.com'
+EMAIL_HOST_PASSWORD = 'oversoul94'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = ''
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -31,13 +31,13 @@
 
                     <div class="FormGroup">
                       <div class="col-md-6">
-                        <label class="text-danger">Alumno</label>
-                        {{ form.asignados|add_class:'js-example-basic-multiple form-control'| attr:'id:alumno' }}
+                        <label class="text-danger">Alumno:</label><br>
+                        {{ form.asignados|attr:'style: width:100%;'|add_class:'js-example-basic-multiple form-control'| attr:'id:alumno' }}
                       </div>
 
                       <div class="col-md-6">
-                        <label class="text-danger">Fecha De Evaluacion</label>
-                        {{ form.fecha|add_class:'form-control'|attr:'id:evaluacion' }} 
+                        <label class="text-danger">Fecha De Evaluacion:</label><br>
+                        {{ form.fecha|attr:'style: width:100%;'|attr:'autocomplete:off'|add_class:'form-control'|attr:'id:evaluacion' }} 
                       </div>
                     </div>
 
@@ -63,7 +63,7 @@
 											</div>	
 										</div>
 										<hr>
-                    <button class="btn btn-primary col-md-12" value="Guardar"> Enviar </button></i> 
+                    <button class="btn btn-primary col-md-12 col-xs-12" value="Guardar"> Enviar </button></i> 
 									</form>
 								</div>
 							</div>

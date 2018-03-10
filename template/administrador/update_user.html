@@ -1,0 +1,50 @@
+{% extends  'base_admin.html' %}
+{%block title%}Actualizar Datos{% endblock title%}
+{% load widget_tweaks %}
+{% load staticfiles %}
+{% block content %}
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal" id="form-prof" onkeydown="" method="POST">{% csrf_token %}
+                <fieldset>
+                  <legend>Actualizar Los Datos</legend>
+                  <div class="FormGroup">
+                      <div class="ci FormGroup">
+                        {{ form.ci.label_tag }}
+                        {{ form.ci | add_class:'form-control' | attr:'autocomplete:off'|attr:"placeholder:Ingrese Numero De Cedula"|attr:"minlength=8"|attr:'onkeypress:return valida(event);' |add_error_class:'form-control is-invalid' }}
+                      </div>
+
+                      {{form.username.as_hidden}}
+                      <div class="FormGroup">
+                        <label for="id_first_name">Nombre:</label>
+                        {{ form.first_name | add_class:'form-control'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event)' |attr:"placeholder:Ingrese su Nombre "}}
+                      </div>
+                      
+                      <div class="FormGroup">
+                        <label for="id_last_name">Apellidos:</label>
+                        {{ form.last_name | add_class:'form-control' |attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event)' |attr:"placeholder:Ingrese su Apellido " }}
+                      </div>
+
+                      <div class="FormGroup">
+                        <label for="id_last_name">Email:</label>
+                        {{ form.email | add_class:'form-control' |attr:'autocomplete:off' |attr:"placeholder:Ingrese su Email " |attr:"type: Email"}}
+                      </div>
+
+                      <hr>
+                      <button class="btn btn-primary col-md-12 col-xs-12">actualizar</button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

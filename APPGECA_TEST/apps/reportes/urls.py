@@ -4,7 +4,7 @@ from ...apps.reportes.views import *
 
 urlpatterns = [
 
-	url(r'^lista_alumnos/$',ListaReporteListView.as_view(), name='reporte_alumnos'),
+	url(r'^lista_alumnos/$',ListaReporteListView.as_view(), name='lista_reportes'),
 
 	url(r'^constancia_alumnos/(?P<pk>[-\ \w]+)',AlumnoPDF.as_view(), name='constan_alumnos'),
 	

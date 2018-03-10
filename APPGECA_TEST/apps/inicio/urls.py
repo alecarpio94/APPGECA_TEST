@@ -13,5 +13,5 @@ urlpatterns = [
     url(r'^quienes_somos/', views.somos),
     url(r'^mision_vision/', views.mision),
 
-    url(r'^', views.inicio),  
+    url(r'^', views.inicio, name='inicio'),  
 ] 

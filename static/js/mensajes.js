@@ -7,7 +7,14 @@ iziToast.error({
 
 function no(men){
 	iziToast.error({
-		title: 'Error',
+		title: 'Alerta!',
+		message: men,
+	})
+}
+
+function fecha(men){
+	iziToast.error({
+		title: 'Alerta!',
 		message: men,
 	})
 }

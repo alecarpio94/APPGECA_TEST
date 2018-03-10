@@ -6,10 +6,6 @@
     <div class="page-title">
         <div>
             <h1>Lista De Profesores</h1>
-            <ul class="breadcrumb side">
-                <li><i class="fa fa-home fa-lg"></i></li>
-                <li class="active">Profesores</li>
-            </ul>
         </div>
     </div>
     <div class="row">
@@ -23,11 +19,11 @@
                                     <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Cedula</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Nombre</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Apellido</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Asignacion</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 99px;">Activar</th>
+                                                <th>Cedula</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Asignacion</th>
+                                                <th>Activar</th>
                                             </thead>
                                             <tbody>
                                                 {% for Profesor in object_list %}
@@ -36,7 +32,7 @@
                                                     <td>{{ Profesor.nombre_profesor }}</td>
                                                     <td>{{ Profesor.apellido_profesor }}</td>
                                                     <td>{{ Profesor.asignacion }}</td>
-                                                    <td><a href="#!" data-toggle="modal" data-target="#Asignar" class="btn btn-primary" id="{{ Profesor.cedula_profesor }}" onclick="asig('{{ Profesor.cedula_profesor }}')"> Asignar </a></td>
+                                                    <td><a href="#!" style="width: 100%;" data-toggle="modal" data-target="#Asignar" class="btn btn-primary" id="{{ Profesor.cedula_profesor }}" onclick="asig('{{ Profesor.cedula_profesor }}')"> Asignar </a></td>
                                                 </tr>
                                                 {% empty %}
                                                 <td valign="top" colspan="5" class="dataTables_empty">No hay datos disponibles en la tabla</td>

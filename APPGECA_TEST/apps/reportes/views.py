@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # Create your views here.
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 from django.views.generic import CreateView 
 from django.views.generic import ListView, DetailView
@@ -11,9 +12,8 @@ from django.views.generic import TemplateView, FormView
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ...apps.profesor.models import Profesor
-from ...apps.instrumento.models import Asignatura
 from ...apps.alumno.models import Alumno
-from ...apps.instrumento.models import Instrumento
+from ...apps.instrumento.models import *
 from datetime import date, datetime
 from django import http
 from io import BytesIO
@@ -32,37 +32,57 @@ def write_pdf(template, context):
     return http.HttpResponse('Ocurrio un error al genera el reporte %s' % cgi.escape(html))
 
 
+#####################################################################################
 class AlumnoPDF(LoginRequiredMixin,View):
 	def get(self, *args, **kwargs):	
 		alumn = Alumno.objects.filter(pk=self.kwargs['pk']).first()
 		return write_pdf('reportes/constancia_alumno.html',{'alumn':alumn, 'request':self.request})
 
-class AlumnoInstrumentoPDF(LoginRequiredMixin,View):
+#####################################################################################
+from ...apps.alumno.models import Alumno
+class AlumnoInstrumentoPDF(LoginRequiredMixin,DetailView):
 	def get(self, *args, **kwargs):
-		instrum = Asignatura.objects.filter(pk=self.kwargs['pk']).first()
-		return write_pdf('reportes/constancia_instrumento_alumno.html',{'Asignatura':instrum, 'request':self.request})
+		# alumno =  Alumno.objects.filter(Alumno, cedula_alumno=self.kwargs['pk'])
+		# instru =  Asignatura.objects.filter(Asignatura, alumno=self.kwargs['pk'])
+		alum = Asignatura.objects.get(pk=Asignatura.alumno).first()
+		return write_pdf('reportes/constancia_instrumento_alumno.html',{'asignatura':alum,'request':self.request})
 
+		# alumno =  Alumno.objects.filter(alumno=Alumno.cedula_alumno)
+		# instru =  Asignatura.objects.filter(asignatura=asignatura.alumno.cedula_alumno) 
+		# if alumno == instru:
+		# 	  ialumno = Asignatura.alumno.filter(self.Asignatura.alumno == self.Alumno.cedula_alumno)
+		# 	return HttpResponse("Si")
+		# 	  return write_pdf('reportes/constancia_instrumento_alumno.html',{'asignatura':ialumno,'request':self.request})
+		# else:
+		# 	return HttpResponse("PORQUE :'v")
+
+#####################################################################################
 class ProfesorPDF(LoginRequiredMixin,View):
 	def get(self, *args, **kwargs):
 		prof = Profesor.objects.filter(pk=self.kwargs['pk']).first()
 		return write_pdf('reportes/constancia_trabajo.html',{'prof':prof, 'request':self.request})
 		
+
+#####################################################################################
 class ListaReporteListView(LoginRequiredMixin,ListView):
 	context_object_name = 'ListasalumnoR'
 	model = Alumno
 	second_model = Asignatura
 	template_name = 'reportes/lista_constancia_alumno.html'
 
+#####################################################################################
 class ListaAlumnosPDF(LoginRequiredMixin, View):
 	def get(self, *args, **kwargs):
 		alumno = Alumno.objects.all()
 		return write_pdf('reportes/report-alumn-list.html', {'alumno':alumno})
 
+#####################################################################################
 class ListaProfesoresPDF(LoginRequiredMixin, View):
 	def get(self, *args, **kwargs):
 		profesor = Profesor.objects.all()
 		return write_pdf('reportes/report-prof-list.html', {'profesor':profesor})
 
+#####################################################################################
 class ListaInstrumentosPDF(LoginRequiredMixin, View):
 	def get(self, *args, **kwargs):
 		instrumento = Instrumento.objects.all()

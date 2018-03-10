@@ -6,10 +6,6 @@
   <div class="page-title">
     <div>
       <h1>Listado De Profesores</h1>
-      <ul class="breadcrumb side">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Listado</li>
-        <li class="active"><a href="#">Profesores</a></li>
       </ul>
     </div>
     <div><a class="btn btn-primary btn-flat" href="/nuevo_profesor/"><i class="fa fa-lg fa-plus"></i></a></div>
@@ -20,21 +16,16 @@
         <div class="card-body">
           <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
             <div class="row">
-              <div class="col-sm-6">
-
-              </div>
-            </div>
-            <div class="row">
               <div class="col-sm-12">
-                <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="" aria-describedby="sampleTable_info">
                   <thead>
-                    <tr role="row">
+                    <tr>
                       <th>Cedula</th>
                       <th>Nombre</th>
                       <th>Apellido</th>
                       <th>Asignacion</th>
                       <th>Constancia</th>
-                      <th>Actualizar</th>
+                      <!-- <th>Actualizar</th> -->
                       <th>Eliminar</th>
                     </tr>
                   </thead>
@@ -46,13 +37,13 @@
                       <td>{{ profesor.nombre_profesor }}</td>
                       <td>{{ profesor.apellido_profesor }}</td>
                       <td>{{ profesor.asignacion }}</td>
-                      <td><a href="{% url 'reportes:const_trab' profesor.pk %}" class="btn btn-primary" >Ver Mas</a></td>
-                      <td><a href="{% url 'profesor:editar_profesor' profesor.cedula_profesor %}"  class="btn btn-info" >Actualizar</a>
-                      <td><a href="{% url 'profesor:eliminar_profesor' profesor.cedula_profesor %}" class="btn btn-danger">Eliminar</a></td>
+                      <td><a href="{% url 'reportes:const_trab' profesor.pk %}" style="width: 100%;" class="btn btn-primary" >Ver Mas</a></td>
+                      <!-- <td><a href="{% url 'profesor:editar_profesor' profesor.cedula_profesor %}"  class="btn btn-info" >ir</a> -->
+                      <td><a href="{% url 'profesor:eliminar_profesor' profesor.cedula_profesor %}" style="width: 100%;" class="btn btn-danger">Eliminar</a></td>
                     </tr>
                     {% endfor %}
                     {% else %}
-                    <td valign="top" colspan="7" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                    <td valign="top" colspan="7" class="dataTables_empty">No hay Profesores Registrados</td>
                     {% endif %}  
                   </tbody>
                 </div>

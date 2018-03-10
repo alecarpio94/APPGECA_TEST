@@ -81,6 +81,15 @@ class AlumAsigView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
 	fields = ['profesor','alumno']
 	template_name = 'asignacion/asignacion_profesor_alumno.html'
 	success_url = reverse_lazy('profesor:alumno_profesor')
+	mensaje = ""
+
+	def form_valid(self, form):
+		if form.save(commit=False):
+			return super(AlumAsigView, self).form_valid(form)
+		else:
+			mensaje = "El Alumno ya ha sido asignado a un profesor"
+			return render(self.request, self.template_name, {'form':form, 'mensaje':self.mensaje})
+
 
 ######################LISTADO DE LOS PROFESORES######################
 class ProfListView(LoginRequiredMixin,AdminRequiredMixin,ListView):

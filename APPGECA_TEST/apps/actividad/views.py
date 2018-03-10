@@ -36,7 +36,8 @@ class ActiCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 	fields = ['nombr_acti', 'descripcio', 'fecha_inic','hora_inico', 'hora_final' ,'fecha_fina','status1']
 	template_name = 'actividad/crear_actividad.html'
 	success_url = reverse_lazy('actividad:list_actividades')
-	
+	mensaje = ""
+
 	def form_valid(self, form):
 		p = form.save(commit=False)
 		fecha = p.fecha_inic
@@ -48,9 +49,11 @@ class ActiCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 				print ("Si Paso")
 				return super(ActiCreateView, self).form_valid(form)
 			else:
-				return render(self.request,'actividad/crear_actividad.html', {'form':form})
+				self.mensaje = "La hora seleccionada no es valida"
+				return render(self.request,'actividad/crear_actividad.html', {'form':form, 'mensaje':self.mensaje})
 		else:
-			return render(self.request,'actividad/crear_actividad.html', {'form':form})
+			self.mensaje = "La fecha seleccionada no es valida"
+			return render(self.request,'actividad/crear_actividad.html', {'form':form, 'mensaje':self.mensaje})
 			
 ######################LISTA DE ACTIVIDADES######################
 class ActivListView(LoginRequiredMixin,ListView):

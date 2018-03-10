@@ -25,8 +25,8 @@
                         <th>Apellido</th>
                         <th>Instrumento</th>
                         <th>Fecha De Entrega</th>
-                        <th>Fecha De Retiro</th>
-                        <th>Movimiento</th>
+                        <!-- <th>Fecha De Retiro</th> -->
+                        <th>Retirar</th>
                       </tr>
                     </thead>
 
@@ -39,8 +39,8 @@
                         <td>{{ asignatura.alumno.primer_apellido }}</td>
                         <td>{{ asignatura.instrumento }}</td>
                         <td>{% if asignatura.fecha_entrega == '' %} Sin Asignar {% else %} {{ asignatura.fecha_entrega }}{% endif %}</td>
-                        <td>{% if asignatura.fecha_retiro == None %} Sin Entregar {% else %} {{ asignatura.fecha_retiro }} {% endif %}</td>
-                        <td><a href="{% url 'instrumento:retir_instr' asignatura.pk %}" class="btn btn-primary" >Modificar</a></td>
+                        <!-- <td>{% if asignatura.fecha_retiro == None %} Sin Entregar {% else %} {{ asignatura.fecha_retiro }} {% endif %}</td> -->
+                        <td><a href="{% url 'instrumento:retir_instr' asignatura.pk %}" style="width: 100%;" class="btn btn-danger" >Retirar</a></td>
                       </tr>
                       {% endfor %}
                       {% else %}

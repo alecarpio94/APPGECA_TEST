@@ -41,6 +41,16 @@ class InstruCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 	model = Instrumento
 	fields = ['nombr_instr']
 	success_url = reverse_lazy('instrumento:list_instrumento')
+	mensaje = ""
+	
+	# def form_valid(self, form):
+	# 	forma = form_valid.save(commit=False)
+	# 	if forma:
+	# 		mensaje = "GUARDADO"
+	# 		return super(InstruCreateView, self.mensaje).form_valid(form)
+	# 	else:
+	# 		mensaje = "ERROR"
+	# 		return render(self.request, self.template_name, {'form':form, 'mensaje':mensaje})
 
 ######################LISTA DE INSTRUMENTOS######################
 class InstruListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
@@ -76,8 +86,7 @@ class AlumnoListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 	model = Asignatura
 	template_name = 'asignacion/instrumentos_asignados.html'
 
-class UpdateAsigAlumnView(LoginRequiredMixin,AdminRequiredMixin,UpdateView):
-	template_name = 'instrumentos/update_instrumento.html'
+class DeleteAsigAlumnView(LoginRequiredMixin,AdminRequiredMixin,DeleteView):
 	model = Asignatura
-	fields = ['instrumento','alumno','descripcion','fecha_entrega','fecha_retiro']
+	template_name = 'instrumentos/update_instrumento.html'
 	success_url = reverse_lazy('instrumento:asig_instrumento')

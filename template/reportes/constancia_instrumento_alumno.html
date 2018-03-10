@@ -32,8 +32,8 @@
     <p class="content" style="font-size: 14px;" align="justify">
       El suscrito <strong class="bold">{{ request.user.get_full_name }}</strong> titular de la cedula de identidad
       <strong class="bold">{{ request.user.ci }}</strong>, en mi condición de Coordinador de la Orquesta Sinfonica Simon Bolivar en el
-      Municipio Guanare, hago constar, que el ciudadano(a) <strong class="bold">{{ Asignatura.alumno.cedula_alumno }}</strong>,
-      Titular de la cedula de identidad <strong class="bold">{{ Asignatura.alumno }}</strong>, es poseedor del siguiente instrumento: <strong>{{ Asignatura.instrumento }}</strong> sobre el cual ejerce actividades academicas en
+      Municipio Guanare, hago constar, que el ciudadano(a) <strong class="bold">{{ asignatura.alumno }}</strong>,
+      Titular de la cedula de identidad <strong class="bold">{{ asignatura.cedula_alumno }}</strong>, es poseedor del siguiente instrumento: <strong>{{ object }}</strong> sobre el cual ejerce actividades academicas en
       <strong class="bold">LA ORQUESTA SINFONICA SIMON BOLIVAR DEL ESTADO PORTUGUESA.</strong>
     </p>
 

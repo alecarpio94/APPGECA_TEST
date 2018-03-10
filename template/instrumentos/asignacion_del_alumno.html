@@ -43,9 +43,9 @@
                   </div>
 
                   <div class="FormGroup">
-                  	<div class="col-md-4">
+                  	<div class="col-md-6">
                   		<label class="text-danger">Fecha De Entrega</label>
-                  		{{ form.fecha_entrega|add_class:'form-control'|attr:'id:demoDate'|attr:'placeholder:Fecha De Entrega Del Instrumento'|attr:'onkeypress:return valida(event);' }}
+                  		{{ form.fecha_entrega|add_class:'form-control'|attr:'id:demoDate'|attr:'placeholder:Fecha De Entrega Del Instrumento'|attr:'onkeypress:return valida(event);'|attr:'autocomplete:off' }}
                   	</div>
                   </div>
                     <hr>
@@ -64,7 +64,7 @@
                     </div>
                     {% endif %}
                     <div class="col-md-12">
-	                    <button class="btn btn-primary col-md-12"> 	enviar </button>
+	                    <button class="btn btn-primary col-md-12 col-xs-12"> 	enviar </button>
                     </div>
                 </form>
               </div>

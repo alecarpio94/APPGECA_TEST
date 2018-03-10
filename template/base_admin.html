@@ -14,7 +14,11 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">	
 	<link rel="stylesheet" href="{% static 'css/alertify.css' %}">
     <link rel="stylesheet" href="{% static 'iziToast/css/iziToast.min.css' %}">
-
+	<style>
+		::-webkit-scrollbar {
+		    display: none;
+		}
+	</style>
 
     <!--<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>-->
@@ -34,7 +38,8 @@
 			              	{% if request.user.is_secretaria %}
 			                	<li><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
 			              	{% endif %}
-							<li><a href="{% url 'auth:auth_password_change' %}"><i class="fa fa-cog fa-lg"></i> Cambiar Contraseña </a></li>
+							<li><a href="{% url 'auth:update' request.user.pk %}"><i class="fa fa-user-plus"></i> Actualizar Datos </a></li>
+							<li><a href="{% url 'auth:auth_password_change' %}"><i class="fa fa-wrench"></i> Cambiar Contraseña </a></li>
 							<li><a href="/logout/"><i class="fa fa-sign-out fa-lg"></i> Salir </a></li>
 			              </ul>
 			          	</li>
@@ -82,15 +87,15 @@
 								<li><a href="{% url 'instrumento:asig_instrumento' %}"><i class="fa fa-circle-o"></i>Lista Instrumentos Asignados</a></li>
 							</ul>
 						</li>
-						<li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Movimiento</span><i class="fa fa-angle-right"></i></a>
+						<li class="treeview"><a href="#"><i class="fa fa-list-alt"></i><span>Movimiento</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
 								<li><a href="{% url 'profesor:asig_alumn' %}"><i class="fa fa-circle-o"></i> Asignar Alumno</a></li>
 								<li><a href="{% url 'instrumento:asign_alumno' %}"><i class="fa fa-circle-o"></i> Asignar Instrumento</a></li>
 							</ul>
 						</li>
-						<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Reportes</span><i class="fa fa-angle-right"></i></a>
+						<li class="treeview"><a href="#"><i class="fa fa-file-pdf-o"></i><span>Reportes</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
-								<li><a href="{% url 'reportes:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Constancia De Estudio</a></li>
+								<li><a href="{% url 'reportes:lista_reportes' %}"><i class="fa fa-circle-o"></i> Constancia De Estudio</a></li>
 							 	<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i><span> Listados</span><i class="fa fa-angle-right"></i></a>
 				              	<ul class="treeview-menu">
 				                	<li><a href="{% url 'reportes:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
@@ -115,12 +120,12 @@
 								<li><a href="{% url 'profesor:alumn_evalu' %}"><i class="fa fa-circle-o"></i> Alumnos Evaluados </a></li>
 							</ul>
 						</li>
-						<li class="treeview"><a href="#"><i class="fa fa-th-list"></i><span>Movimiento</span><i class="fa fa-angle-right"></i></a>
+						<li class="treeview"><a href="#"><i class="fa fa-list-alt"></i><span>Movimiento</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
 								<li><a href="{% url 'profesor:eva_alumn' user.ci %}"><i class="fa fa-circle-o"></i> Evaluar Alumno</a></li>
 							</ul>
 						</li>
-						<li class="treeview"><a href="{% url 'reportes:const_trab' user.ci %}"><i class="fa fa-file-text"></i><span>Reportes</span><i></i></a>
+						<li class="treeview"><a href="{% url 'reportes:const_trab' user.ci %}"><i class="fa fa-file-pdf-o"></i><span>Reportes</span><i></i></a>
 						</li>
 						<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Manual De Usuario</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">

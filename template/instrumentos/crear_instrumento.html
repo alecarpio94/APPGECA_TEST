@@ -7,14 +7,7 @@
   <div class="page-title">
     <div>
       <h1><i class="fa fa-edit"></i> Registrar Instrumento</h1>
-      <p>Inventario Para Un Instrumento</p>
-    </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Registro</li>
-        <li><a href="#">Instrumento</a></li>
-      </ul>
+      <p><b>NOTA: Los campos marcados de rojo son obligadorios.</b></p>
     </div>
   </div>
   <div class="row">
@@ -26,8 +19,9 @@
               <form class="form-horizontal" method="POST">{% csrf_token %}
                 <fieldset>
                   <legend>Registro</legend>
+                  {{ mensaje }}
                   <div class="FormGroup">
-                    <label>Nombre Del Instrumento</label>
+                    <label class="text-danger">Nombre Del Instrumento</label>
                     <div name="nombr_instr">{{ form.nombr_instr | add_class:'form-control'| attr:"autocomplete:off" | attr:'placeholder: Ingrese Nombre Del Instrumento'}}</div>
                     <hr>
                     {% if form.nombr_instr.errors %}
@@ -37,7 +31,7 @@
                       <p>Este Instrumento ya ha sido registrado.</p>
                     </div>
                     {% endif %}
-                    <button class="btn btn-primary">crear</button>
+                    <button class="btn btn-primary col-md-12 col-xs-12">crear</button>
                   </div>
                 </form>
               </div>
