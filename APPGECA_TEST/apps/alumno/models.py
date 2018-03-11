@@ -73,7 +73,7 @@ class Vivienda(models.Model):
 	num_bano = models.CharField('Numero De Baños En La Vivienda', max_length=10 ,blank=True, null=True)
 	habitan_tra = models.CharField('Habitantes Que Trabajan', max_length=10 ,blank=True, null=True)
 	habitan_apo = models.CharField('Habitantes Que Aportan', max_length=10 ,blank=True, null=True)
-	mon_apr_men = models.CharField('Monto Aproximado De Ingresos Total Mensual En El Hogar(Bs)', max_length=255 ,blank=True, null=True)
+	mon_apr_men = models.CharField('Monto Aproximado De Ingresos Total Mensual En El Hogar(Bs)', max_length=100 ,blank=True, null=True)
 	
 	def __str__(self):
 		return '{}'.format(self.cedula_alumno)
