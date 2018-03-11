@@ -17,9 +17,7 @@
             "sys_platform": "linux2"
         },
         "pipfile-spec": 6,
-        "requires": {
-        python_version = "2.7"
-        },
+        "requires": {},
         "sources": [
             {
                 "name": "pypi",
