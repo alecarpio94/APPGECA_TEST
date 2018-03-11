@@ -22,6 +22,7 @@ django-cron==0.5.0
 django-material==1.2.2
 django-widget-tweaks==1.4.1
 enum34==1.1.6
+gunicorn==19.7.1
 html5lib==1.0b8
 hyperlink==17.3.1
 idna==2.6
