@@ -35,8 +35,9 @@ def write_pdf(template, context):
 #####################################################################################
 class AlumnoPDF(LoginRequiredMixin,View):
 	def get(self, *args, **kwargs):	
+		date = datetime.now()
 		alumn = Alumno.objects.filter(pk=self.kwargs['pk']).first()
-		return write_pdf('reportes/constancia_alumno.html',{'alumn':alumn, 'request':self.request})
+		return write_pdf('reportes/constancia_alumno.html',{'alumn':alumn, 'date':date,'request':self.request})
 
 #####################################################################################
 class AlumnoInstrumentoPDF(LoginRequiredMixin,DetailView):

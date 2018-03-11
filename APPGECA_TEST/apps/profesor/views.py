@@ -58,22 +58,54 @@ class EvaAlumListView(LoginRequiredMixin,ProfesorRequiredMixin,CreateView):
 		return super(EvaAlumListView, self).form_valid(form)
 		
 
-	def get_context_data(self, **kwargs):
+	def get_context_data(self, *args,**kwargs):
 	    context = super(EvaAlumListView, self).get_context_data(**kwargs)
 	    user_login = self.request.user
+	    profesor = Profesor.objects.filter(cedula_profesor=self.kwargs['pk']).first()
+	    asignado = Evaluado.objects.filter(asignados=self.kwargs['pk']).first()
+
 	    if user_login:
-	    	profesor_login = user_login.ci_profesor
-	    	if profesor_login:
-	    		alumnos_profesor = Evaluado.objects.filter(profesor = profesor_login)
-	    		if alumnos_profesor:
-	    			context['Evaluado'] = alumnos_profesor
-	    		else:
-	    			context['Evaluado'] = None
+	    	profesor_login = user_login.ci
+	    	profesor = profesor_login
+	    	if profesor:
+	    		context['asignacion'] = Evaluado.objects.filter(asignados=self.kwargs['pk']).first()
+	    		profesor = context
+	    		if profesor:
+	    			evaluado = Evaluado.objects.filter(profesor=self.kwargs['pk']).first()
+	    			if evaluado:
+	    				context['object_list'] = evaluado	
+		    		else:
+	    				context['object_list'] = None
+    			else:	
+    				context['object_list'] = None
 	    	else:
-	    		context['Evaluado'] = None
+	    		context['object_list'] = None
 	    else:
-	    	context['Evaluado'] = None
+	    	context['object_list'] = None
 	    return context
+
+	    # if user_login:
+	    # 	profesor_login = user_login.ci
+	    # 	profesor = Profesor.cedula_profesor
+	    # 	asignado = Asignados.profesor
+
+	    # 	if profesor_login:
+	    # 		if profesor:
+	    # 			if asignado == profesor:
+			  #   		alumnos_profesor = Evaluado.objects.filter(alumno = profesor_login)
+			  #   		if alumnos_profesor:
+			  #   			context['object_list'] = alumnos_profesor
+			  #   		else:	
+		   #  				context['object_list'] = None
+		   #  		else:
+	    # 				context['object_list'] = None
+    	# 		else:	
+    	# 			context['object_list'] = None
+	    # 	else:
+	    # 		context['object_list'] = None
+	    # else:
+	    # 	context['object_list'] = None
+	    # return context
 
 #######################ASIGNAR ALUMNO AL PROFESOR################################
 class AlumAsigView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
