@@ -20,7 +20,7 @@ class Profesor(models.Model):
 	asignacion = models.ForeignKey(Instrumento)
 
 	def __str__(self):
-		return '{} {}'.format(self.nombre_profesor, self.apellido_profesor)
+		return '{}'.format(self.cedula_profesor)
 
 	def get_full_name(self):
 		return '{} {}'.format(self.nombre_profesor, self.apellido_profesor)

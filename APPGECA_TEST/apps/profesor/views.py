@@ -4,7 +4,7 @@
 from django.views.generic import View
 #________________________________________
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.template import Context
 from django.template.context import RequestContext
@@ -99,25 +99,30 @@ class ProfListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 
 ######################LISTA DE ALUMNOS ASIGANDOS AL PROFESOR######################
 class ProfAlumListView(LoginRequiredMixin,ListView):
-	context_object_name = 'Listaalumnos'
+	context_object_name = 'Lista'
 	model = Asignados
 	template_name = 'profesor/listado_alumno_profesor.html'
 
 	def get_context_data(self, **kwargs):
 	    context = super(ProfAlumListView, self).get_context_data(**kwargs)
 	    user_login = self.request.user
+	    profesor = Profesor
 	    if user_login:
-	    	profesor_login = user_login.ci_profesor
+	    	profesor_login = user_login.ci
+	    	profesor = Profesor.cedula_profesor
 	    	if profesor_login:
-	    		alumnos_profesor = Asignados.objects.filter(profesor = profesor_login)
-	    		if alumnos_profesor:
-	    			context['Asignados'] = alumnos_profesor
-	    		else:
-	    			context['Asignados'] = None
+	    		if profesor:
+		    		alumnos_profesor = Asignados.objects.filter(profesor = profesor_login)
+		    		if alumnos_profesor:
+		    			context['object_list'] = alumnos_profesor
+		    		else:
+	    				context['object_list'] = None
+    			else:	
+    				context['object_list'] = None
 	    	else:
-	    		context['Asignados'] = None
+	    		context['object_list'] = None
 	    else:
-	    	context['Asignados'] = None
+	    	context['object_list'] = None
 	    return context
 
 class AsigAlumListView(LoginRequiredMixin,ListView):
