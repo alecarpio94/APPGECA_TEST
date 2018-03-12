@@ -66,7 +66,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email']
 
     def __unicode__(self):
-        return '{} {} {} {}'.format(self.ci,self.ci_profesor, self.first_name, self.last_name)
+        return '%s %s %s %s'%(self.ci,self.ci_profesor, self.first_name, self.last_name)
 
     def get_full_name(self):
         return ' '.join([self.first_name, self.last_name]).encode('utf-8').strip()

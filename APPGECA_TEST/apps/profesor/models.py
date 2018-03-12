@@ -19,11 +19,11 @@ class Profesor(models.Model):
 	apellido_profesor = models.CharField(apodo('Apellido'),max_length=40)
 	asignacion = models.ForeignKey(Instrumento)
 
-	def __str__(self):
-		return '{}'.format(self.cedula_profesor)
+	def __unicode__(self):
+		return '%s'%(self.cedula_profesor)
 
 	def get_full_name(self):
-		return '{} {}'.format(self.nombre_profesor, self.apellido_profesor)
+		return '%s %s'%(self.nombre_profesor, self.apellido_profesor)
 
 class Asignados(models.Model):
 	
@@ -31,11 +31,11 @@ class Asignados(models.Model):
 	profesor = models.ForeignKey(Profesor,null=True)
 	alumno = models.OneToOneField(Alumno,null=True)
 
-	def __str__(self):
+	def __unicode__(self):
 		return '{}'.format(self.alumno)
 
 	def get_full_name(self):
-		return '{} {}'.format(self.alumno, self.profesor)
+		return '%s %s'%(self.alumno, self.profesor)
 
 class Evaluado(models.Model):
 
@@ -47,8 +47,8 @@ class Evaluado(models.Model):
 	status = models.BooleanField(default=False, blank=True)
 	evaluado = models.BooleanField(default=False, blank=True)
 
-	def __str__(self):
-		return '{} {}'.format(self.profesor, self.asignados)
+	def __unicode__(self):
+		return '%s %s'%(self.profesor, self.asignados)
 
 	def get_full_name(self):
 		return '{}'.format(self.asignados)

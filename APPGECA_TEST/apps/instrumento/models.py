@@ -11,8 +11,8 @@ class Instrumento(models.Model):
 	# id = models.AutoField(primary_key=True)
 	nombr_instr = models.CharField('Nombre', primary_key=True,max_length=50, unique=True)
 
-	def __str__(self):
-		return '{}'.format(self.nombr_instr)
+	def __unicode__(self):
+		return '%s'%(self.nombr_instr)
 
 class Asignatura(models.Model):
 
@@ -26,8 +26,8 @@ class Asignatura(models.Model):
 	# def __main__(self, instrumento, alumno):
 	# 	self.Asignatura = {'Instrumento': instrumento, 'Alumno':alumno}
 
-	def __str__(self):
-		return '{} {}'.format(self.alumno, self.instrumento)
+	def __unicode__(self):
+		return '%s %s'%(self.alumno, self.instrumento)
 
 	def instrumentos(self):
 		return '{}'.format(self.instrumento)

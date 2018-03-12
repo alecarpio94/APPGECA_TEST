@@ -27,12 +27,14 @@
                     </div>
 									<form action="" method="POST" id="asignados">{% csrf_token %}
                     
-                    {{ form.profesor|attr:'value:id_user.ci' }}
+                    {{ form.alumno|attr:'value:id_user.ci' }}
+
+                    {{ evaluado }}
 
                     <div class="FormGroup">
                       <div class="col-md-6">
                         <label class="text-danger">Alumno:</label><br>
-                        {{ form.asignados|attr:'style: width:100%;'|add_class:'js-example-basic-multiple form-control'| attr:'id:alumno' }}
+                        {{ form.asignados|attr:'style: width:100%;'|attr:'value:alumno'|add_class:'js-example-basic-multiple form-control' }}
                       </div>
 
                       <div class="col-md-6">
@@ -56,12 +58,14 @@
 											  </label>
 											</div>
 
-											<div class="animated-checkbox col-md-6">
-											  <label>
-											    {{ form.status|attr:'type:checkbox' }}<span class="label-text">Aprobo</span>
-											  </label>
-											</div>	
-										</div>
+
+                      <div class="animated-checkbox col-md-6">
+                        <label>
+                          {{ form.status|attr:'type:checkbox' }}<span class="label-text">Aprobo</span>
+                        </label>
+                      </div>  
+                    </div>
+                      {{ form.errors }}
 										<hr>
                     <button class="btn btn-primary col-md-12 col-xs-12" value="Guardar"> Enviar </button></i> 
 									</form>

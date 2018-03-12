@@ -23,11 +23,11 @@ class Alumno(models.Model):
 	lugar_nacimiento = models.CharField(apodo('Lugar De Nacimiento*'),max_length=100)
 	institucion = models.CharField(apodo('Institucion*'),max_length=200)
 
-	def __str__(self):
-		return '{} {}'.format(self.primer_nombre, self.primer_apellido)
+	def __unicode__(self):
+		return '%s %s'%(self.primer_nombre, self.primer_apellido)
 
 	def get_full_name(self):
-		return '{} {}'.format(self.primer_nombre, self.primer_apellido)
+		return '%s %s'%(self.primer_nombre, self.primer_apellido)
 		
 #################MODELO REPRESENTANTE#####################
 class Representante(models.Model):
@@ -42,8 +42,8 @@ class Representante(models.Model):
 	telef_res = models.CharField(apodo('Telefono Residencial'), max_length=11 ,blank=True, null=True)
 	direccion = models.CharField(apodo('Direccion*'),max_length=150,blank=True, null=True)
 
-	def __str__(self):
-		return '{} {}'.format(self.cedula_repres, self.cedula_alumno)
+	def __unicode__(self):
+		return '%i %i'%(self.cedula_repres, self.cedula_alumno)
 
 ####################MODELO VIVIENDA#######################
 class Vivienda(models.Model):
@@ -75,8 +75,8 @@ class Vivienda(models.Model):
 	habitan_apo = models.CharField('Habitantes Que Aportan', max_length=10 ,blank=True, null=True)
 	mon_apr_men = models.CharField('Monto Aproximado De Ingresos Total Mensual En El Hogar(Bs)', max_length=100 ,blank=True, null=True)
 	
-	def __str__(self):
-		return '{}'.format(self.cedula_alumno)
+	def __unicode__(self):
+		return '%i'%(self.cedula_alumno)
 
 ###################MODELO DIRECCION#######################
 class Direccion(models.Model):
@@ -92,8 +92,8 @@ class Direccion(models.Model):
 	calle_avend = models.CharField(apodo('Calle/Avenida*'),max_length=150)
 	apt_casa = models.CharField(apodo('Apartamento/Casa*'),max_length=100)
 	
-	def __str__(self):
-		return '{}'.format(self.cedula_alumno)
+	def __unicode__(self):
+		return '{}'%(self.cedula_alumno)
 
 ####################MODELO FAMILIA########################
 class Familia(models.Model):
@@ -109,8 +109,8 @@ class Familia(models.Model):
 	telef_res_f = models.CharField(apodo('Telefono Residencial'), max_length=11 ,null=True, blank=True)
 	vive = models.BooleanField(apodo('Vive Con El Alumno?*'),blank=True, default=False)
 	
-	def __str__(self):
-		return '{}'.format(self.cedula_familia)
+	def __unicode__(self):
+		return '%i'%(self.cedula_familia)
 
 #################MODELO EDUCACION ALUMNO##################
 class EducaAlumno(models.Model):
@@ -121,8 +121,8 @@ class EducaAlumno(models.Model):
 	nivel_e = models.CharField(apodo('Nivel Educativo*'),choices=nivel, max_length=20)
 	curso = models.CharField(max_length=100, blank=True, null=True)
 	
-	def __str__(self):
-		return '{}'.format(self.cedula_alumno)
+	def __unicode__(self):
+		return '%i'%(self.cedula_alumno)
 
 ###################MODELO INSTITUCION#####################
 class Empresa(models.Model):
@@ -131,8 +131,8 @@ class Empresa(models.Model):
 	nombre_jefe = models.CharField('Jefe De La Empresa',max_length=100, null=True, blank=True)
 	cedula_alumno = models.OneToOneField(Alumno, null=True, blank=True, on_delete=models.CASCADE)
 	
-	def __str__(self):
-		return '{}'.format(self.nombre_empre, self.cedula_alumno)
+	def __unicode__(self):
+		return '%s %i'%(self.nombre_empre, self.cedula_alumno)
 
 ################MODELO EDUCACION MUSICAL##################
 class EducaMusi(models.Model):
@@ -152,8 +152,8 @@ class EducaMusi(models.Model):
 	estu_cur = models.CharField('Que Estudios Cursa?',max_length=100, null=True, blank=True)
 	inst_empr_bec = models.CharField('Que Institucion O Empresa Otorga La Beca',max_length=100, null=True, blank=True)
 	
-	def __str__(self):
-		return '{}'.format(self.cedula_alumno)
+	def __unicode__(self):
+		return '%i'%(self.cedula_alumno)
 
 ###########MODELO PERCEPCION DEL REPRESENTANTE#############
 class PercepRepre(models.Model):
@@ -165,8 +165,8 @@ class PercepRepre(models.Model):
 	viv_mej = models.BooleanField('Ahora Vivo Mejor',default=False)
 	otra_razon = models.CharField('Otra Razon',max_length=100, blank=True, null=True)
 	
-	def __str__(self):
-		return '{}'.format(self.cedula_repres)
+	def __unicode__(self):
+		return '%i'%(self.cedula_repres)
 
 ###############MODELO PERCEPCION DEL NINO##################
 class PercepNino(models.Model):
@@ -179,5 +179,5 @@ class PercepNino(models.Model):
 	m_sien_cap = models.BooleanField('Me Siento Cansado', default=False)
 	m_sien_mot = models.BooleanField('Me Siento Desmotivado', default=False)
 	
-	def __str__(self):
-		return '{}'.format(self.cedula_alumno)
+	def __unicode__(self):
+		return '%i'%(self.cedula_alumno)

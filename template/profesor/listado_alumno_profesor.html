@@ -24,6 +24,7 @@
                     <thead>
                       <tr role="row">
                         <th>Nombre</th>
+                        <!-- <th>Evaluar</th> -->
                       </tr>
                     </thead>
 
@@ -31,9 +32,10 @@
                       {% for asignados in object_list%}
                         <tr class="odd">
                           <td>{{ asignados.alumno.primer_nombre }} {{ asignados.alumno.primer_apellido }}</td>
+                          <!-- <td><a href="{% url 'profesor:eva_alumn' asignados.alumno.cedula_alumno %}" style="width: 100%;" class="btn btn-primary" >Evaluar</a></td> -->
                         </tr>
                       {% empty %}
-                      <td valign="top" colspan="3" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      <td valign="top" colspan="2" class="dataTables_empty">No hay datos disponibles en la tabla</td>
                       {% endfor %}
                     </tbody>
                   </table>

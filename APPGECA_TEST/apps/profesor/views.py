@@ -45,7 +45,6 @@ class ProfCreateView(LoginRequiredMixin,AdminRequiredMixin, CreateView):
 ######################PONDERACION DEL ALUMNOS PROFESOR######################
 class EvaAlumListView(LoginRequiredMixin,ProfesorRequiredMixin,CreateView):
 	model = Evaluado
-	second_model = Asignados
 	fields = ['asignados','descripcion','fecha','status','evaluado']
 	template_name = 'profesor/evaluacion_del_alumno.html'
 	success_url = reverse_lazy('profesor:alumn_evalu')
@@ -61,51 +60,25 @@ class EvaAlumListView(LoginRequiredMixin,ProfesorRequiredMixin,CreateView):
 	def get_context_data(self, *args,**kwargs):
 	    context = super(EvaAlumListView, self).get_context_data(**kwargs)
 	    user_login = self.request.user
-	    profesor = Profesor.objects.filter(cedula_profesor=self.kwargs['pk']).first()
-	    asignado = Evaluado.objects.filter(asignados=self.kwargs['pk']).first()
 
 	    if user_login:
 	    	profesor_login = user_login.ci
-	    	profesor = profesor_login
-	    	if profesor:
-	    		context['asignacion'] = Evaluado.objects.filter(asignados=self.kwargs['pk']).first()
-	    		profesor = context
+	    	profesor = Profesor.cedula_profesor
+	    	if profesor_login:
 	    		if profesor:
-	    			evaluado = Evaluado.objects.filter(profesor=self.kwargs['pk']).first()
-	    			if evaluado:
-	    				context['object_list'] = evaluado	
+		    		alumnos_profesor = Asignados.objects.filter(profesor = profesor_login)
+		    		if alumnos_profesor:
+		    			print alumnos_profesor
+		    			context['evaluado'] = alumnos_profesor
 		    		else:
-	    				context['object_list'] = None
+	    				context['evaluado'] = None
     			else:	
-    				context['object_list'] = None
+    				context['evaluado'] = None
 	    	else:
-	    		context['object_list'] = None
+	    		context['evaluado'] = None
 	    else:
-	    	context['object_list'] = None
+	    	context['evaluado'] = None
 	    return context
-
-	    # if user_login:
-	    # 	profesor_login = user_login.ci
-	    # 	profesor = Profesor.cedula_profesor
-	    # 	asignado = Asignados.profesor
-
-	    # 	if profesor_login:
-	    # 		if profesor:
-	    # 			if asignado == profesor:
-			  #   		alumnos_profesor = Evaluado.objects.filter(alumno = profesor_login)
-			  #   		if alumnos_profesor:
-			  #   			context['object_list'] = alumnos_profesor
-			  #   		else:	
-		   #  				context['object_list'] = None
-		   #  		else:
-	    # 				context['object_list'] = None
-    	# 		else:	
-    	# 			context['object_list'] = None
-	    # 	else:
-	    # 		context['object_list'] = None
-	    # else:
-	    # 	context['object_list'] = None
-	    # return context
 
 #######################ASIGNAR ALUMNO AL PROFESOR################################
 class AlumAsigView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
@@ -166,6 +139,28 @@ class ListaAlumEvaluados(LoginRequiredMixin, ProfesorRequiredMixin, ListView):
 	context_object_name = 'ListaEvalua'
 	model = Evaluado
 	template_name = 'profesor/lista_alumno_evaluado.html'
+
+	def get_context_data(self, **kwargs):
+	    context = super(ListaAlumEvaluados, self).get_context_data(**kwargs)
+	    user_login = self.request.user
+	    profesor = Profesor
+	    if user_login:
+	    	profesor_login = user_login.ci
+	    	profesor = Profesor.cedula_profesor
+	    	if profesor_login:
+	    		if profesor:
+		    		alumnos_profesor = Evaluado.objects.filter(profesor = profesor_login)
+		    		if alumnos_profesor:
+		    			context['object_list'] = alumnos_profesor
+		    		else:
+	    				context['object_list'] = None
+    			else:	
+    				context['object_list'] = None
+	    	else:
+	    		context['object_list'] = None
+	    else:
+	    	context['object_list'] = None
+	    return context
 		
 ##########################DETALLES DE LA EVALUACION###############################
 class DetallesEvaluacionView(LoginRequiredMixin, ProfesorRequiredMixin, DetailView):
