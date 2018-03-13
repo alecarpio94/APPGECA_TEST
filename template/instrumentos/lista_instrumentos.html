@@ -29,7 +29,7 @@
                       {% if object_list %}
                       {% for instrumento in object_list %}
                       <tr class="odd">
-                        <td>{{ instrumento.nombr_instr }}</td>
+                        <td>{{ instrumento.nombr_instr|title }}</td>
                         </tr>
                       {% endfor %}
                       {% else %}
