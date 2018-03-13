@@ -13,7 +13,7 @@ from django.views.generic import ListView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from ...apps.profesor.models import Profesor
 from ...apps.alumno.models import Alumno
-from ...apps.instrumento.models import Asignatura
+from ...apps.instrumento.models import *
 from datetime import date, datetime
 from django import http
 from io import BytesIO

@@ -11,6 +11,7 @@ min.setYear(min.getFullYear()-50);
 var max = new Date();
 max.setYear(max.getFullYear()-5);	
 $('#calendar').datepicker({
+	'format': 'dd/mm/yyyy',
 	'startDate': min,
 	'endDate': max,
 	"autoclose": true
@@ -32,7 +33,7 @@ $("#vol1").click(function(e){
 });
 
 $("#vivie").click(function(e){
-	if ($("#id_cedula_repres").val() === "" || $("#id_nombre_repres").val === "" || $("#id_apelli_repres").val() === "" || $("#id_ocupacion").val() === "" || $("#id_telef_cel").val() === "" || $("#id_direccion").val() === "" ){
+	if ($("#id_cedula_repres").val() === "" || $("#id_nombre_repres").val === "" || $("#id_apelli_repres").val() === "" || $("#id_ocupacion").val() === "" || $("#id_telef_cel").val() === ""){
 		return false
 	}else{
 		$("#repre").removeClass('active')

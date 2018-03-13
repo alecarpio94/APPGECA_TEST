@@ -4,8 +4,7 @@
 from django.views.generic import View
 #________________________________________
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.template import Context
 from django.template.context import RequestContext
 from django.template.loader import get_template
@@ -15,12 +14,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from datetime import date, datetime
-from django.views.generic import CreateView 
-from django.views.generic import ListView 
-from django.views.generic import UpdateView
-from django.views.generic import DeleteView
-from django.views.generic import TemplateView, FormView
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import (
+	CreateView,
+	ListView,
+	UpdateView,
+	DeleteView,
+	TemplateView, 
+	FormView, 
+	ListView, 
+	TemplateView, 
+	DetailView
+	)
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 from django.db.models import Q
@@ -66,7 +70,7 @@ class EvaAlumListView(LoginRequiredMixin,ProfesorRequiredMixin,CreateView):
 	    	profesor = Profesor.cedula_profesor
 	    	if profesor_login:
 	    		if profesor:
-		    		alumnos_profesor = Asignados.objects.filter(profesor = profesor_login)
+		    		alumnos_profesor = Asignados.objects.get(profesor = profesor_login)
 		    		if alumnos_profesor:
 		    			print alumnos_profesor
 		    			context['evaluado'] = alumnos_profesor
@@ -94,7 +98,6 @@ class AlumAsigView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
 		else:
 			mensaje = "El Alumno ya ha sido asignado a un profesor"
 			return render(self.request, self.template_name, {'form':form, 'mensaje':self.mensaje})
-
 
 ######################LISTADO DE LOS PROFESORES######################
 class ProfListView(LoginRequiredMixin,AdminRequiredMixin,ListView):

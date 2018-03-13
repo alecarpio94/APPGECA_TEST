@@ -31,20 +31,20 @@
             <div class="col-xs-12 table-responsive">
               <table class="table table-striped">
                     <thead>
-                      <tr role="row" style="border: 1px solid black; padding: 1 1 1 1px; font-weight: bold; ">
-                        <th>Cedula</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Sexo</th>
-                        <th>Fecha De Nacimiento</th>
-                        <th>Institucion</th>
+                      <tr role="row" style="border: 1px solid black; padding: 1 1 1 1px; font-weight: bold;">
+                        <th style="background-color: red;">Cedula</th>
+                        <th style="background-color: red;">Nombre</th>
+                        <th style="background-color: red;">Apellido</th>
+                        <th style="background-color: red;">Sexo</th>
+                        <th style="background-color: red;">Fecha De Nacimiento</th>
+                        <th style="background-color: red;">Institucion</th>
                       </tr>
                     </thead>
 
                     <tbody>
                       {% for object_list in alumno %}
                       <tr class="row" style="border: 1px solid black; text-align: center; padding: 1 1 1 1px;">
-                        <td>{{ object_list.cedula_alumno|title }}</td>
+                        <td style="background-color: red;">{{ object_list.cedula_alumno|title }}</td>
                         <td>{{ object_list.primer_nombre|title }}</td>
                         <td>{{ object_list.primer_apellido|title }}</td>
                         <td>{{ object_list.sexo_alumno|title }}</td>
