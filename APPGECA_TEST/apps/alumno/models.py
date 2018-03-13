@@ -76,7 +76,7 @@ class Vivienda(models.Model):
 	mon_apr_men = models.CharField('Monto Aproximado De Ingresos Total Mensual En El Hogar(Bs)', max_length=100 ,blank=True, null=True)
 	
 	def __unicode__(self):
-		return '%i'%(self.cedula_alumno)
+		return '%s'%(self.cedula_alumno)
 
 ###################MODELO DIRECCION#######################
 class Direccion(models.Model):
@@ -93,7 +93,7 @@ class Direccion(models.Model):
 	apt_casa = models.CharField(apodo('Apartamento/Casa*'),max_length=100)
 	
 	def __unicode__(self):
-		return '{}'%(self.cedula_alumno)
+		return '%s'%(self.cedula_alumno)
 
 ####################MODELO FAMILIA########################
 class Familia(models.Model):
@@ -122,7 +122,7 @@ class EducaAlumno(models.Model):
 	curso = models.CharField(max_length=100, blank=True, null=True)
 	
 	def __unicode__(self):
-		return '%i'%(self.cedula_alumno)
+		return '%s'%(self.cedula_alumno)
 
 ###################MODELO INSTITUCION#####################
 class Empresa(models.Model):
@@ -132,7 +132,7 @@ class Empresa(models.Model):
 	cedula_alumno = models.OneToOneField(Alumno, null=True, blank=True, on_delete=models.CASCADE)
 	
 	def __unicode__(self):
-		return '%s %i'%(self.nombre_empre, self.cedula_alumno)
+		return '%s %s'%(self.nombre_empre, self.cedula_alumno)
 
 ################MODELO EDUCACION MUSICAL##################
 class EducaMusi(models.Model):
@@ -153,7 +153,7 @@ class EducaMusi(models.Model):
 	inst_empr_bec = models.CharField('Que Institucion O Empresa Otorga La Beca',max_length=100, null=True, blank=True)
 	
 	def __unicode__(self):
-		return '%i'%(self.cedula_alumno)
+		return '%s'%(self.cedula_alumno)
 
 ###########MODELO PERCEPCION DEL REPRESENTANTE#############
 class PercepRepre(models.Model):
@@ -166,7 +166,7 @@ class PercepRepre(models.Model):
 	otra_razon = models.CharField('Otra Razon',max_length=100, blank=True, null=True)
 	
 	def __unicode__(self):
-		return '%i'%(self.cedula_repres)
+		return '%s'%(self.cedula_alumno)
 
 ###############MODELO PERCEPCION DEL NINO##################
 class PercepNino(models.Model):
@@ -180,4 +180,4 @@ class PercepNino(models.Model):
 	m_sien_mot = models.BooleanField('Me Siento Desmotivado', default=False)
 	
 	def __unicode__(self):
-		return '%i'%(self.cedula_alumno)
+		return '%s'%(self.cedula_alumno)

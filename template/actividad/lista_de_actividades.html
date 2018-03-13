@@ -8,7 +8,9 @@
       <h1>Listado De Actividades</h1>
     </div>
     {% if request.user.is_secretaria %}
-      <div><a class="btn btn-primary btn-flat" href="/nueva_actividad/"><i class="fa fa-lg fa-plus"></i></a></div>
+      <div>
+        <a class="btn btn-primary btn-flat" href="{% url 'actividad:actividadR' %}"><i class="fa fa-lg fa-plus"></i></a>
+      </div>
     {% endif %}
   </div>
   <div class="row">

@@ -6,9 +6,10 @@
   <div class="page-title">
     <div>
       <h1>Listado De Profesores</h1>
-      </ul>
     </div>
-    <div><a class="btn btn-primary btn-flat" href="/nuevo_profesor/"><i class="fa fa-lg fa-plus"></i></a></div>
+    <div>
+      <a class="btn btn-primary btn-flat" href="{% url 'profesor:profesorR' %}"><i class="fa fa-lg fa-plus"></i></a>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -29,6 +30,7 @@
                       <th>Eliminar</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {% if object_list %}
                     {% for profesor in object_list %}

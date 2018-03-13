@@ -8,7 +8,9 @@
       <h1>Listado De Instrumentos</h1>
     </div>
   {% if request.user.is_secretaria %}
-    <div><a class="btn btn-primary btn-flat" href="/nuevo_instrumento/"><i class="fa fa-lg fa-plus"></i></a></div>
+    <div>
+      <a class="btn btn-primary btn-flat" href="{% url 'instrumento:instrumentoR' %}"><i class="fa fa-lg fa-plus"></i></a>
+    </div>
   {% endif %}
   </div>
     <div class="row">

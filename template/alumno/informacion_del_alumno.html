@@ -151,7 +151,7 @@
             </div>
 
             <!-- Datos Academicos -->
-            <div class="col-md-6">
+<!--             <div class="col-md-6">
               <div class="card">
                 <section class="invoice">
                   <div class="row invoice-info">
@@ -159,22 +159,22 @@
                       <h2>Datos Academicos</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Nivel Educativo: </b> {{ object.educaalumno.nivel_e }} </h4>
-                        <h4> - <b>Cursos: </b>{% if object.educaalumno.curso == None %} Ninguno {% else %} {{ object.educaalumno.curso }}{% endif %} </h4>
+                        <h4> - <b>Nivel Educativo: </b> {{ object.educacion.nivel_e }} </h4>
+                        <h4> - <b>Cursos: </b>{% if object.educacion.curso == None %} Ninguno {% else %} {{ object.educacion.curso }}{% endif %} </h4>
                       </ul>
                     </div>
                   </div>
                 </section>
               </div>
-            </div>
+            </div> -->
 
             <!-- Trabajo Del Alumno -->
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="card">
                 <section class="invoice">
                   <div class="row invoice-info">
                     <div class="col-xs-12">
-                      <h2>Datos Laborales</h2>
+                      <h2 class="text-center">Datos Laborales</h2>
                       <hr>
                       <ul>
                         <h4> - <b>Nombre De La Empresa: </b>{% if object.empresa.nombre_empre == None %} No Posee {% else %} {{ object.empresa.nombre_empre }}{% endif %} </h4>
