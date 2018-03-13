@@ -68,6 +68,24 @@ class ActivUpdateView(LoginRequiredMixin,AdminRequiredMixin,UpdateView):
 	fields = ['nombr_acti', 'descripcio', 'fecha_inic','hora_inico', 'hora_final', 'fecha_fina', 'status1', 'status2','status3']
 	success_url = reverse_lazy('actividad:list_actividades')
 	
+	def form_valid(self, form):
+		p = form.save(commit=False)
+		fecha = p.fecha_inic
+		fecha_dada = p.fecha_fina
+		horaI = p.hora_inico
+		horaF = p.hora_final
+		if fecha_dada >= fecha:
+			if horaF >= horaI:
+				print ("Si Paso")
+				self.mensaje = "Actividad guardada con exito."
+				return super(ActivUpdateView, self).form_valid(form)
+			else:
+				self.mensaje = "La hora seleccionada no es valida"
+				return render(self.request,'actividad/crear_actividad.html', {'form':form, 'mensaje':self.mensaje})
+		else:
+			self.mensaje = "La fecha seleccionada no es valida"
+			return render(self.request,'actividad/crear_actividad.html', {'form':form, 'mensaje':self.mensaje})
+	
 class ActivDeleteView(LoginRequiredMixin,AdminRequiredMixin, DeleteView):
 	
 	model = Actividad

@@ -40,13 +40,13 @@ class AlumnoPDF(LoginRequiredMixin,View):
 		return write_pdf('reportes/constancia_alumno.html',{'alumn':alumn, 'date':date,'request':self.request})
 
 #####################################################################################
-class AlumnoInstrumentoPDF(LoginRequiredMixin,DetailView):
+class AlumnoInstrumentoPDF(LoginRequiredMixin,View):
 	def get(self, *args, **kwargs):
 		asig = Asignatura.objects.filter(alumno=self.kwargs['pk']).first()
 		if asig:
 			return write_pdf('reportes/constancia_instrumento_alumno.html', {'asignatura':asig ,'request':self.request})
 		else:
-			raise Http404('ERROR! EL ALUMNO NO POSEE UN INSTRUMENTO ASIGNADO')
+			return render(self.request,'reportes/error404.html')
 
 #####################################################################################
 class ProfesorPDF(LoginRequiredMixin,View):

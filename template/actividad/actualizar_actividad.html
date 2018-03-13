@@ -121,7 +121,9 @@
 {% endblock content %}
 
 {% block javascript %}
-
+  {% if mensaje %}
+    <script>fecha('{{ mensaje }}')</script>
+  {% endif %}
   <script src="{% static 'js/bootstrap-datepicker.js'%}"></script>
   <!-- <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script> -->
   <script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.js'%}" charset="UTF-8"></script>
