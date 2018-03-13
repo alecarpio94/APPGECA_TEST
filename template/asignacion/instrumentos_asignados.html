@@ -5,7 +5,7 @@
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1>Lista De Alumnos Con Instrumentos</h1>
+      <h1>Listado De Alumnos Con Instrumentos</h1>
     </div>
     <div><a class="btn btn-primary btn-flat" href="{% url 'instrumento:asign_alumno' %}"><i class="fa fa-lg fa-plus"></i></a></div>
   </div>
@@ -25,8 +25,8 @@
                         <th>Apellido</th>
                         <th>Instrumento</th>
                         <th>Fecha De Entrega</th>
-                        <th>Fecha De Retiro</th>
-                        <th>Movimiento</th>
+                        <!-- <th>Fecha De Retiro</th> -->
+                        <th>Retirar</th>
                       </tr>
                     </thead>
 
@@ -35,12 +35,12 @@
                       {% for asignatura in object_list %}
                       <tr class="odd">
                         <td>{% if asignatura.alumno.cedula_alumno == "" %}R-{{ asignatura.alumno.representante.cedula_repres }} {% else %}{{ asignatura.alumno.cedula_alumno }}{% endif %}</td>
-                        <td>{{ asignatura.alumno.primer_nombre }}</td>
-                        <td>{{ asignatura.alumno.primer_apellido }}</td>
-                        <td>{{ asignatura.instrumento }}</td>
+                        <td>{{ asignatura.alumno.primer_nombre|title }}</td>
+                        <td>{{ asignatura.alumno.primer_apellido|title }}</td>
+                        <td>{{ asignatura.instrumento|title }}</td>
                         <td>{% if asignatura.fecha_entrega == '' %} Sin Asignar {% else %} {{ asignatura.fecha_entrega }}{% endif %}</td>
-                        <td>{% if asignatura.fecha_retiro == None %} Sin Entregar {% else %} {{ asignatura.fecha_retiro }} {% endif %}</td>
-                        <td><a href="{% url 'instrumento:retir_instr' asignatura.pk %}" class="btn btn-primary" >Modificar</a></td>
+                        <!-- <td>{% if asignatura.fecha_retiro == None %} Sin Entregar {% else %} {{ asignatura.fecha_retiro }} {% endif %}</td> -->
+                        <td><a href="{% url 'instrumento:retir_instr' asignatura.pk %}" style="width: 100%;" class="btn btn-danger" >Retirar</a></td>
                       </tr>
                       {% endfor %}
                       {% else %}

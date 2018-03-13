@@ -10,14 +10,7 @@
   <div class="page-title">
     <div>
       <h1><i class="fa fa-edit"></i> Nuevo Profesor</h1>
-      <p>Formulario Para El Registro De Un Nuevo Profesor</p>
-    </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Registro</li>
-        <li><a href="#">Profesor</a></li>
-      </ul>
+      <p><b>NOTA: Los campos marcados de rojo son obligadorios.</b></p>
     </div>
   </div>
   <div class="row">
@@ -34,7 +27,7 @@
                     <div class="cedula_profesor">
                       <div class="col-md-12">
                         <label class="text-danger">Cedula</label>
-                        {{ form.cedula_profesor | add_class:'form-control' |attr:"placeholder:Ingrese Numero De Cedula"|attr:'autocomplete:off'|attr:"minlength=8"| add_error_class:'form-control is-invalid'|attr:'onkeypress:return valida(event);' }}
+                        {{ form.cedula_profesor | add_class:'form-control' |attr:"placeholder:Ingrese Numero De Cedula"|attr:'autocomplete:off'|attr:"minlength=8"| add_error_class:'form-control is-invalid' }}
                       </div>
                     </div>
                   </div>
@@ -43,7 +36,7 @@
                     <div class="nombre_profesor">
                       <div class="col-md-12">
                         <label class="text-danger">Nombre Del Profesor</label>
-                        {{ form.nombre_profesor |add_error_attr:"aria-invalid:true"| add_class:'form-control'| attr:"placeholder:Ingrese Nombre Del Profesor"|attr:'autocomplete:off'| add_error_class:'form-control is-invalid'|attr:'onkeypress:return soloLetras(event);' }}
+                        {{ form.nombre_profesor |add_error_attr:"aria-invalid:true"| add_class:'form-control'| attr:"placeholder:Ingrese Nombre Del Profesor"|attr:'autocomplete:off'| add_error_class:'form-control is-invalid' }}
                       </div>
                     </div>
                   </div>
@@ -52,7 +45,7 @@
                     <div class="apellido_profesor">
                       <div class="col-md-12">
                         <label class="text-danger">Apellido Del Profesor</label>
-                        {{ form.apellido_profesor | add_class:'form-control'|attr:"placeholder:Ingrese Apellido Del   Profesor"| add_error_class:'form-control is-invalid'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                        {{ form.apellido_profesor | add_class:'form-control'|attr:"placeholder:Ingrese Apellido Del   Profesor"| add_error_class:'form-control is-invalid'|attr:'autocomplete:off' }}
                       </div>
                     </div>
 
@@ -79,8 +72,8 @@
                             <p>Este Instrumento ya esta registrado con el Profesor.</p>
                       </div>
                     {% endif %}
-                  <div class="col-md-6">
-                    <button class="btn btn-primary">Crear</button>
+                  <div class="col-md-12">
+                    <button class="btn btn-primary col-md-12 col-xs-12">Crear</button>
                   </div>
                 </form>
               </div>
@@ -94,4 +87,5 @@
 
 {% block javascript %}
   <script src="{% static 'js/form_validation.js' %}"></script>
+  <script src="{% static 'js/valinput/profesor.js' %}"></script>
 {% endblock %}

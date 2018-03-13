@@ -29,7 +29,16 @@ class RepreForm(forms.ModelForm):
 	class Meta:
 		model = Representante
 
-		fields = ['cedula_repres','nombre_repres','apelli_repres','ocupacion','profesion','telef_cel','telef_res','direccion']
+		fields = [
+		'cedula_repres',
+		'nombre_repres',
+		'apelli_repres',
+		'ocupacion',
+		'profesion',
+		'telef_cel',
+		'telef_res',
+		'direccion'
+		]
 
 ######################FORMULARIO VIVIENDA#########################
 class VivienForm(forms.ModelForm):

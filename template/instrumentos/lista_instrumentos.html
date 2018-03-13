@@ -5,15 +5,12 @@
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1>Inventario De Instrumentos</h1>
-      <ul class="breadcrumb side">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Listado</li>
-        <li class="active"><a href="#">Inventario</a></li>
-      </ul>
+      <h1>Listado De Instrumentos</h1>
     </div>
   {% if request.user.is_secretaria %}
-    <div><a class="btn btn-primary btn-flat" href="/nuevo_instrumento/"><i class="fa fa-lg fa-plus"></i></a></div>
+    <div>
+      <a class="btn btn-primary btn-flat" href="{% url 'instrumento:instrumentoR' %}"><i class="fa fa-lg fa-plus"></i></a>
+    </div>
   {% endif %}
   </div>
     <div class="row">
@@ -34,11 +31,11 @@
                       {% if object_list %}
                       {% for instrumento in object_list %}
                       <tr class="odd">
-                        <td>{{ instrumento.nombr_instr }}</td>
+                        <td>{{ instrumento.nombr_instr|title }}</td>
                         </tr>
                       {% endfor %}
                       {% else %}
-                      <td valign="top" colspan="1" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      <td valign="top" colspan="1" class="dataTables_empty">No hay Instrumentos Registrados</td>
                       {% endif %}  
                     </tbody>
                   </table>

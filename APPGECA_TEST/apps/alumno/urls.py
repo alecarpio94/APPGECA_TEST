@@ -9,7 +9,7 @@ urlpatterns = [
 	url(r'^editar/(?P<pk>\d+)$', AlumUpdateView.as_view(),name='update_alumno'),
 	url(r'^borrar_alumno/(?P<pk>\d+)$',AlumDeleteView.as_view(), name='eliminar_alumno'),
 	
-	url(r'^reporte_lista_alumnos/$',AlumListAllView.as_view(), name='reporte_alumnos'),
+	# url(r'^reporte_lista_alumnos/$',AlumListAllView.as_view(), name='reporte_alumnos'),
 
 	url(r'^datos_del_alumno/(?P<pk>\d+)$',AlumnAllListView.as_view(), name='data_alumnos'),
 

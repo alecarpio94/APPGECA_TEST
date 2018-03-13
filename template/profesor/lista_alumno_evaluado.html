@@ -1,1 +1,59 @@
-lista_alumno_evaluado.html
+{% extends 'base_admin.html' %}
+{% load staticfiles %}
+{%block title%}Listado De Alumnos Evaluados{% endblock title%}
+{% block content %}
+<div class="content-wrapper">
+  <div class="page-title">
+    <div>
+      <h1>Lista De Alumnos Evaluados</h1>
+      <ul class="breadcrumb side">
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-body">
+            <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
+                    <thead>
+                      <tr role="row">
+                        <th>Nombre</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Detalles</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for evaluado in object_list %}
+                        <tr class="odd">
+                          <td>{{ evaluado.asignados.alumno.primer_nombre|title }} {{ evaluado.asignados.alumno.primer_apellido|title }}</td>
+                          <td>{{ evaluado.fecha }}</td>
+                          <td>{% if evaluado.status == True and evaluado.evaluado == True %}Aprovado <img src="/static/img/icon-yes.svg" > {% elif evaluado.status == False and evaluado.evaluado == True %}Reprobado <img src="/static/img/icon-no.svg"> {% else %} Sin Evaluar {% endif %}</td>
+	                      <td><a href="{% url 'profesor:detail_evalu' evaluado.pk %}" style="width: 100%;" class="btn btn-primary" >Ver Mas</a></td>
+                        </tr>
+                      {% empty %}
+                      <td valign="top" colspan="4" class="dataTables_empty">No hay datos disponibles en la tabla</td>
+                      {% endfor %}
+                    </tbody></table></div></div>
+                  </div>              </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock content %}
+
+{% block javascript %}
+  <script type="text/javascript" src="{% static 'js/plugins/jquery.dataTables.min.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/plugins/dataTables.bootstrap.min.js'%}"></script>
+  <script type="text/javascript">$('#sampleTable').DataTable();</script>
+{% endblock %}

@@ -5,7 +5,7 @@
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1>Lista De Alumnos Asignados</h1>
+      <h1>Listado De Alumnos Asignados</h1>
     </div>
   </div>
   <div class="row">
@@ -29,10 +29,10 @@
                     <tbody>
                       {% for asignados in object_list%}
                         <tr class="odd">
-                          <td>{{ asignados.profesor.nombre_profesor }} {{ asignados.profesor.apellido_profesor }}</td>
-                          <td>{{ asignados.alumno.primer_nombre }} {{ asignados.alumno.primer_apellido }}</td>
-                          <td>{{ asignados.profesor.asignacion }}</td>
-                          <td><a href="{% url 'profesor:retiro_alumno' asignados.id %}" class="btn btn-danger">Eliminar</a></td>
+                          <td>{{ asignados.profesor.nombre_profesor|title }} {{ asignados.profesor.apellido_profesor|title }}</td>
+                          <td>{{ asignados.alumno.primer_nombre|title }} {{ asignados.alumno.primer_apellido|title }}</td>
+                          <td>{{ asignados.profesor.asignacion|title }}</td>
+                          <td><a href="{% url 'profesor:retiro_alumno' asignados.id %}" style="width: 100%;" class="btn btn-danger">Eliminar</a></td>
                         </tr>
                       {% empty %}
                       <td valign="top" colspan="4" class="dataTables_empty">No hay datos disponibles en la tabla</td>

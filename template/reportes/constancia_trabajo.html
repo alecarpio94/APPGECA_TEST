@@ -4,50 +4,41 @@
 
 {% block content %}
 <style>
-  .imagen{
-    zoom: 95%;
-    width: 1000px;
-    margin-bottom: 0.12cm;
-  }
-  .reporte{
+    @page {
+    size: letter;
     margin: 1cm;
-    margin-left: 0.5cm;
-    margin-right: 2cm;
-    margin-bottom: 0.4cm;
-  }
-  .card{
-    width: 1000px;
-    height: 800px;
-  }
+    margin-top: 1.5cm;
+    margin-right: 1.5cm;
+    margin-left: 1.5cm;
+    margin-bottom: 1cm;
+    }
   h1{
     text-align: center;
   }
   p{
     text-align: center;
-    font-size: 18px;
   }
 </style>
 <div class="reporte card">
   <div class="Topbanner">
-    <img src="{%static 'img/banner.png' %}" class="imagen" alt="">
-      <h1 class="Title">Constancia De Trabajo </h1>
+    <img src="static/img/banner.png" class="imagen" alt="">
+      <h1 class="Title" style="font-size: 22px;">Constancia De Trabajo </h1>
 
   </div>
 
 
   <div class="Page col-lg-12">
-  <br>
-    <p class="content">
+    <p class="content" style="font-size: 14px" align="justify">
       {% if request.user.is_secretaria %}El suscrito <strong class="bold">{{ request.user.get_full_name }}</strong> titular de la cedula de identidad
       <strong class="bold">{{ request.user.ci }}</strong>, en mi condición de Coordinador(a) de la Orquesta Sinfonica Simon Bolivar en el
-      Municipio Guanare, hago constar, que el ciudadano(a){% endif %} <strong class="bold">{{ profesor.get_full_name }}</strong>,
-      Titular de la cedula de identidad <strong class="bold">{{ profesor.cedula_profesor }}</strong>, es profesor bajo el siguiente instrumento <strong>{{ profesor.asignacion }}</strong> en <strong class="bold">LA ORQUESTA SINFONICA SIMON BOLIVAR DEL ESTADO PORTUGUESA</strong>
+      Municipio Guanare, hago constar, que el ciudadano(a){% endif %} <strong class="bold">{{ prof.get_full_name|title }}</strong>,
+      Titular de la cedula de identidad <strong class="bold">{{ prof.cedula_profesor }}</strong>, es profesor bajo el siguiente instrumento <strong>{{ prof.asignacion|title }}</strong> en <strong class="bold">LA ORQUESTA SINFONICA SIMON BOLIVAR DEL ESTADO PORTUGUESA</strong>
     </p>
 
       <br>
       <br>
 
-      <p class="content-pOne">
+      <p class="content-pOne" style="font-size: 14px;" align="justify">
         <i>
           “Bolívar: no araste en el mar, aquí estamos haciendo realidad el sueño
           de una gran Patria Venezuela y la unidad de América Latina en un mundo
@@ -56,23 +47,22 @@
 
         <br><br>
 
-        Agradeciendo la atención que pueda prestar a nuestra gestión;
       </p>
 
       <br>
 
-      <p class="content-pTwo">
+      <p class="content-pTwo" style="font-size: 14px;" align="justify">
         Constancia que se expide a petición de la parte interesada, en Guanare, a los {{ dia }} días del mes {{ mes }} del año {{ ano }}.
       </p>
 
       <br>
       <br>
 
-      <p class="content-pTree">
-        <strong class="bold">ATENTAMENTE;</strong> <br><br>
+      <p class="content-pTree" style="font-size: 14px;" align="center">
+        <strong class="bold">ATENTAMENTE:</strong> <br><br>
         <strong class="bold">_____________________________</strong> <br>
-        <strong>{% if request.user.is_secretaria %}{{ user.get_full_name }}{% endif %} <br>
-        SECRETARIA DE LA ORQUESTA SINFONICA DEL ESTADO PORTUGUESA<br>
+        <strong>{% if request.user.is_secretaria %}{{ request.user.get_full_name|title }}{% endif %} <br>
+        SECRETARIO(A) DE LA ORQUESTA SINFONICA DEL ESTADO PORTUGUESA<br>
         EDO GUANARE<br></strong>
       </p>
 
@@ -82,11 +72,6 @@
     <br>
     <br>
 
-    
-    
-  </div>
-  <br><br><br><br><br><br>
-<div class="col-xs-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="reporte"><i class="fa fa-print"></i> Imprimir</a></div>
 </div>
 
 

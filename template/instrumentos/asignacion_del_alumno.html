@@ -8,17 +8,14 @@
     <div>
       <h1><i class="fa fa-edit"></i> Asignando Instrumento</h1>
     </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Asignando</li>
-        <li><a href="{% url 'instrumento:asig_instrumento' %}">Instrumento</a></li>
-      </ul>
-    </div>
   </div>
+<<<<<<< HEAD
   <div class="alert">
     {{ message }}
   </div>
+=======
+
+>>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
 
   <div class="row">
     <div class="col-md-12">
@@ -52,9 +49,9 @@
                   </div>
 
                   <div class="FormGroup">
-                  	<div class="col-md-4">
+                  	<div class="col-md-6">
                   		<label class="text-danger">Fecha De Entrega</label>
-                  		{{ form.fecha_entrega|add_class:'form-control'|attr:'id:demoDate'|attr:'placeholder:Fecha De Entrega Del Instrumento'|attr:'onkeypress:return valida(event);' }}
+                  		{{ form.fecha_entrega|add_class:'form-control'|attr:'id:demoDate'|attr:'placeholder:Fecha De Entrega Del Instrumento'|attr:'onkeypress:return valida(event);'|attr:'autocomplete:off' }}
                   	</div>
                   </div>
                     <hr>
@@ -73,7 +70,7 @@
                     </div>
                     {% endif %}
                     <div class="col-md-12">
-	                    <button class="btn btn-primary col-md-12"> 	enviar </button>
+	                    <button class="btn btn-primary col-md-12 col-xs-12"> 	enviar </button>
                     </div>
                 </form>
               </div>
@@ -86,6 +83,11 @@
 {% endblock content %}
 
 {% block javascript %}
+
+  {% if mensaje %}
+    <script>no('{{ mensaje }}')</script>
+  {% endif %}
+  <script src="{% static 'iziToast/js/iziToast.min.js' %}"></script>
   <script src="{% static 'js/forms.js'%}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
   <script>
@@ -96,3 +98,7 @@
     });
   </script>
 {% endblock javascript %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'iziToast/css/iziToast.min.css' %}">
+{% endblock %}

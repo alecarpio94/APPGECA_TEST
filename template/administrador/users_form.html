@@ -1,20 +1,13 @@
 {% extends  'base_admin.html' %}
-{%block title%}Nuevo Usuario{% endblock title%}
+{%block title%}Nuevo Administrador{% endblock title%}
 {% load widget_tweaks %}
 {% load staticfiles %}
 {% block content %}
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1><i class="fa fa-edit"></i> Nuevo Usuario</h1>
-      <p>Formulario Para El Registro De Un Nuevo Usuario</p>
-    </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Registro</li>
-        <li><a href="{% url 'auth:list' %}">Usuario</a></li>
-      </ul>
+      <h1><i class="fa fa-edit"></i> Nuevo Administrador</h1>
+      <p>Formulario Para El Registro De Un Nuevo Administrador</p>
     </div>
   </div>
   <div class="row">
@@ -89,7 +82,7 @@
                         <p>Esta Cedula ya ha sido registrada con otro usuario.</p>
                       </div>
                       {% endif %}
-                      {% if form.password2 != form.password1 %}
+                      {% if form.password2.errors %}
                       <div class="alert alert-dismissible alert-danger">
                         <button class="close" type="button" data-dismiss="alert">×</button>
                         <h4>Alerta!</h4>
@@ -97,7 +90,7 @@
                       </div>
                       {% endif %}
                       <hr>
-                      <button class="btn btn-primary">crear</button>
+                      <button class="btn btn-primary col-md-12 col-xs-12">crear</button>
                   </div>
                 </fieldset>
               </form>

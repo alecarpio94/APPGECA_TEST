@@ -1,19 +1,13 @@
-{% extends 'base_admin.html' %}
+{% extends  'base_admin.html' %}
+{%block title%}Eliminar Alumno{% endblock title%}
 {% load staticfiles %}
-{% block title %}Actualizando {% endblock title %}
-{% load widget_tweaks %}
 {% block content %}
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1><i class="fa fa-edit"></i> Asignando Instrumento</h1>
+      <h1><i class="fa fa-edit"></i> Eliminar Alumno</h1>
     </div>
     <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Asignando</li>
-        <li><a href="{% url 'instrumento:asig_instrumento' %}">Instrumento</a></li>
-      </ul>
     </div>
   </div>
   <div class="row">
@@ -22,76 +16,33 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="well bs-component">
-              <form class="form-horizontal" method="POST">{% csrf_token %}
-                <fieldset>
-                  <legend>Actualizando</legend>
-
-                  <div class="FormGroup">
-                  	<div class="col-md-6">
-	                    <label class="text-danger">Nombre Del Instrumento</label>
-	                    {{ form.instrumento|add_class:'form-control' }}
-	                    {{ form.instrumento.errors }}
-                  	</div>
-                    <div class="col-md-6">
-                      <label class="text-danger">Alumno</label>
-                      <div class="form-group floating-label ">
-                      {{form.alumno|add_class:'js-example-basic-multiple' |attr:'id:alumno'}}
+              <div class="Alumno">
+                <form method="POST" action="">
+                  {% csrf_token %}
+                  <h3 align="center">Seguro que desea Retirar el siguiente instrumento {{ object.instrumento|title }} al alumno {{ object.alumno|title }} {{ object.primer_apellido|title }} </h3>
+                  <div align="center">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#DeleteAlumn"> Eliminar </button>
+                    <a href="{% url 'instrumento:asig_instrumento' %}" class="btn btn-default">Volver</a>
+                  </div>
+                  
+                  <div class="modal fade" id="DeleteAlumn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="myModalLabel">Advertencia</h4>
+                        </div>
+                        <div class="modal-body">
+                          <h3 class="text-danger" align="center">
+                            Esta Seguro Que Desea Retirar El Siguiente Instrumento: {{ object.instrumento }}
+                          </h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-danger" type="submit"> Eliminar </button> 
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <div class="FormGroup">
-                  	<div class="col-md-12">
-                  		<label class="text-danger">Descripción</label>
-                  		{{ form.descripcion|add_class:'form-control'|attr:'placeholder:Estado Del Instrumento'|attr:'style: resize: none;'|attr:'rows:4' }}
-                  	</div>
-                  </div>
-                  <div class="FormGroup">
-                    <div class="col-md-6">
-                      <label class="text-danger">Fecha De Entrega</label>
-                      {{ form.fecha_entrega|add_class:'form-control'|attr:'id:demoDate'|attr:'placeholder:Fecha De Entrega Del Instrumento'|attr:'onkeypress:return valida(event);' }}
-                    </div>
-          
-                    <div class="col-md-6">
-                      <label class="text-danger">Fecha De Retiro</label>
-                      {{ form.fecha_retiro|add_class:'form-control'|attr:'id:demoDate2'|attr:'placeholder:Fecha De Retiro Del Instrumento'|attr:'onkeypress:return valida(event);' }}
-                    </div>
-                  </div>
-                    <hr>
-
-                    {% if form.alumno.errors %}
-                      <div class="alert alert-dismissible alert-danger">
-                        <button class="close" type="button" data-dismiss="alert">×</button>
-                          <h4>Alerta!</h4>                    
-                            <p>Datos Del Alumno Incorrectos.</p>
-                        </div>
-                    {% endif %}
-
-                    {% if form.instrumento.errors %}
-                      <div class="alert alert-dismissible alert-danger">
-                        <button class="close" type="button" data-dismiss="alert">×</button>
-                          <h4>Alerta!</h4>                    
-                            <p>Datos Del Instrumento Incorrectos.</p>
-                        </div>
-                    {% endif %}
-
-                    {% if form.fecha_entrega.errors %}
-                      <div class="alert alert-dismissible alert-danger">
-                        <button class="close" type="button" data-dismiss="alert">×</button>
-                          <h4>Alerta!</h4>                    
-                            <p>Fecha De Entrega Invalida! Favor de colocar una fecha valida.</p>
-                        </div>
-                    {% endif %}
-
-                    {% if form.fecha_retiro.errors %}
-                      <div class="alert alert-dismissible alert-danger">
-                        <button class="close" type="button" data-dismiss="alert">×</button>
-                          <h4>Alerta!</h4>                    
-                            <p>Fecha De Retiro Invalida! Favor de colocar una fecha valida.</p>
-                        </div>
-                    {% endif %}
-                    <div class="col-md-12">
-	                    <button class="btn btn-primary col-md-12"> 	actualizar </button>
-                    </div>
                 </form>
               </div>
             </div>
@@ -100,23 +51,6 @@
       </div>
     </div>
   </div>
+</div>
+
 {% endblock content %}
-
-{% block javascript %}
-  <script src="{% static 'js/form_validation.js' %}"></script>
-  <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
-  <script src="{% static 'js/forms.js'%}"></script>
-
-  <script>
-    $('#demoDate').datepicker({
-      format: 'dd/mm/yyyy',
-      todayHighlight: 1,
-      todayBtn:  1
-    });
-    $('#demoDate2').datepicker({
-      format: 'dd/mm/yyyy',
-      todayHighlight: 1,
-      todayBtn:  1
-    });
-  </script>
-{% endblock %}

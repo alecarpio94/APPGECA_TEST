@@ -1,20 +1,13 @@
 {% extends  'base_admin.html' %}
+{%block title%}Registrar Alumno{% endblock title%}
+{% load widget_tweaks %}
 {% load staticfiles %}
 {% block content %}
-{% load widget_tweaks %}
-{%block title%}Registrar Alumno{% endblock title%}
 <div class="content-wrapper">
   <div class="page-title">
     <div>
       <h1><i class="fa fa-edit"></i> Nuevo Alumno</h1>
-      <p>Formulario Para El Registro De Un Nuevo Alumno</p>
-    </div>
-    <div>
-      <ul class="breadcrumb">
-        <li><i class="fa fa-home fa-lg"></i></li>
-        <li>Registro</li>
-        <li><a href="{% url 'alumno:list_alumno' %}">Alumno</a></li>
-      </ul>
+      <p><b>NOTA: Los campos marcados de rojo son obligadorios.</b></p>
     </div>
   </div>
   <div class="row">
@@ -22,7 +15,7 @@
       <div class="card">
         <div class="row">
           <div class="col-lg-12">
-            <div class="well bs-component">
+            <div class="">
               <form class="form-horizontal " id="form" onkeypress="" method="POST" role="form">
                 <div class="Alumno">
                   <fieldset>
@@ -86,7 +79,11 @@
                                 </div>
                                 <div class="col-md-6">
                                   <label for="fecha_nacimiento" class="text-danger">Fecha De Nacimiento</label>
+<<<<<<< HEAD
                                   {{ alumno.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:calendar'|attr:'placeholder:Ingrese La Fecha De Nacimiento' }}
+=======
+                                  {{ alumno.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:calendar'|attr:'placeholder:Ingrese La Fecha De Nacimiento'|attr:'autocomplete:off' }}
+>>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
                                 </div>
                               </div>
 
@@ -152,8 +149,8 @@
                               <br>
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Alumno" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Vivienda" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Alumno" data-toggle="tab" class="btn btn-primary" id="vol1">Anterior</a>
+                                <a href="#Vivienda" data-toggle="tab" class="btn btn-primary" id="vivie">Siguiente</a>
                               </div>
                             </div> 
                             
@@ -282,8 +279,8 @@
 
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Representante" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Direccion" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Representante" data-toggle="tab" class="btn btn-primary" id="vol2">Anterior</a>
+                                <a href="#Direccion" data-toggle="tab" class="btn btn-primary" id="dirr">Siguiente</a>
                               </div>
                             </div>
 
@@ -331,8 +328,8 @@
 
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Vivienda" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Familia" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Vivienda" data-toggle="tab" class="btn btn-primary" id="vol3">Anterior</a>
+                                <a href="#Familia" data-toggle="tab" class="btn btn-primary" id="fam">Siguiente</a>
                               </div>
                             </div>
 
@@ -403,8 +400,8 @@
 
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Direccion" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Educacion" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Direccion" data-toggle="tab" class="btn btn-primary" id="vol4">Anterior</a>
+                                <a href="#Educacion" data-toggle="tab" class="btn btn-primary" id="edu">Siguiente</a>
                               </div>
                             </div>
 
@@ -426,8 +423,8 @@
 
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Familia" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Empresa" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Familia" data-toggle="tab" class="btn btn-primary" id="vol5">Anterior</a>
+                                <a href="#Empresa" data-toggle="tab" class="btn btn-primary" id="trab">Siguiente</a>
                               </div>
                             </div>
                             
@@ -449,8 +446,8 @@
 
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Educacion" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Educa_Musi" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Educacion" data-toggle="tab" class="btn btn-primary" id="vol6">Anterior</a>
+                                <a href="#Educa_Musi" data-toggle="tab" class="btn btn-primary" id="musi">Siguiente</a>
                               </div>
                             </div>
 
@@ -547,8 +544,8 @@
 
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Empresa" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Percepcion_Representante" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Empresa" data-toggle="tab" class="btn btn-primary" id="vol7">Anterior</a>
+                                <a href="#Percepcion_Representante" data-toggle="tab" class="btn btn-primary" id="perc">Siguiente</a>
                               </div>
                             </div>
 
@@ -603,8 +600,8 @@
 
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Educa_Musi" data-toggle="tab" class="btn btn-primary">Anterior</a>
-                                <a href="#Percepcion_Alumno" data-toggle="tab" class="btn btn-primary">Siguiente</a>
+                                <a href="#Educa_Musi" data-toggle="tab" class="btn btn-primary" id="vol8">Anterior</a>
+                                <a href="#Percepcion_Alumno" data-toggle="tab" class="btn btn-primary" id="pren">Siguiente</a>
                               </div>
                             </div>  
 
@@ -666,7 +663,7 @@
                               </div>
                               <div class="col-md-12" align="right">
                                 <hr>
-                                <a href="#Percepcion_Representante" data-toggle="tab" class="btn btn-primary">Anterior</a>
+                                <a href="#Percepcion_Representante" data-toggle="tab" class="btn btn-primary" id="vol9">Anterior</a>
                                 <button class="btn btn-primary" value="Guardar"> Guardar </button></i> 
                               </div>
                             </div> 

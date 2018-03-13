@@ -17,8 +17,8 @@ class Actividad(models.Model):
 	status2 = models.BooleanField(default=False)
 	status3 = models.BooleanField(default=False)
 
-	def __str__(self):
-		return '{}'.format(self.nombr_acti)
+	def __unicode__(self):
+		return '%s'%(self.nombr_acti)
 
 	def save(self, *args, **kwargs):
 		fecha = self.fecha_inic
@@ -30,7 +30,7 @@ class Actividad(models.Model):
 				print ("Si Paso")
 				super(Actividad, self).save(*args, **kwargs)
 			else:
-				print "No Paso"
+				print ("No Paso")
 
 	def fecha(self):		
 		 return datetime.strptime(str(self.fecha_inic.date()), "%Y-%m-%d").strftime("%Y-%m-%d")

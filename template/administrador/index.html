@@ -5,13 +5,13 @@
   {% csrf_token %}
   {% if request.user.is_authenticated %}
 		{% block content %}
-		<div class="content-wrapper slimScrollBar">
-		  <div class="card" align="center" style="height: 175px;">
+		<div class="content-wrapper">
+<!-- 		  <div class="card" align="center" style="height: 175px;">
 			
 		    <h1>Bienvenido Nuevamente</h1>
 		    <h3>Inicio Sesión: {{ user.last_login }}</h3>
 
-		  </div>
+		  </div> -->
 			<div class="card">
 				<h1 align="center">Cronograma De Actividades</h1>
 				<hr>
@@ -77,4 +77,5 @@
 
 {% block css %} 
   <link rel='stylesheet' type='text/css' href="{% static 'css/fullcalendar.css' %}" />
+  <link rel="stylesheet" href="{% static 'iziToast/css/iziToast.min.css' %}">
 {% endblock %}

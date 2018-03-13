@@ -1,0 +1,17 @@
+html,
+body {
+    height: 100%;
+    background: url('/static/img/background-4.jpg') fixed;
+    background-size: cover;
+}
+html {
+    display: table;
+    margin: auto;
+}
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+.margin {
+  margin: 0 !important;
+}

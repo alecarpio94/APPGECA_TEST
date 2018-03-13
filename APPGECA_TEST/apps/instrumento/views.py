@@ -41,23 +41,22 @@ class InstruCreateView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 	model = Instrumento
 	fields = ['nombr_instr']
 	success_url = reverse_lazy('instrumento:list_instrumento')
+	mensaje = ""
+	
+	# def form_valid(self, form):
+	# 	forma = form_valid.save(commit=False)
+	# 	if forma:
+	# 		mensaje = "GUARDADO"
+	# 		return super(InstruCreateView, self.mensaje).form_valid(form)
+	# 	else:
+	# 		mensaje = "ERROR"
+	# 		return render(self.request, self.template_name, {'form':form, 'mensaje':mensaje})
 
 ######################LISTA DE INSTRUMENTOS######################
 class InstruListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 	context_object_name = 'Listainstrumento'
 	model = Instrumento
 	template_name = 'instrumentos/lista_instrumentos.html'
-
-######################REPORTE DE LOS INSTRUMENTOS######################
-class InstListAllView(LoginRequiredMixin,AdminRequiredMixin,ListView):
-	def get_context_data(self, **kwargs):
-	    context = super(instListAllView, self).get_context_data(**kwargs)
-	    context['date'] = datetime.now().strftime("%d/%m/%Y")
-	    return context
-	    
-	context_object_name = 'ListaAllintrumentos'
-	model = Instrumento
-	template_name = 'reportes/report-instr-list.html'
 
 ######################ASIGNANDO INSTRUMENTO######################
 from ...apps.profesor.models import Asignados
@@ -66,7 +65,7 @@ class AsigInstrumentoView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 	model = Asignatura
 	fields = ['instrumento','alumno','descripcion','fecha_entrega']
 	success_url = reverse_lazy('instrumento:asig_instrumento')
-	message = ""
+	mensaje = ""
 
 	def form_valid(self, form):
 		alumno = form.save(commit=False)
@@ -75,11 +74,11 @@ class AsigInstrumentoView(LoginRequiredMixin,AdminRequiredMixin,CreateView):
 			if alumno.instrumento.pk == halumno.profesor.asignacion.pk:
 				return super(AsigInstrumentoView, self).form_valid(form)
 			else:
-				self.message = "Lo siento el alumno no debe tener el instrumento {}".format(alumno.instrumento.nombr_instr)
-				return render(self.request, self.template_name, {'form':form, 'message':self.message})
+				self.mensaje = "Lo siento el alumno no debe tener el instrumento {}".format(alumno.instrumento.nombr_instr)
+				return render(self.request, self.template_name, {'form':form, 'mensaje':self.mensaje})
 		else:
-			self.message = "Lo siento el alumno no tiene docente asignado"
-			return render(self.request, self.template_name, {'form':form, 'message':self.message})
+			self.mensaje = "Lo siento el alumno no tiene docente asignado"
+			return render(self.request, self.template_name, {'form':form, 'mensaje':self.mensaje})
 
 ######################LISTADO DE ALUMNOS######################
 class AlumnoListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
@@ -87,8 +86,7 @@ class AlumnoListView(LoginRequiredMixin,AdminRequiredMixin,ListView):
 	model = Asignatura
 	template_name = 'asignacion/instrumentos_asignados.html'
 
-class UpdateAsigAlumnView(LoginRequiredMixin,AdminRequiredMixin,UpdateView):
-	template_name = 'instrumentos/update_instrumento.html'
+class DeleteAsigAlumnView(LoginRequiredMixin,AdminRequiredMixin,DeleteView):
 	model = Asignatura
-	fields = ['instrumento','alumno','descripcion','fecha_entrega','fecha_retiro']
+	template_name = 'instrumentos/update_instrumento.html'
 	success_url = reverse_lazy('instrumento:asig_instrumento')

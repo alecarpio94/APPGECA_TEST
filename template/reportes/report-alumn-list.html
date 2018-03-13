@@ -1,7 +1,21 @@
-{% extends  'base_admin.html' %}
-{%block title%}Reporte Alumnos{% endblock title%}
-{% load staticfiles %}
+{% extends 'base_reportes.html' %}
 {% block content %}
+<style>
+    @page {
+    size: letter;
+    margin: 1cm;
+    margin-top: 1.5cm;
+    margin-right: 1.5cm;
+    margin-left: 1.5cm;
+    margin-bottom: 1cm;
+    }
+  h1{
+    text-align: center;
+  }
+  p{
+    text-align: center;
+  }
+</style>
 <div class="content-wrapper">
   <div class="row">
     <div class="col-md-12">
@@ -9,44 +23,38 @@
         <section class="invoice">
           <div class="row">
             <div class="col-xs-12">
-              <h2 class="page-header"><i class="fa fa-globe"></i> Listado De Los Alumnos<small class="pull-right">Fecha: {{ date }}</small></h2>
+              <img src="static/img/banner.png" class="imagen" alt="">
+              <h2 class="page-heade" align="center">Listado De Los Alumnos</h2>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 table-responsive">
               <table class="table table-striped">
                     <thead>
-                      <tr role="row">
-                        <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 69px;">Cedula</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 89px;">Nombre</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 71px;">Apellido</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 51px;">Sexo</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 73px;">Fecha De Nacimiento</th>
-                        <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 73px;">Institucion</th>
+                      <tr role="row" style="border: 1px solid black; padding: 1 1 1 1px; font-weight: bold;">
+                        <th style="background-color: red;">Cedula</th>
+                        <th style="background-color: red;">Nombre</th>
+                        <th style="background-color: red;">Apellido</th>
+                        <th style="background-color: red;">Sexo</th>
+                        <th style="background-color: red;">Fecha De Nacimiento</th>
+                        <th style="background-color: red;">Institucion</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      {% if object_list %}
-                      {% for alumno in object_list %}
-                      <tr class="odd">
-                        <td>{{ alumno.cedula_alumno }}</td>
-                        <td>{{ alumno.primer_nombre }}</td>
-                        <td>{{ alumno.primer_apellido }}</td>
-                        <td>{{ alumno.sexo_alumno }}</td>
-                        <td>{{ alumno.fecha_nacimiento }}</td>
-                        <td>{{ alumno.institucion }}</td>
+                      {% for object_list in alumno %}
+                      <tr class="row" style="border: 1px solid black; text-align: center; padding: 1 1 1 1px;">
+                        <td style="background-color: red;">{{ object_list.cedula_alumno|title }}</td>
+                        <td>{{ object_list.primer_nombre|title }}</td>
+                        <td>{{ object_list.primer_apellido|title }}</td>
+                        <td>{{ object_list.sexo_alumno|title }}</td>
+                        <td>{{ object_list.fecha_nacimiento|date:"d F Y" }}</td>
+                        <td>{{ object_list.institucion|title }}</td>
                       </tr>
                       {% endfor %}
-                      {% else %}
-                      <td valign="top" colspan="7" class="dataTables_empty" align="center">No hay alumnos registrados</td>
-                      {% endif %}  
                     </tbody>
               </table>
             </div>
-          </div>
-          <div class="row hidden-print mt-20">
-            <div class="col-xs-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Imprimir</a></div>
           </div>
         </section>
       </div>

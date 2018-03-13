@@ -25,9 +25,9 @@
                       <hr>
                       <ul>
                         <h4> - <b>Nacionalidad: </b> {{ object.nacionalidad }} </h4>
-                        <h4> - <b>Cedula: </b> {% if object.cedula_alumno == '' %} No Posee {% else %} {{ object.cedula_alumno }}{% endif %} </h4>
-                        <h4> - <b>Nombre:</b> {{ object.primer_nombre }} {{ object.segundo_nombre }} </h4>
-                        <h4> - <b>Apellido:</b> {{ object.primer_apellido }} {{ object.segundo_apellido }} </h4>
+                        <h4> - <b>Cedula: </b> {% if object.cedula_alumno == None %} No Posee {% else %} {{ object.cedula_alumno }}{% endif %} </h4>
+                        <h4> - <b>Nombre:</b> {{ object.primer_nombre }} </h4>
+                        <h4> - <b>Apellido:</b> {{ object.primer_apellido }}</h4>
                         <h4> - <b>Sexo: </b> {{ object.sexo_alumno }} </h4>
                         <h4> - <b>Fecha De Nacimiento: </b> {{ object.fecha_nacimiento }} </h4>
                         <h4> - <b>Lugar De Nacimiento: </b> {{ object.lugar_nacimiento }} </h4>
@@ -38,6 +38,7 @@
                 </section>
               </div>
             </div>
+            
             <!-- Datos Del Representante -->
             <div class="col-md-6">
               <div class="card">
@@ -51,16 +52,19 @@
                         <h4> - <b>Nombre: </b> {{ object.representante.nombre_repres }} </h4>
                         <h4> - <b>Apellido: </b> {{ object.representante.apelli_repres }} </h4>
                         <h4> - <b>Ocupación: </b> {{ object.representante.ocupacion }} </h4>
-                        <h4> - <b>Profesión: </b> {% if  object.representante.profesion == '' %} No Ejerce {{ object.representante.profesion }}{% endif %}  </h4>
-                        <h4> - <b>Telefono Celular: </b>{% if object.representante.telef_cel == '' %} No Posee {% else %} {{ object.representante.telef_cel }} {% endif %}</h4>
-                        <h4> - <b>Telefono Residencia: </b>{% if object.representante.telef_res == '' %} No Posee {% else %} {{ object.representante.telef_res }}{% endif %}  </h4>
-                        <h4> - <b>Dirección: </b> {{ object.representante.direccion }} </h4>
+                        <h4> - <b>Profesión: </b> {% if  object.representante.profesion == None %} No Ejerce {% else %}
+                             {{ object.representante.profesion }}{% endif %}  </h4>
+                        <h4> - <b>Telefono Celular: </b>{% if object.representante.telef_cel == None %} No Posee {% else %} {{ object.representante.telef_cel }} {% endif %}</h4>
+                        <h4> - <b>Telefono Residencia: </b>{% if object.representante.telef_res == None %} No Posee {% else %} {{ object.representante.telef_res }}{% endif %}  </h4>
+                        <h4> - <b>Dirección: </b> {% if object.representante.direccion == None %} No Registro {% else %}
+                            {{ object.representante.direccion }}{% endif %} </h4>
                       </ul>
                     </div>
                   </div>
                 </section>
               </div>
             </div>
+
             <!-- Datos De La Vivienda -->
             <div class="col-md-12">
               <div class="card">
@@ -85,18 +89,19 @@
                         <h4> - <b>Secadora: </b> {% if object.vivienda.secadora == True %} Si {% else %} No {% endif %} </h4>
                         <h4> - <b>Computadora: </b> {% if object.vivienda.computadora == True %} Si {% else %} No {% endif %} </h4>
                         <h4> - <b>Calentador De Agua: </b> {% if object.vivienda.calentador_de_agua == True %} Si {% else %} No {% endif %} </h4>
-                        <h4> - <b>N° De Habitaciones: </b> {% if object.vivienda.habitacione == '' %} No Hay {% else %} {{ object.vivienda.habitacione }} {% endif %}</h4>
-                        <h4> - <b>N° De Habitantes: </b>{% if object.vivienda.num_habitan == '' %} No Hay {% else %} {{ object.vivienda.num_habitan }} {% endif %}</h4>
-                        <h4> - <b>N° De Baños: </b>{% if object.vivienda.num_bano == '' %} No Hay {% else %} {{ object.vivienda.num_bano }} {% endif %} </h4>
-                        <h4> - <b>N° Habitantes Que Trabajan:</b>{% if object.vivienda.habitan_tra == '' %} No Hay {% else %} {{ object.vivienda.habitan_tra }}{% endif %}  </h4>
-                        <h4> - <b>N° Habitantes Que Aportan: </b>{% if object.vivienda.habitan_apor == '' %} No Hay {% else %} {{ object.vivienda.habitan_apor }}{% endif %} </h4>
-                        <h4> - <b>Monto Mensual En El Hogar: </b>{% if object.vivienda.mon_apr_men == '' %} No Hay {% else %} {{ object.vivienda.mon_apr_men }}{% endif %} </h4>
+                        <h4> - <b>N° De Habitaciones: </b> {% if object.vivienda.habitacione == None %} No Hay {% else %} {{ object.vivienda.habitacione }} {% endif %}</h4>
+                        <h4> - <b>N° De Habitantes: </b>{% if object.vivienda.num_habitan == None %} No Hay {% else %} {{ object.vivienda.num_habitan }} {% endif %}</h4>
+                        <h4> - <b>N° De Baños: </b>{% if object.vivienda.num_bano == None %} No Hay {% else %} {{ object.vivienda.num_bano }} {% endif %} </h4>
+                        <h4> - <b>N° Habitantes Que Trabajan:</b>{% if object.vivienda.habitan_tra == None %} No Hay {% else %} {{ object.vivienda.habitan_tra }}{% endif %}  </h4>
+                        <h4> - <b>N° Habitantes Que Aportan: </b>{% if object.vivienda.habitan_apor == None %} No Hay {% else %} {{ object.vivienda.habitan_apor }}{% endif %} </h4>
+                        <h4> - <b>Monto Mensual En El Hogar: </b>{% if object.vivienda.mon_apr_men == None %} No Hay {% else %} {{ object.vivienda.mon_apr_men }}{% endif %} </h4>
                       </ul>
                     </div>
                   </div>
                 </section>
               </div>
             </div>
+
             <!-- Datos De La Direccion -->
             <div class="col-md-12">
               <div class="card">
@@ -119,6 +124,7 @@
                 </section>
               </div>
             </div>
+
             <!-- Datos De Un Familiar -->
             <div class="col-md-12">
               <div class="card">
@@ -128,14 +134,14 @@
                       <h2 align="center">Datos Familiares</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Cedula: </b>{% if object.familia.cedula_familia == '' %} Sin Registro {% else %} {{ object.familia.cedula_familia }}{% endif %} </h4>
-                        <h4> - <b>Nombre: </b>{% if object.familia.nombre_familia == '' %} Sin Registro {% else %} {{ object.familia.nombre_familia }}{% endif %}  </h4>
-                        <h4> - <b>Apellido: </b>{% if object.familia.apelli_familia == '' %} Sin Registro {% else %} {{ object.familia.apelli_familia }} {% endif %}</h4>
-                        <h4> - <b>Ocupación: </b>{% if object.familia.ocupacion_f == '' %} Sin Registro {% else %} {{ object.familia.ocupacion_f }}{% endif %} </h4>
-                        <h4> - <b>Profesión: </b>{% if object.familia.profesion_f == '' %} Sin Registro {% else %} {{ object.familia.profesion_f }}{% endif %} </h4>
-                        <h4> - <b>Dirección: </b>{% if object.familia.direccion == '' %} Sin Registro {% else %} {{ object.familia.direccion }}{% endif %} </h4>
-                        <h4> - <b>Telefono Celular: </b>{% if object.familia.telef_cel_f == '' %} Sin Registro {% else %} {{ object.familia.telef_cel_f }} {% endif %}</h4>
-                        <h4> - <b>Telefono Residencia: </b>{% if object.familia.telef_res_f == '' %} Sin Registro {% else %} {{ object.familia.telef_res_f }} {% endif %}</h4>
+                        <h4> - <b>Cedula: </b>{% if object.familia.cedula_familia == None %} Sin Registro {% else %} {{ object.familia.cedula_familia }}{% endif %} </h4>
+                        <h4> - <b>Nombre: </b>{% if object.familia.nombre_familia == None %} Sin Registro {% else %} {{ object.familia.nombre_familia }}{% endif %}  </h4>
+                        <h4> - <b>Apellido: </b>{% if object.familia.apelli_familia == None %} Sin Registro {% else %} {{ object.familia.apelli_familia }} {% endif %}</h4>
+                        <h4> - <b>Ocupación: </b>{% if object.familia.ocupacion_f == None %} Sin Registro {% else %} {{ object.familia.ocupacion_f }}{% endif %} </h4>
+                        <h4> - <b>Profesión: </b>{% if object.familia.profesion_f == None %} Sin Registro {% else %} {{ object.familia.profesion_f }}{% endif %} </h4>
+                        <h4> - <b>Dirección: </b>{% if object.familia.direccion == None %} Sin Registro {% else %} {{ object.familia.direccion }}{% endif %} </h4>
+                        <h4> - <b>Telefono Celular: </b>{% if object.familia.telef_cel_f == None %} Sin Registro {% else %} {{ object.familia.telef_cel_f }} {% endif %}</h4>
+                        <h4> - <b>Telefono Residencia: </b>{% if object.familia.telef_res_f == None %} Sin Registro {% else %} {{ object.familia.telef_res_f }} {% endif %}</h4>
                         <h4> - <b>Vive Con El Alumno: </b> {% if object.familia.vive == True %} Si {% else %} No {% endif %} </h4>
                       </ul>
                     </div>
@@ -143,8 +149,9 @@
                 </section>
               </div>
             </div>
+
             <!-- Datos Academicos -->
-            <div class="col-md-6">
+<!--             <div class="col-md-6">
               <div class="card">
                 <section class="invoice">
                   <div class="row invoice-info">
@@ -152,31 +159,33 @@
                       <h2>Datos Academicos</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Nivel Educativo: </b> {{ object.educaalumno.nivel_e }} </h4>
-                        <h4> - <b>Cursos: </b>{% if object.educaalumno.curso == '' %} Ninguno {% else %} {{ object.educaalumno.curso }}{% endif %} </h4>
+                        <h4> - <b>Nivel Educativo: </b> {{ object.educacion.nivel_e }} </h4>
+                        <h4> - <b>Cursos: </b>{% if object.educacion.curso == None %} Ninguno {% else %} {{ object.educacion.curso }}{% endif %} </h4>
                       </ul>
                     </div>
                   </div>
                 </section>
               </div>
-            </div>
+            </div> -->
+
             <!-- Trabajo Del Alumno -->
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="card">
                 <section class="invoice">
                   <div class="row invoice-info">
                     <div class="col-xs-12">
-                      <h2>Datos Laborales</h2>
+                      <h2 class="text-center">Datos Laborales</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Nombre De La Empresa: </b>{% if object.empresa.nombre_empre == '' %} No Posee {% else %} {{ object.empresa.nombre_empre }}{% endif %} </h4>
-                        <h4> - <b>Nombre Del jefe: </b>{% if object.empresa.nombre_jefe == '' %} No Posee {% else %} {{ object.empresa.nombre_jefe }}{% endif %} </h4>
+                        <h4> - <b>Nombre De La Empresa: </b>{% if object.empresa.nombre_empre == None %} No Posee {% else %} {{ object.empresa.nombre_empre }}{% endif %} </h4>
+                        <h4> - <b>Nombre Del jefe: </b>{% if object.empresa.nombre_jefe == None %} No Posee {% else %} {{ object.empresa.nombre_jefe }}{% endif %} </h4>
                       </ul>
                     </div>
                   </div>
                 </section>
               </div>
             </div>
+
             <!-- Educacion Musical Del Alumno -->
             <div class="col-md-12">
               <div class="card">
@@ -186,19 +195,19 @@
                       <h2 align="center">Educación Musical</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Programas Orquestales: </b>{% if object.educamusi.progama_orque == '' %} Ninguno {% else %} {{ object.educamusi.progama_orque }}{% endif %} </h4>
-                        <h4> - <b>Instrumento Principal: </b>{% if object.educamusi.instru_princi == '' %} Ninguno {% else %} {{ object.educamusi.instru_princi }}{% endif %}</h4>
-                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_ind == '' %} Ninguno {% else %} {{ object.educamusi.prof_clas_ind }}{% endif %} </h4>
-                        <h4> - <b>Instrumento Secundario: </b>{% if object.educamusi.instru_secund == '' %} Ninguno {% else %} {{ object.educamusi.instru_secund }}{% endif %}  </h4>
-                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_sec == '' %} Ninguno {% else %} {{ object.educamusi.prof_clas_sec }}{% endif %} </h4>
+                        <h4> - <b>Programas Orquestales: </b>{% if object.educamusi.progama_orque == None %} Ninguno {% else %} {{ object.educamusi.progama_orque }}{% endif %} </h4>
+                        <h4> - <b>Instrumento Principal: </b>{% if object.educamusi.instru_princi == None %} Ninguno {% else %} {{ object.educamusi.instru_princi }}{% endif %}</h4>
+                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_ind == None %} Ninguno {% else %} {{ object.educamusi.prof_clas_ind }}{% endif %} </h4>
+                        <h4> - <b>Instrumento Secundario: </b>{% if object.educamusi.instru_secund == None %} Ninguno {% else %} {{ object.educamusi.instru_secund }}{% endif %}  </h4>
+                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_sec == None %} Ninguno {% else %} {{ object.educamusi.prof_clas_sec }}{% endif %} </h4>
                         <h4> - <b>Clases Academicas/Catedra Nacional: </b>  
                           {% if object.educamusi.academ_catedr == True %} Si 
                         <h4> - <b>Nombre De La Catedra: </b> {{ object.educamusi.nombr_academi }} </h4>
                           {% else %} No {% endif %} 
                         </h4>
-                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Nacional: </b>{% if object.educamusi.clas_acad_cate == '' %} No {% else %} {{ object.educamusi.clas_acad_cate }} {% endif %}</h4>
-                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Regional: </b> {% if object.educamusi.nom_aca_cate == '' %} No {% else %}{{ object.educamusi.nom_aca_cate }}{% endif %} </h4>
-                        <h4> - <b>Escuela Especial De Musica: </b>{% if object.educamusi.inst_espc_mus == '' %} No {% else %} {{ object.educamusi.inst_espc_mus }} {% endif %}</h4>
+                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Nacional: </b>{% if object.educamusi.clas_acad_cate == None %} No {% else %} {{ object.educamusi.clas_acad_cate }} {% endif %}</h4>
+                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Regional: </b> {% if object.educamusi.nom_aca_cate == None %} No {% else %}{{ object.educamusi.nom_aca_cate }}{% endif %} </h4>
+                        <h4> - <b>Escuela Especial De Musica: </b>{% if object.educamusi.inst_espc_mus == None %} No {% else %} {{ object.educamusi.inst_espc_mus }} {% endif %}</h4>
                         <h4> - <b>Recibe Beca/Ayuda Por Cursar Estudios Musicales: </b> {% if object.educamusi.bec_est_esp == True %} Si 
                           <h4> - <b>Nombre Del Curso/s: </b> {{ object.educamusi.estu_cur }} 
                           </h4>
@@ -211,6 +220,7 @@
                 </section>
               </div>
             </div>
+
             <!-- Percepcion Del Representante -->
             <div class="col-md-12">
               <div class="card">
@@ -224,13 +234,14 @@
                         <h4> - <b>La Asistencia De Mis Niños Al La Actividad Musical, Mejoro Las Relaciones Familiares: </b> {% if object.representante.perceprepre.asis_nin_act_mus == True %} Si {% else %} No {% endif %} </h4>
                         <h4> - <b>La Practica Musical Produce Una Entrada Economica Mas En El Grupo Familiar: </b> {% if object.representante.perceprepre.prac_mus_ent_eco == True %} Si {% else %} No {% endif %} </h4>
                         <h4> - <b>Ahora Vivo Mejor: </b> {% if object.representante.perceprepre.viv_mej == True %} Si {% else %} No {% endif %} </h4>
-                        {% if object.representante.perceprepre.otra_razon == '' %} {% else %}<h4> - <b>Otra Razón: </b> {{ object.representante.perceprepre.otra_razon }} {% endif %} </h4>
+                        {% if object.representante.perceprepre.otra_razon == None %} {% else %}<h4> - <b>Otra Razón: </b> {{ object.representante.perceprepre.otra_razon }} {% endif %} </h4>
                       </ul>
                     </div>
                   </div>
                 </section>
               </div>
             </div>
+
             <!-- Percepcion Del Alumno -->
             <div class="col-md-12">
               <div class="card">
@@ -253,10 +264,5 @@
               </div>
             </div>
           </div>
-          {% if hidden %}
-            <div class="row hidden-print mt-20">
-              <div class="col-xs-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Imprimir</a></div>
-            </div>
-          {% endif %}
       </div>
 {% endblock content %}

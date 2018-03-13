@@ -31,7 +31,7 @@
                   <div class="FormGroup">
                     <div class="cedula_profesor">
                       <div class="col-md-12">
-                        <label class="text-danger">Cedula</label>
+                        <label class="text-danger">Cedula:</label>
                         {{ form.cedula_profesor | add_class:'form-control' |attr:'oninput:validacion(cedula_profesor);' |attr:"placeholder:Ingrese Numero De Cedula"|attr:'autocomplete:off'|attr:"minlength=8"| add_error_class:'form-control is-invalid'|attr:'onkeypress:return valida(event);' }}
                       </div>
                     </div>
@@ -40,7 +40,7 @@
                   <div class="FormGroup">
                     <div class="nombre_profesor">
                       <div class="col-md-12">
-                        <label class="text-danger">Nombre Del Profesor</label>
+                        <label class="text-danger">Nombre Del Profesor:</label>
                         {{ form.nombre_profesor |add_error_attr:"aria-invalid:true"| add_class:'form-control'| attr:"placeholder:Ingrese Nombre Del Profesor"|attr:'autocomplete:off'| add_error_class:'form-control is-invalid'|attr:'onkeypress:return soloLetras(event);' }}
                       </div>
                     </div>
@@ -49,14 +49,14 @@
                   <div class="FormGroup">
                     <div class="apellido_profesor">
                       <div class="col-md-12">
-                        <label class="text-danger">Apellido Del Profesor</label>
+                        <label class="text-danger">Apellido Del Profesor:</label>
                         {{ form.apellido_profesor | add_class:'form-control'|attr:"placeholder:Ingrese Apellido Del   Profesor"| add_error_class:'form-control is-invalid'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
                       </div>
                     </div>
 
                     <div class="asignacion">
                       <div class="col-md-12">
-                        <label class="text-danger">Asignación</label>
+                        <label class="text-danger">Asignación:</label>
                         {{ form.asignacion | add_class:'form-control' }}
                       </div>
                     </div>
@@ -73,8 +73,8 @@
                             {{ form.errors.asignacion }}
                       </div>
                     {% endif %}
-                  <div class="col-md-6">
-                    <button class="btn btn-primary">Actualizar</button>
+                  <div class="col-md-12">
+                    <button class="btn btn-primary col-md-12 col-xs-12">Actualizar</button>
                   </div>
                 </form>
               </div>

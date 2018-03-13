@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-md-6">
                               <label for="fecha_nacimiento" class="text-danger">Fecha De Nacimiento</label>
-                              {{ form.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:datepicker3'|attr:'placeholder:Ingrese La Fecha De Nacimiento'|attr:'onkeypress:return valida(event);' }}
+                              {{ form.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:datepicker3'|attr:'placeholder:Ingrese La Fecha De Nacimiento'|attr:'onkeypress:return valida(event);'|attr:'autocomplete:off' }}
                             </div>
                           </div>
 
@@ -82,9 +82,11 @@
                             {{ form.institucion|add_class:'form-control'|attr:'placeholder:Nombre De La Actual Institución Cursante'|attr:'autocomplete:off' }}
                           </div>
                         </div>
-                      <hr>
-                      <button class="btn btn-primary" value="Guardar"> Actualizar </button></i>  
                     </div> 
+                    <hr>
+                    <div class="col-md-12">
+                      <button class="btn btn-primary col-md-12" value="Guardar"> Actualizar </button></i>  
+                    </div>
                   </form>
                 </div>
               </div>
@@ -98,3 +100,19 @@
 </div>
 </body>
 {% endblock content %}
+
+{% block javascript %}
+  <script src="{% static 'js/form_validation.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
+    <script type="text/javascript">
+    $(function () {
+      $('#datepicker3').datepicker({
+          format: 'dd/m/yyyy',
+          todayBtn:  1,
+          todayHighlight: 1,
+          minDate: 0,
+          autoclose: 1
+      });
+    });
+  </script>
+{% endblock %}

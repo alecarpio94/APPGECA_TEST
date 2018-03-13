@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.generic import ListView, TemplateView
 from django.views.generic import TemplateView, View
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.views.generic.detail import DetailView
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template.context import RequestContext
@@ -21,7 +21,16 @@ from .models import Users, UsersManager
 from APPGECA_TEST.apps.actividad.models import Actividad
 from APPGECA_TEST.apps.profesor.models import Profesor
 from APPGECA_TEST.apps.profesor.forms import ProfForm
-from .forms import UsersModelForm, UsersUpdateModelForm
+from .forms import *
+from django.utils.translation import ugettext, ugettext_lazy as _
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.utils.http import is_safe_url, urlsafe_base64_decode
+from django.utils.encoding import force_text
+from django.shortcuts import resolve_url
+
 # mixins
 from ...apps.utils.mixins import AdminRequiredMixin
 
@@ -56,7 +65,6 @@ def HomeTemplateView(request):
 
         }
         return render(request,'administrador/index.html',context)
-
 
 ###########LOGIN###########
 class LoginView(View):
@@ -108,13 +116,11 @@ class UsersListView(LoginRequiredMixin, AdminRequiredMixin, ListView):
     template_name = 'administrador/lista_Users.html'
 
 ###############################ACTUALIZAR EL USUARIO###############################
-class UsersUpdateView(LoginRequiredMixin, AdminRequiredMixin, UpdateView):
+class UsersUpdateView(LoginRequiredMixin, UpdateView):
     model = Users
-    fields = ['ci' ,'first_name', 'last_name', 'email','is_active','password','password']
-    template_name = 'administrador/users_form.html'
-
-    def get_success_url(self):
-        return reverse_lazy('auth:list', args=(self.user.pk))
+    fields = ['ci' ,'first_name', 'last_name', 'email']
+    template_name = 'administrador/update_user.html'
+    success_url = reverse_lazy('auth:inicio')
 
 ###############################ELIMNIAR EL USUARIO###############################
 class UsersDeleteView(LoginRequiredMixin, AdminRequiredMixin, DeleteView):
@@ -132,22 +138,6 @@ class LogoutView(LoginRequiredMixin, View):
 class error404(TemplateView):
     template_name = 'login/page-error.html'
 
-#########################CAMBIAR PASSWORD#############################    
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!
-            messages.success(request, 'Your password was successfully updated!')
-            return redirect('change_password')
-        else:
-            messages.error(request, 'Please correct the error below.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'administrador/change_password.html', {
-        'form': form
-    })
 ######################################################################
 class GuardarPermiso(View):
     model = Users
@@ -158,8 +148,10 @@ class GuardarPermiso(View):
         if cedula1 == cedula2:
             profesor = Profesor.objects.filter(cedula_profesor=cedula1).first()
             if profesor:
-                a = self.model(ci=cedula1, is_staff=True, is_profesor=True, first_name=profesor.nombre_profesor, last_name=profesor.apellido_profesor)
-                a.set_password("hola1234")
+                a = self.model(ci=cedula1 ,is_staff=True, is_profesor=True, first_name=profesor.nombre_profesor, last_name=profesor.apellido_profesor)
+                a.set_password("appgeca1234")
                 a.save()
                 return JsonResponse({'si':'si'})
         return JsonResponse({'No':'No'})
+
+
