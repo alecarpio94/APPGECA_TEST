@@ -34,9 +34,9 @@
                     {% for profesor in object_list %}
                     <tr class="odd">
                       <td>{{ profesor.cedula_profesor }}</td>
-                      <td>{{ profesor.nombre_profesor }}</td>
-                      <td>{{ profesor.apellido_profesor }}</td>
-                      <td>{{ profesor.asignacion }}</td>
+                      <td>{{ profesor.nombre_profesor|title }}</td>
+                      <td>{{ profesor.apellido_profesor|title }}</td>
+                      <td>{{ profesor.asignacion|title }}</td>
                       <td><a href="{% url 'reportes:const_trab' profesor.pk %}" style="width: 100%;" class="btn btn-primary" >Ver Mas</a></td>
                       <!-- <td><a href="{% url 'profesor:editar_profesor' profesor.cedula_profesor %}"  class="btn btn-info" >ir</a> -->
                       <td><a href="{% url 'profesor:eliminar_profesor' profesor.cedula_profesor %}" style="width: 100%;" class="btn btn-danger">Eliminar</a></td>

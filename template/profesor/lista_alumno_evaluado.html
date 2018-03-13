@@ -31,7 +31,7 @@
                     <tbody>
                       {% for evaluado in object_list %}
                         <tr class="odd">
-                          <td>{{ evaluado.asignados.alumno.primer_nombre }} {{ evaluado.asignados.alumno.primer_apellido }}</td>
+                          <td>{{ evaluado.asignados.alumno.primer_nombre|title }} {{ evaluado.asignados.alumno.primer_apellido|title }}</td>
                           <td>{{ evaluado.fecha }}</td>
                           <td>{% if evaluado.status == True and evaluado.evaluado == True %}Aprovado <img src="/static/img/icon-yes.svg" > {% elif evaluado.status == False and evaluado.evaluado == True %}Reprobado <img src="/static/img/icon-no.svg"> {% else %} Sin Evaluar {% endif %}</td>
 	                      <td><a href="{% url 'profesor:detail_evalu' evaluado.pk %}" style="width: 100%;" class="btn btn-primary" >Ver Mas</a></td>

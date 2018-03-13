@@ -1,4 +1,4 @@
-{% extends 'base_admin.html' %}
+|title{% extends 'base_admin.html' %}
 {% load staticfiles %}
 {%block title%}Listado De Alumnos{% endblock title%}
 {% block content %}
@@ -33,9 +33,9 @@
                       {% if object_list %}
                       {% for alumno in object_list %}
                       <tr class="odd" id="myTR">
-                        <td>{{ alumno.cedula_alumno }}</td>
-                        <td>{{ alumno.primer_nombre }}</td>
-                        <td>{{ alumno.primer_apellido }}</td>
+                        <td>{{ alumno.cedula_alumno|title }}</td>
+                        <td>{{ alumno.primer_nombre|title }}</td>
+                        <td>{{ alumno.primer_apellido|title }}</td>
                         <td><a href="{% url 'alumno:data_alumnos' alumno.cedula_alumno %}" style="width: 100%;" class="btn btn-primary" >Ver Mas</a></td>
                         <td><a href="{% url 'alumno:update_alumno' alumno.cedula_alumno %}" style="width: 100%;"  class="btn btn-info" >Editar</a>
                         <td><a href="{% url 'alumno:eliminar_alumno' alumno.cedula_alumno %}" style="width: 100%;" class="btn btn-danger">Eliminar</a></td>

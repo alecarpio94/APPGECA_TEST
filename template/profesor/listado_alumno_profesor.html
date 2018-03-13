@@ -31,7 +31,7 @@
                     <tbody>
                       {% for asignados in object_list%}
                         <tr class="odd">
-                          <td>{{ asignados.alumno.primer_nombre }} {{ asignados.alumno.primer_apellido }}</td>
+                          <td>{{ asignados.alumno.primer_nombre|title }} {{ asignados.alumno.primer_apellido|title }}</td>
                           <!-- <td><a href="{% url 'profesor:eva_alumn' asignados.alumno.cedula_alumno %}" style="width: 100%;" class="btn btn-primary" >Evaluar</a></td> -->
                         </tr>
                       {% empty %}
