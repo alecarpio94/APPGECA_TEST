@@ -20,7 +20,7 @@ class Profesor(models.Model):
 	asignacion = models.ForeignKey(Instrumento)
 
 	def __unicode__(self):
-		return '%s'%(self.cedula_profesor)
+		return '%s %s'%(self.nombre_profesor, self.apellido_profesor)
 
 	def get_full_name(self):
 		return '%s %s'%(self.nombre_profesor, self.apellido_profesor)
