@@ -8,7 +8,7 @@
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1><i class="fa fa-edit"></i> Evaluacion </h1>
+      <h1><i class="fa fa-edit"></i> Modificar evaluacion de {{ evaluado.asignados }} </h1>
     </div>
   </div>
   <div class="row">
@@ -19,25 +19,19 @@
             <div id="sampleTable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
               <div class="row">
                 <div class="col-lg-12">
-                  <div class="panel panel-info">
-                    <div class="panel-heading">
-                      <h3 class="panel-title" align="center">Información</h3>
-                    </div>
-                    <div class="panel-body" align="center">Marque La Opcion -> (Si) / Deje Sin Marcar La Opcion -> (No)</div>
-                  </div>
   								<form action="" method="POST" id="evaluado">{% csrf_token %}
                     
                     {{ form.alumno|attr:'value:id_user.ci' }}
 
-                    {{ evaluado }}
+                    <!-- {{ evaluado }} -->
 
                     <div class="FormGroup">
-                      <div class="col-md-6">
+<!--                       <div class="col-md-6">
                         <label class="text-danger">Alumno:</label><br>
-                        {{ form.asignados|attr:'style: width:100%;'|attr:'value:alumno'|add_class:'js-example-basic-multiple form-control' }}
+                        {{ form.asignados|attr:'style: width:100%;'|attr:'disabled:true'|attr:'value:alumno'|add_class:'js-example-basic-multiple form-control' }}
                       </div>
-
-                      <div class="col-md-6">
+ -->
+                      <div class="col-md-12 col-xs-12">
                         <label class="text-danger">Fecha De Evaluacion:</label><br>
                         {{ form.fecha|attr:'style: width:100%;'|attr:'autocomplete:off'|add_class:'form-control'|attr:'id:evaluacion' }} 
                       </div>
@@ -51,19 +45,10 @@
                     </div>
 
   									<div class="FormGroup text-center">
-                      <br>
-  									  <div class="animated-checkbox col-md-6">
-  										  <label>
-  										    {{ form.evaluado|attr:'type:checkbox' }}<span class="label-text">Ha sido Evaluado</span>
-  										  </label>
-  										</div>
-
-
-                      <div class="animated-checkbox col-md-3">
-                        <label>
-                          {{ form.status|attr:'type:checkbox' }}<span class="label-text">Aprobo</span>
-                        </label>
-                      </div>  
+                      <div class="col-md-12 col-xs-12">
+                        <label for="" class="text-danger">Ponderación</label>
+                        {{ form.examen|add_class:'form-control'|attr:'style:width:100%;' }}
+                      </div> 
                     </div>
                       {{ form.errors }}
   									<hr>

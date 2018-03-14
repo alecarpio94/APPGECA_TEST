@@ -39,13 +39,14 @@ class Asignados(models.Model):
 
 class Evaluado(models.Model):
 
+	eva = (('Aprobado','Aprobado'),('Reprobado','Reprobado'))
+
 	id = models.AutoField(primary_key=True)
 	profesor = models.ForeignKey(Profesor,null=True)
 	asignados = models.ForeignKey(Asignados,null=True)
 	descripcion = models.TextField(max_length=200)
 	fecha = models.DateField(auto_now=False)
-	status = models.BooleanField(default=False, blank=True)
-	evaluado = models.BooleanField(default=False, blank=True)
+	examen = models.CharField(max_length=10, choices=eva,default=2)
 
 	def __unicode__(self):
 		return '%s %s'%(self.profesor, self.asignados)

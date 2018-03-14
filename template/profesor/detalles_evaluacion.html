@@ -17,24 +17,21 @@
           <div class="card-body">
             <div class="row">
               
-              <h1 class="text-center">Datos</h1>
+              <h1 class="text-center">Información</h1>
               
-              <div class="col-md-6 text-center">
+              <div class="col-md-12 text-center" style="border: 2px solid black; border-radius: 15px; margin-top: 4px; margin-left: 3px; margin-right: 3px; width: 100%; ">
                 <h3>Datos Del Estudiante</h3>
-                <p>{{ Detalles.get_full_name }}</p>
+                <p style="font-size: 18px;">{{ Detalles.get_full_name }}</p>
               </div>
 
-              <div class="col-md-6 text-center">
+              <div class="col-md-12 text-center" style="border: 2px solid black; border-radius: 15px; margin-top: 4px; margin-left: 3px; margin-right: 3px; width: 100%; ">
                 <h3>Fecha De La Evaluacion</h3>
-                <p>{{ Detalles.fecha }}</p>
+                <p style="font-size: 18px;">{{ Detalles.fecha }}</p>
               </div>
 
-              <div class="col-md-12 text-center">
+              <div class="col-md-12 text-center" style="border: 2px solid black; border-radius: 15px; margin-top: 4px; margin-left: 3px; margin-right: 3px; width: 100%; ">
                 <h3>Descripción De La Evaluacion</h3>
-                <p>{{ Detalles.descripcion }}</p>
-              </div>
-              <div class="col-md-12 col-xs-12">
-                <td><a href="{% url 'profesor:update_evalu' evaluado.pk %}" class="btn btn-danger pull-right">eliminar</a></td>
+                <p style="font-size: 18px;">{{ Detalles.descripcion }}</p>
               </div>
             </div>
           </div>

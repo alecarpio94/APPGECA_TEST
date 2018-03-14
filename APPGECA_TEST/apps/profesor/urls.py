@@ -19,7 +19,8 @@ urlpatterns = [
 	url(r'^evaluar/(?P<pk>\d+)/$', EvaAlumListView.as_view(),name="eva_alumn"),
 	url(r'^alumnos_evaluados/$', ListaAlumEvaluados.as_view(),name="alumn_evalu"),
 	url(r'^detalles_evaluacion/(?P<pk>[-\ \w]+)/$', DetallesEvaluacionView.as_view(),name="detail_evalu"),
-	url(r'^eliminar_evaluacion/(?P<pk>\d+)/$', UpdateEvaluacion.as_view(),name="update_evalu"),
+	url(r'^modificar_evaluacion/(?P<pk>[-\ \w]+)/$', UpdateEvaluacion.as_view(),name="update_evalu"),
+	url(r'^eliminar_evaluacion/(?P<pk>[-\ \w]+)/$', DeletedEvaluacion.as_view(),name="delete_evalu"),
 	
 	
 
