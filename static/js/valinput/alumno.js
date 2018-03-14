@@ -27,9 +27,6 @@ $("#repree").click(function(e) {
 	}
 });
 
-<<<<<<< HEAD
-
-=======
 $("#vol1").click(function(e){
 	$("#alu").addClass('active')
 	$("#repre").removeClass('active')		
