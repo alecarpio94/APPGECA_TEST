@@ -22,15 +22,25 @@ z
 <div class="reporte">
   <div class="Topbanner">
     <img src="static/img/banner.png" class="imagen" alt="">
+<<<<<<< HEAD
+      <h1 class="Title">Constancia De Estudio </h1>
+
+=======
       <h1 class="Title" style="font-size: 22px;">Constancia De Estudio </h1>
       {{ date|date }}
+>>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
   </div>
 
 
   <div class="Page col-lg-12">
 
+<<<<<<< HEAD
+    <p class="content">
+      El suscrito <strong>{{ request.user.get_full_name }}</strong> titular de la cedula de identidad
+=======
     <p class="content" style="font-size: 14px;" align="justify">
       El suscrito <strong>{{ request.user.get_full_name|title }}</strong> titular de la cedula de identidad
+>>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
       <strong class="bold">{{ request.user.ci }}</strong>, en mi condición de Coordinador de la Orquesta Sinfonica Simon Bolivar en el
       Municipio Guanare, hago constar, que el ciudadano(a) <strong class="bold">{{ alumn.get_full_name|title }}</strong>,
       Titular de la cedula de identidad <strong class="bold">{{ alumn.cedula_alumno }}</strong>, es estudiante de
@@ -53,8 +63,13 @@ z
 
       <br>
 
+<<<<<<< HEAD
+      <p class="content-pTwo">
+        Constancia que se expide a petición de la parte interesada, en Guanare, a los {{ dia }} días del mes {{ mes }} del año {{ ano }}.
+=======
       <p class="content-pTwo" style="font-size: 14px;" align="justify">
         Constancia que se expide a petición de la parte interesada en Guanare, a los {{ dia }} días del mes {{ mes }} del año {{ ano }}.
+>>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
       </p>
 
       <br>
@@ -63,8 +78,13 @@ z
       <p class="content-pTree" style="font-size: 14px;" align="center">
         <strong class="bold">ATENTAMENTE:</strong> <br><br>
         <strong class="bold">_____________________________</strong> <br>
+<<<<<<< HEAD
+        {{ request.user.get_full_name }} <br>
+        SECRETARIA DE LA ORQUESTA SINFONICA DEL ESTADO PORTUGUESA<br>
+=======
         <b>{{ request.user.get_full_name|title }}</b> <br>
         SECRETARIO(A) DE LA ORQUESTA SINFONICA DEL ESTADO PORTUGUESA<br>
+>>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
         EDO GUANARE<br>
       </p>
     </p>
