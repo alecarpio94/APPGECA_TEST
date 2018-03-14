@@ -22,29 +22,18 @@
   								<form action="" method="POST" id="evaluado">{% csrf_token %}
                     
                     {{ form.alumno|attr:'value:id_user.ci' }}
-                    
-                     <div class="FormGroup">
-                  <div class="panel panel-info">
-                    <div class="panel-heading">
-                      <h3 class="panel-title" align="center">Información</h3>
-                    </div>
-                    <div class="panel-body" align="center">Marque La Opcion -> (Si) / Deje Sin Marcar La Opcion -> (No)</div>
-                  </div>
-                  <form action="" method="POST" id="evaluado">{% csrf_token %}
-
-                    {{ form.alumno|attr:'value:id_user.ci' }}
 
                       <div class="FormGroup">
-                      <div class="col-md-6">
-                        <label class="text-danger">Alumno:</label><br>
-                         <select name="asignados" id="id_asignados" class="js-example-basic-multiple form-control" value="alumno" style="width:100%">Alumnos Del Docente
-                          <option value="" selected="">Escoger Alumno</option>
-                          {% for i in evaluado %}
-                            <option value="{{i.pk}}">{{ i.alumno }}</option>
-                          {% endfor%}
-                        </select>
-                        {# {{ form.asignados|attr:'style: width:100%;'|attr:'value:alumno'|add_class:'js-example-basic-multiple form-control' }} #}
-                      </div>
+                        <div class="col-md-6">
+                          <label class="text-danger">Alumno:</label><br>
+                           <select name="asignados" id="id_asignados" class="js-example-basic-multiple form-control" value="alumno" style="width:100%">Alumnos Del Docente
+                            <option value="" selected="">Escoger Alumno</option>
+                            {% for i in evaluado %}
+                              <option value="{{i.pk}}">{{ i.alumno }}</option>
+                            {% endfor%}
+                          </select>
+                          {# {{ form.asignados|attr:'style: width:100%;'|attr:'value:alumno'|add_class:'js-example-basic-multiple form-control' }} #}
+                        </div>
                       <div class="col-md-6">
                         <label class="text-danger">Fecha De Evaluacion:</label><br>
                         {{ form.fecha|attr:'style: width:100%;'|attr:'autocomplete:off'|add_class:'form-control'|attr:'id:evaluacion' }} 
