@@ -21,6 +21,7 @@ import cStringIO as StringIO
 import cgi
 from django.template.loader import render_to_string
 from xhtml2pdf import pisa
+#import pypdf2
 
 # Create your views here.
 def write_pdf(template, context):
@@ -31,6 +32,10 @@ def write_pdf(template, context):
         return http.HttpResponse(result.getvalue(),content_type='application/pdf')
     return http.HttpResponse('Ocurrio un error al genera el reporte %s' % cgi.escape(html))
 
+# @login_required()
+# def PDFREAD(request):
+# 	pdf_file = open('reportes/manual_de_usuario.pdf')
+# 	read_pef = PyPDF2.PdfFileRead(pdf_file)
 
 #####################################################################################
 class AlumnoPDF(LoginRequiredMixin,View):
