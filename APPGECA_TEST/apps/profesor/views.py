@@ -171,11 +171,18 @@ class DetallesEvaluacionView(LoginRequiredMixin, ProfesorRequiredMixin, DetailVi
 	model = Evaluado
 	template_name = 'profesor/detalles_evaluacion.html'
 		
+######################ACTUALIZAR EVALUACION######################
+class UpdateEvaluacion(LoginRequiredMixin, ProfesorRequiredMixin, UpdateView):
+	template_name = 'profesor/evaluacion_update.html'
+	model = Evaluado
+	fields = ['asignados','descripcion','fecha','status','evaluado']
+	success_url = reverse_lazy('profesor:alumn_evalu')
+
 ######################ACTUALIZAR PROFESOR######################
-class ProfUpdateView(LoginRequiredMixin,AdminRequiredMixin,UpdateView):
+class ProfUpdateView(LoginRequiredMixin,AdminRequiredMixin,DeleteView):
 	template_name = 'profesor/editar_profesor.html'
 	model = Profesor
-	fields = ['cedula_profesor', 'nombre_profesor', 'apellido_profesor', 'asignacion']
+	# fields = ['cedula_profesor', 'nombre_profesor', 'apellido_profesor', 'asignacion']
 	success_url = reverse_lazy('profesor:list_profesor')
 
 ######################ELIMINAR PROFESOR######################

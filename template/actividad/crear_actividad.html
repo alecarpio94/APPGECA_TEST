@@ -57,13 +57,13 @@
                     <div class="horaI">
                       <div class="col-md-6">
                           <label class="text-danger">Hora De Inicio</label>
-                          {{ form.hora_inico|add_class:'form-control'|attr:'autocomplete:off'|attr:'id:timepicker1'|attr:'placeholder:Ingrese La Hora De Inicio'}}
+                          {{ form.hora_inico|add_class:'form-control form_time'|attr:'autocomplete:off'|attr:'placeholder:Ingrese La Hora De Inicio'}}
                       </div>  
                     </div>
                     <div class="horaF">
                       <div class="col-md-6">
                         <label for="" class="text-danger">Hora De Culminacion</label>
-                        {{ form.hora_final|add_class:'form-control'|attr:'autocomplete:off'|attr:'id:timepicker2'|attr:'placeholder:Ingrese La Hora De Culmincaion' }}
+                        {{ form.hora_final|add_class:'form-control form_time'|attr:'autocomplete:off'|attr:'placeholder:Ingrese La Hora De Culmincaion' }}
                       </div>
                     </div>
                   </div>
@@ -121,6 +121,8 @@
   <!-- <script src="{% static 'js/bootstrap-datetimepicker.min.js'%}"></script> -->
 
   <!-- <script src="{% static 'js/bootstrap-datetimepicker.es.js'%}"></script> -->
+  <script src="{% static 'js/form_validation.js' %}"></script>
+  <script src="{% static 'js/valinput/actividad.js' %}"></script>
   <script src="{% static 'js/bootstrap-datepicker.js'%}"></script>
   <!-- <script type="text/javascript" src="{% static 'jquery/jquery-1.8.3.min.js'%}" charset="UTF-8"></script> -->
   <!-- <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js'%}"></script> -->
@@ -161,24 +163,40 @@
   </script>
 
 <script type="text/javascript">
-  $('#timepicker1').timepicker({
-    timeFormat: 'H:mm:ss',
-    timepicker: true,
-    language: 'es',
+  // $('#timepicker1').timepicker({
+  //   timeFormat: 'H:mm:ss',
+  //   timepicker: true,
+  //   language: 'es',
+  //   todayBtn:  1,
+  //   autoclose: 1,
+  //   minView: 0,
+  //   maxView: 1,
+  //   forceParse: 0,
+  // });
+    $('.form_time').datetimepicker({
+    language:  'es',
+    format: 'hh:ii',
+    weekStart: 1,
     todayBtn:  1,
     autoclose: 1,
-    minView: 0,
-    maxView: 1,
-    forceParse: 0,
-  });
-  $('#timepicker2').timepicker({
-    timeFormat: 'H:mm:ss',
-    language: 'es',
-    autoclose: 1,
+    todayHighlight: 1,
+    startView: 1,
     minView: 0,
     maxView: 1,
     forceParse: 0
-  });
+    });
+    $('.form_time').datetimepicker({
+    language:  'es',
+    format: 'hh:ii',
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 1,
+    minView: 0,
+    maxView: 1,
+    forceParse: 0
+    });
 </script>
 {% endblock %}
 

@@ -79,3 +79,6 @@ class ListaInstrumentosPDF(LoginRequiredMixin, View):
 	def get(self, *args, **kwargs):
 		instrumento = Instrumento.objects.all()
 		return write_pdf('reportes/report-instr-list.html', {'instrumento':instrumento})
+
+class ManualPDF(LoginRequiredMixin, View):
+	HttpResponseRedirect('reportes/manual_de_usuario.pdf')		
