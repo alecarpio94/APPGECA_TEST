@@ -62,21 +62,7 @@
                       <div class="col-md-12">
                         <label for="" class="text-danger">Ponderación:</label>
                         {{ form.examen|add_class:'form-control'|attr:'style: width:100%' }}
-                      </div>
-                    <div class="FormGroup text-center">
-                      <br>
-                      <div class="animated-checkbox col-md-6">
-                        <label>
-                          {{ form.evaluado|attr:'type:checkbox' }}<span class="label-text">Ha sido Evaluado</span>
-                        </label>
-                      </div>
-
-
-                      <div class="animated-checkbox col-md-3">
-                        <label>
-                          {{ form.status|attr:'type:checkbox' }}<span class="label-text">Aprobo</span>
-                        </label>
-                      </div>  
+                      </div> 
                     </div>
                     {{ form.errors }}
                     <hr>
