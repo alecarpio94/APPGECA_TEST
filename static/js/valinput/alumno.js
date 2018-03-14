@@ -11,10 +11,7 @@ min.setYear(min.getFullYear()-50);
 var max = new Date();
 max.setYear(max.getFullYear()-5);	
 $('#calendar').datepicker({
-<<<<<<< HEAD
-=======
 	'format': 'dd/mm/yyyy',
->>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
 	'startDate': min,
 	'endDate': max,
 	"autoclose": true
@@ -134,4 +131,3 @@ $("#vol9").click(function(e){
 	$("#perep").addClass('active')
 	$("#peralu").removeClass('active')
 });
->>>>>>> 0f322c3677bb0607a05b7c8ccd2f7440164693f2
