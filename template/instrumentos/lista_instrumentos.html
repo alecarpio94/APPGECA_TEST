@@ -23,7 +23,8 @@
                   <table class="table table-hover table-bordered dataTable no-footer" id="sampleTable" role="grid" aria-describedby="sampleTable_info">
                     <thead>
                       <tr role="row">
-                      <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column descending" style="width: 89px;" aria-sort="ascending">Nombre</th>
+                      <th>Nombre</th>
+                      <th style="width: 200px;" class="text-center">Lista de Alumnos</th>
                       </tr>
                     </thead>
 
@@ -32,6 +33,7 @@
                       {% for instrumento in object_list %}
                       <tr class="odd">
                         <td>{{ instrumento.nombr_instr|title }}</td>
+                        <td><a href="{% url 'reportes:list_const_asign' instrumento.pk %}" class="btn btn-primary" style="width: 100%;" target="_blank">ver</a></td>
                         </tr>
                       {% endfor %}
                       {% else %}

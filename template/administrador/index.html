@@ -49,8 +49,8 @@
                 {% for i in Actividad %}
                 {
                     title: "{{ i.nombr_acti}}",
-                    start: '{{ i.fecha_inic|date:"d M Y " }}:{{ i.fecha_inic|time:"h:i: A" }}',
-                    end: '{{ i.fecha_fina|date:"d M Y"}} {{ i.fecha_fina|time:"h:i: A" }}',
+                    start: '{{ i.fecha_inic|date:"d M Y " }}',
+                    end: '{{ i.fecha_fina|date:"d M Y"}}',
                     {% if i.status1 == True and i.status2 == False and i.status3 == False %}
                       color:'159FFF'
                     {% elif i.status1 == True and i.status2 == True and i.status3 == False %}

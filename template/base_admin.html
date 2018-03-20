@@ -5,7 +5,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- CSS-->
-	{# <link rel="stylesheet" type="text/css" href="{% static 'css/main1.css'%}"> #}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
 	<!-- Font-icon css-->
 	<link rel="stylesheet" href="{% static 'assets/font-awesome/css/font-awesome.css' %}">
@@ -98,16 +97,16 @@
 								<li><a href="{% url 'reportes:lista_reportes' %}"><i class="fa fa-circle-o"></i> Constancia De Estudio</a></li>
 							 	<li class="treeview"><a href="#"><i class="fa fa-circle-o"></i><span> Listados</span><i class="fa fa-angle-right"></i></a>
 				              	<ul class="treeview-menu">
-				                	<li><a href="{% url 'reportes:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
-				                	<li><a href="{% url 'reportes:reporte_profesor' %}"><i class="fa fa-circle-o"></i><span> Listado De Profesores</span></a></li>
-				                	<li><a href="{% url 'reportes:reporte_instrumentos' %}"><i class="fa fa-circle-o"></i><span> Listado De Instrumentos</span></a></li>
+				                	<li><a target="_blank" href="{% url 'reportes:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
+				                	<li><a target="_blank" href="{% url 'reportes:reporte_profesor' %}"><i class="fa fa-circle-o"></i><span> Listado De Profesores</span></a></li>
+				                	<li><a target="_blank" href="{% url 'reportes:reporte_instrumentos' %}"><i class="fa fa-circle-o"></i><span> Listado De Instrumentos</span></a></li>
 				              	</ul>
 				            	</li>
 							</ul>
 						</li>
 						<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Manual De Usuario</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
-								<li><a href="{% url 'reportes:manual' %}"><i class="fa fa-circle-o"></i> Ayuda</a></li>
+								<li><a target="_blank" href="{% url 'reportes:manual' %}"><i class="fa fa-circle-o"></i> Ayuda</a></li>
 							</ul>
 						</li>
 					{% endif %}
@@ -124,12 +123,17 @@
 							<ul class="treeview-menu">
 								<li><a href="{% url 'profesor:eva_alumn' user.ci %}"><i class="fa fa-circle-o"></i> Evaluar Alumno</a></li>
 							</ul>
+						</li>						
+						<li class="treeview"><a href="#"><i class="fa fa-file-pdf-o"></i><span>Reportes</span><i class="fa fa-angle-right"></i></a>
+							<ul class="treeview-menu">
+								<li class="treeview"><a target="_blank" href="{% url 'reportes:const_trab' user.ci %}"><i class="fa fa-circle-o"></i><span>Constancia</span><i></i></a>
+								<li class="treeview"><a target="_blank" href="{% url 'reportes:lista_alum' %}"><i class="fa fa-circle-o"></i><span>Lista De Alumnos</span><i></i></a>
+							</ul>
 						</li>
-						<li class="treeview"><a href="{% url 'reportes:const_trab' user.ci %}"><i class="fa fa-file-pdf-o"></i><span>Reportes</span><i></i></a>
 						</li>
 						<li class="treeview"><a href="#"><i class="fa fa-file-text"></i><span>Manual De Usuario</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
-								<li><a href=""><i class="fa fa-circle-o"></i> Ayuda</a></li>
+								<li><a target="_blank" href="https://drive.google.com/file/d/1BDvp5u7hs_h4O5advLeKzEw5USRB0Iux/view"><i class="fa fa-circle-o"></i> Ayuda</a></li>
 							</ul>
 						</li>
 					{% endif %}

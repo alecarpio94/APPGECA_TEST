@@ -1,0 +1,64 @@
+{% extends 'base_reportes.html' %}
+{% block content %}
+<style>
+    @page {
+    size: letter;
+    margin: 1cm;
+    margin-top: 1.5cm;
+    margin-right: 1.5cm;
+    margin-left: 1.5cm;
+    margin-bottom: 1cm;
+    }
+  h1{
+    text-align: center;
+  }
+  p{
+    text-align: center;
+  }
+</style>
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <section class="invoice">
+          <div class="row">
+            <div class="col-xs-12">
+              <img src="static/img/banner.png" class="imagen" alt="">
+              <h1 class="page-heade" align="center">Listado De Los Alumnos asignados al Instrumento {{ instrumento|title }} </h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-striped">
+
+                    <thead>
+                      <tr role="row" >
+                        <th style="border: 1px solid black; background-color: brown; padding: 1 1 1 1px; font-size: 13px;">Cedula</th>
+                        <th style="border: 1px solid black; background-color: brown; padding: 1 1 1 1px; font-size: 13px;">Nombre</th>
+                        <th style="border: 1px solid black; background-color: brown; padding: 1 1 1 1px; font-size: 13px;">Apellido</th>
+                        <th style="border: 1px solid black; background-color: brown; padding: 1 1 1 1px; font-size: 13px;">Fecha De Entrega</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for asignado in asignados %}
+                      <tr class="odd">
+                        <td style="border: 1px solid black; padding: 1 1 1 1px; text-align: center; font-size: 12px;">{{ asignado.alumno.cedula_alumno }}</td>
+                        <td style="border: 1px solid black; padding: 1 1 1 1px; text-align: center; font-size: 12px;">{{ asignado.alumno.primer_nombre|title }}</td>
+                        <td style="border: 1px solid black; padding: 1 1 1 1px; text-align: center; font-size: 12px;">{{ asignado.alumno.primer_apellido|title }}</td>
+                        <td style="border: 1px solid black; padding: 1 1 1 1px; text-align: center; font-size: 12px;">{% if asignado.fecha_entrega == '' %} Sin Asignar {% else %} {{ asignado.fecha_entrega }}{% endif %}</td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+
+              </table>
+
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}  

@@ -4,14 +4,10 @@
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
-from django.views.generic import CreateView 
-from django.views.generic import ListView, DetailView
-from django.views.generic import UpdateView
-from django.views.generic import DeleteView
 from django.views.generic import TemplateView, FormView
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from ...apps.profesor.models import Profesor
+from ...apps.profesor.models import Profesor, Evaluado, Asignados
 from ...apps.alumno.models import Alumno
 from ...apps.instrumento.models import *
 from datetime import date, datetime
@@ -49,9 +45,16 @@ class AlumnoInstrumentoPDF(LoginRequiredMixin,View):
 	def get(self, *args, **kwargs):
 		asig = Asignatura.objects.filter(alumno=self.kwargs['pk']).first()
 		if asig:
-			return write_pdf('reportes/constancia_instrumento_alumno.html', {'asignatura':asig ,'request':self.request})
+			return write_pdf('reportes/constancia_instrumento_alumno.html', {'asignatsura':asig ,'request':self.request})
 		else:
 			return render(self.request,'reportes/error404.html')
+
+#####################################################################################
+class ListaAlumnoInstrumentoPDF(LoginRequiredMixin,View):
+	def get(self, *args, **kwargs):
+		asignado = Asignatura.objects.filter(instrumento=self.kwargs['pk'])
+		return write_pdf('reportes/constancia_instrumentos.html', {'asignados':asignado , 'instrumento': self.kwargs['pk'],'request':self.request})
+
 
 #####################################################################################
 class ProfesorPDF(LoginRequiredMixin,View):
@@ -59,6 +62,34 @@ class ProfesorPDF(LoginRequiredMixin,View):
 		prof = Profesor.objects.filter(pk=self.kwargs['pk']).first()
 		return write_pdf('reportes/constancia_trabajo.html',{'prof':prof, 'request':self.request})
 		
+#####################################################################################
+class EvaluacionAlumnoPDF(LoginRequiredMixin, View):
+	def get(self, *args, **kwargs):
+		evaluados = Evaluado.objects.filter(asignados=self.kwargs['pk'])
+		return write_pdf('reportes/constancia_evaluacion_individual.html', {'evaluados':evaluados, 'request':self.request})
+
+#####################################################################################
+class ListaAlumnoProfesor(LoginRequiredMixin, ListView):
+	def get(self, *args,**kwargs):
+	    user_login = self.request.user
+	    profesor = Profesor
+	    if user_login:
+	    	profesor_login = user_login.ci
+	    	profesor = Profesor.cedula_profesor
+	    	if profesor_login:
+	    		if profesor:
+		    		alumnos_profesor = Asignados.objects.filter(profesor = profesor_login)
+		    		if alumnos_profesor:
+		    			return write_pdf('reportes/lista_alumnos_profesor.html', {'object_list':alumnos_profesor, 'request':self.request})
+		    		else:
+	    				return HttpResponse('Nada')
+    			else:	
+    				return HttpResponse('Nada')
+	    	else:
+	    		return HttpResponse('Nada')
+	    else:
+	    	return HttpResponse('Nada')
+	    return HttpResponse('Nada')
 
 #####################################################################################
 class ListaReporteListView(LoginRequiredMixin,ListView):
@@ -84,6 +115,16 @@ class ListaInstrumentosPDF(LoginRequiredMixin, View):
 	def get(self, *args, **kwargs):
 		instrumento = Instrumento.objects.all()
 		return write_pdf('reportes/report-instr-list.html', {'instrumento':instrumento})
+from django.core.files.storage import FileSystemStorage
 
-class ManualPDF(LoginRequiredMixin, View):
-	HttpResponseRedirect('reportes/manual_de_usuario.pdf')		
+class ManualPDF(View):
+	def get(self, *args, **kwargs):
+		fs = FileSystemStorage()
+		filename = 'manual_de_usuario.pdf'
+		with fs.open(filename) as pdf:
+			response = HttpResponse(pdf)
+			response['Content-type'] = 'application/pdf'
+			#response['Content-Disposition'] = 'inline:filename=manual_de_usuario.pdf'			
+		return response
+		
+

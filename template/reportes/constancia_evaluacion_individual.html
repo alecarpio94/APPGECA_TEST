@@ -24,7 +24,8 @@
           <div class="row">
             <div class="col-xs-12">
               <img src="static/img/banner.png" class="imagen" alt="">
-              <h1 class="page-heade" align="center">Listado De Los Alumnos</h1>
+              <h2 class="page-heade" align="center">Evaluaciones Del Alumno {{ evaluado.asignados }}</h2>
+              <p align="right"><b>{% now "d/F/Y" %}</b></p>
             </div>
           </div>
           <div class="row">
@@ -32,24 +33,18 @@
               <table class="table table-striped">
                     <thead>
                       <tr role="row" style="border: 1px solid black; padding: 1 1 1 1px; font-weight: bold;">
-                        <th style="background-color: brown; font-size: 13px;">Cedula</th>
-                        <th style="background-color: brown; font-size: 13px;">Nombre</th>
-                        <th style="background-color: brown; font-size: 13px;">Apellido</th>
-                        <th style="background-color: brown; font-size: 13px;">Sexo</th>
-                        <th style="background-color: brown; font-size: 13px;">Fecha De Nacimiento</th>
-                        <th style="background-color: brown; font-size: 13px;">Institucion</th>
+                        <th style="background-color: #22bbaa; font-size: 11px;">Fecha De Evaluacion</th>
+                        <th style="background-color: #22bbaa; font-size: 11px;">Descripcion</th>
+                        <th style="background-color: #22bbaa; font-size: 11px;">Ponderacion</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      {% for object_list in alumno %}
+                      {% for evaluado in evaluados %}
                       <tr class="row" style="border: 1px solid black; text-align: center; padding: 1 1 1 1px;">
-                        <td style="font-size: 12px;">{{ object_list.cedula_alumno|title }}</td>
-                        <td style="font-size: 12px;">{{ object_list.primer_nombre|title }}</td>
-                        <td style="font-size: 12px;">{{ object_list.primer_apellido|title }}</td>
-                        <td style="font-size: 12px;">{{ object_list.sexo_alumno|title }}</td>
-                        <td style="font-size: 12px;">{{ object_list.fecha_nacimiento|date:"d F Y" }}</td>
-                        <td style="font-size: 12px;">{{ object_list.institucion|title }}</td>
+                          <th>{{ evaluado.fecha }}</th>
+                          <th>{{ evaluado.descripcion }}</th>
+                          <th>{{ evaluado.examen }}</th>
                       </tr>
                       {% endfor %}
                     </tbody>

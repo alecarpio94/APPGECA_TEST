@@ -53,22 +53,23 @@
                               <div class="FormGroup">
                                 <div class="col-md-6">
                                   <label for="nombre_alumno" class="text-danger">Primer Nombre</label>
-                                  {{ alumno.primer_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Primer Nombre'|attr:'autocomplete:off'|attr:'type:text'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ alumno.primer_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Primer Nombre'|attr:'autocomplete:off'|attr:'type:text' }}
                                 </div>
+
                                 <div class="col-md-6">
-                                  <label for="segundo_nombre">Segundo Nombre</label>
-                                  {{ alumno.segundo_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Segundo Nombre'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                  <label for="primer_apellido" class="text-danger">Primer Apellido</label>
+                                  {{ alumno.primer_apellido | add_class:'form-control'|attr:'placeholder:Ingrese El Primer Apellido'|attr:'autocomplete:off' }}
                                 </div>
                               </div>
 
                               <div class="FormGroup">
                                 <div class="col-md-6">
-                                  <label for="primer_apellido" class="text-danger">Primer Apellido</label>
-                                  {{ alumno.primer_apellido | add_class:'form-control'|attr:'placeholder:Ingrese El Primer Apellido'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                  <label for="segundo_nombre">Segundo Nombre</label>
+                                  {{ alumno.segundo_nombre | add_class:'form-control'| attr:'placeholder:Ingrese El Segundo Nombre'|attr:'autocomplete:off' }}
                                 </div>
                                 <div class="col-md-6">
                                   <label for="segundo_apellido">Segundo Apellido</label>
-                                  {{ alumno.segundo_apellido| add_class:'form-control'|attr:'placeholder:Ingrese El Segundo Apellido'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ alumno.segundo_apellido| add_class:'form-control'|attr:'placeholder:Ingrese El Segundo Apellido'|attr:'autocomplete:off' }}
                                 </div>
                               </div>
 
@@ -79,13 +80,13 @@
                                 </div>
                                 <div class="col-md-6">
                                   <label for="fecha_nacimiento" class="text-danger">Fecha De Nacimiento</label>
-                                  {{ alumno.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:calendar'|attr:'placeholder:Ingrese La Fecha De Nacimiento' }}
+                                  {{ alumno.fecha_nacimiento|add_class:'form-control datepicker'|attr:'id:calendar'|attr:'autocomplete:off'|attr:'placeholder:Ingrese La Fecha De Nacimiento' }}
                                 </div>
                               </div>
 
                               <div class="FormGroup col-md-6">
                                 <label for="lugar_nacimiento" class="text-danger">Lugar De Nacimiento</label>
-                                {{ alumno.lugar_nacimiento | add_class:'form-control'|attr:'placeholder:Nombre El Lugar De Nacimiento'| attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                {{ alumno.lugar_nacimiento | add_class:'form-control'|attr:'placeholder:Nombre El Lugar De Nacimiento'| attr:'autocomplete:off'}}
                               </div>
 
                               <div class="FormGroup col-md-6">
@@ -108,11 +109,11 @@
                               <div class="FormGroup">
                                 <div class="col-md-6">
                                   <label for="nombre_representante" class="text-danger">Nombre Del Representante</label>
-                                  {{ representante.nombre_repres|add_class:'form-control '|attr:'placeholder:Nombre Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ representante.nombre_repres|add_class:'form-control '|attr:'placeholder:Nombre Del Representante'|attr:'autocomplete:off' }}
                                 </div>
                                 <div class="col-md-6">
                                   <label for="apellido_representante" class="text-danger">Apellido Del Representante</label>
-                                  {{ representante.apelli_repres|add_class:'form-control '|attr:'placeholder:Ingrese Apellido Del Representante'|attr:'autocomplete:off'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ representante.apelli_repres|add_class:'form-control '|attr:'placeholder:Ingrese Apellido Del Representante'|attr:'autocomplete:off' }}
                                 </div>
                               </div>
 
@@ -123,7 +124,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <label for="profesion">Profesión Del Representante</label>
-                                  {{ representante.profesion|add_class:'form-control'|attr:'placeholder:Profesión Actual'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ representante.profesion|add_class:'form-control'|attr:'placeholder:Profesión Actual' }}
                                 </div>
                               </div>
 
@@ -348,11 +349,11 @@
                               <div class="FormGroup">
                                 <div class="col-md-6">
                                   <label for="">Nombre Del Familiar</label>
-                                  {{ familia.nombre_familia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese Nombre Del Familiar'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ familia.nombre_familia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese Nombre Del Familiar' }}
                                 </div>
                                 <div class="col-md-6">
                                   <label for="">Apellido Del Familiar</label>
-                                  {{ familia.apelli_familia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese El Apellido Del Familiar'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ familia.apelli_familia|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Ingrese El Apellido Del Familiar' }}
                                 </div>
                               </div>
 
@@ -363,7 +364,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <label for="">Profesión</label>
-                                  {{ familia.profesion_f|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Profesión Del Familiar'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ familia.profesion_f|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Profesión Del Familiar' }}
                                 </div>
                               </div>
 
@@ -460,11 +461,11 @@
                               <div class="FormGroup">
                                 <div class="col-md-6">
                                   <label for="">Instrumento Principal</label>
-                                  {{ educamusi.instru_princi|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Instrumento Principal Del Alumno'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ educamusi.instru_princi|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Instrumento Principal Del Alumno' }}
                                 </div>
                                 <div class="col-md-6">
                                   <label for="">Profesor De Clase Individual</label>
-                                  {{ educamusi.prof_clas_ind|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre Del Profesor Que Imparte La Clase'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ educamusi.prof_clas_ind|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre Del Profesor Que Imparte La Clase' }}
                                 </div>
                               </div>
                               <hr>
@@ -472,11 +473,11 @@
                               <div class="FormGroup">
                                 <div class="col-md-6">
                                   <label for="">Instrumento Secundario</label>
-                                  {{ educamusi.instru_secund|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Instrumento Principal Del Alumno'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ educamusi.instru_secund|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Instrumento Principal Del Alumno' }}
                                 </div>
                                 <div class="col-md-6">
                                   <label for="">Profesor De Clase Individual</label>
-                                  {{ educamusi.prof_clas_sec|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre Del Profesor Que Imparte La Clase'|attr:'onkeypress:return soloLetras(event);' }}
+                                  {{ educamusi.prof_clas_sec|add_class:'form-control'|attr:'autocomplete:off'|attr:'placeholder:Nombre Del Profesor Que Imparte La Clase' }}
                                 </div>
                               </div>
                               <hr>
@@ -707,4 +708,5 @@
   <script src="{% static 'js/form_validation.js' %}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
   <script src="{% static 'js/valinput/alumno.js' %}"></script>
+  <script src="{% static 'js/jquery.validate.min.js' %}"></script>
 {% endblock %}

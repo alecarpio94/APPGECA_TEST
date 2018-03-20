@@ -52,5 +52,5 @@ class Evaluado(models.Model):
 		return '%s %s'%(self.profesor, self.asignados)
 
 	def get_full_name(self):
-		return '{}'.format(self.asignados)
+		return '%s'%(self.asignados)
 	

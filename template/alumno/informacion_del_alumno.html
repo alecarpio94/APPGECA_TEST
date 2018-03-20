@@ -24,14 +24,14 @@
                       <h2 align="center">Datos Del Alumno</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Nacionalidad: </b> {{ object.nacionalidad }} </h4>
+                        <h4> - <b>Nacionalidad: </b>{% if object_list.nacionalidad == V %} Venezolano(a) {% else %} Extranjero(a) {% endif %} </h4>
                         <h4> - <b>Cedula: </b> {% if object.cedula_alumno == None %} No Posee {% else %} {{ object.cedula_alumno }}{% endif %} </h4>
-                        <h4> - <b>Nombre:</b> {{ object.primer_nombre }} </h4>
-                        <h4> - <b>Apellido:</b> {{ object.primer_apellido }}</h4>
+                        <h4> - <b>Nombre:</b> {{ object.primer_nombre|title }} </h4>
+                        <h4> - <b>Apellido:</b> {{ object.primer_apellido|title }}</h4>
                         <h4> - <b>Sexo: </b> {{ object.sexo_alumno }} </h4>
                         <h4> - <b>Fecha De Nacimiento: </b> {{ object.fecha_nacimiento }} </h4>
-                        <h4> - <b>Lugar De Nacimiento: </b> {{ object.lugar_nacimiento }} </h4>
-                        <h4> - <b>Institución: </b> {{ object.institucion }} </h4>
+                        <h4> - <b>Lugar De Nacimiento: </b> {{ object.lugar_nacimiento|title }} </h4>
+                        <h4> - <b>Institución: </b> {{ object.institucion|title }} </h4>
                       </ul>
                     </div>
                   </div>
@@ -49,15 +49,15 @@
                       <hr>
                       <ul>
                         <h4> - <b>Cedula: </b> {{ object.representante.cedula_repres }} </h4>
-                        <h4> - <b>Nombre: </b> {{ object.representante.nombre_repres }} </h4>
-                        <h4> - <b>Apellido: </b> {{ object.representante.apelli_repres }} </h4>
+                        <h4> - <b>Nombre: </b> {{ object.representante.nombre_repres|title }} </h4>
+                        <h4> - <b>Apellido: </b> {{ object.representante.apelli_repres|title }} </h4>
                         <h4> - <b>Ocupación: </b> {{ object.representante.ocupacion }} </h4>
                         <h4> - <b>Profesión: </b> {% if  object.representante.profesion == None %} No Ejerce {% else %}
                              {{ object.representante.profesion }}{% endif %}  </h4>
                         <h4> - <b>Telefono Celular: </b>{% if object.representante.telef_cel == None %} No Posee {% else %} {{ object.representante.telef_cel }} {% endif %}</h4>
                         <h4> - <b>Telefono Residencia: </b>{% if object.representante.telef_res == None %} No Posee {% else %} {{ object.representante.telef_res }}{% endif %}  </h4>
                         <h4> - <b>Dirección: </b> {% if object.representante.direccion == None %} No Registro {% else %}
-                            {{ object.representante.direccion }}{% endif %} </h4>
+                            {{ object.representante.direccion|title }}{% endif %} </h4>
                       </ul>
                     </div>
                   </div>
@@ -75,7 +75,7 @@
                       <hr>
                       <ul>
                         <h4> - <b>Tipo De Vivienda: </b> {{ object.vivienda.tipo_vivien }} </h4>
-                        <h4> - <b>Zona: </b> {{ object.vivienda.zona }} </h4>
+                        <h4> - <b>Zona: </b> {{ object.vivienda.zona|title }} </h4>
                         <hr>
                         <h3>Servicios Basicos</h3>
                         <h4> - <b>Agua: </b> {% if object.vivienda.agua == True %} Si {% else %} No {% endif %} </h4>
@@ -112,12 +112,12 @@
                       <hr>
                       <ul>
                         <h4> - <b>Entidad Federal: </b> {{ object.direccion.entid_feder }} </h4>
-                        <h4> - <b>Ciudad: </b> {{ object.direccion.ciudad }} </h4>
-                        <h4> - <b>Parroquia: </b> {{ object.direccion.parroquia }} </h4>
-                        <h4> - <b>Sector: </b> {{ object.direccion.sector }} </h4>
-                        <h4> - <b>Barrio/Urbanización: </b> {{ object.direccion.barri_urban }} </h4>
-                        <h4> - <b>Calle/Avenida: </b> {{ object.direccion.calle_avend }} </h4>
-                        <h4> - <b>Apartamento/Casa: </b> {{ object.direccion.apt_casa }} </h4>
+                        <h4> - <b>Ciudad: </b> {{ object.direccion.ciudad|title }} </h4>
+                        <h4> - <b>Parroquia: </b> {{ object.direccion.parroquia|title }} </h4>
+                        <h4> - <b>Sector: </b> {{ object.direccion.sector|title }} </h4>
+                        <h4> - <b>Barrio/Urbanización: </b> {{ object.direccion.barri_urban|title }} </h4>
+                        <h4> - <b>Calle/Avenida: </b> {{ object.direccion.calle_avend|title }} </h4>
+                        <h4> - <b>Apartamento/Casa: </b> {{ object.direccion.apt_casa|title }} </h4>
                       </ul>
                     </div>
                   </div>
@@ -135,11 +135,11 @@
                       <hr>
                       <ul>
                         <h4> - <b>Cedula: </b>{% if object.familia.cedula_familia == None %} Sin Registro {% else %} {{ object.familia.cedula_familia }}{% endif %} </h4>
-                        <h4> - <b>Nombre: </b>{% if object.familia.nombre_familia == None %} Sin Registro {% else %} {{ object.familia.nombre_familia }}{% endif %}  </h4>
-                        <h4> - <b>Apellido: </b>{% if object.familia.apelli_familia == None %} Sin Registro {% else %} {{ object.familia.apelli_familia }} {% endif %}</h4>
+                        <h4> - <b>Nombre: </b>{% if object.familia.nombre_familia == None %} Sin Registro {% else %} {{ object.familia.nombre_familia|title }}{% endif %}  </h4>
+                        <h4> - <b>Apellido: </b>{% if object.familia.apelli_familia == None %} Sin Registro {% else %} {{ object.familia.apelli_familia|title }} {% endif %}</h4>
                         <h4> - <b>Ocupación: </b>{% if object.familia.ocupacion_f == None %} Sin Registro {% else %} {{ object.familia.ocupacion_f }}{% endif %} </h4>
                         <h4> - <b>Profesión: </b>{% if object.familia.profesion_f == None %} Sin Registro {% else %} {{ object.familia.profesion_f }}{% endif %} </h4>
-                        <h4> - <b>Dirección: </b>{% if object.familia.direccion == None %} Sin Registro {% else %} {{ object.familia.direccion }}{% endif %} </h4>
+                        <h4> - <b>Dirección: </b>{% if object.familia.direccion == None %} Sin Registro {% else %} {{ object.familia.direccion|title }}{% endif %} </h4>
                         <h4> - <b>Telefono Celular: </b>{% if object.familia.telef_cel_f == None %} Sin Registro {% else %} {{ object.familia.telef_cel_f }} {% endif %}</h4>
                         <h4> - <b>Telefono Residencia: </b>{% if object.familia.telef_res_f == None %} Sin Registro {% else %} {{ object.familia.telef_res_f }} {% endif %}</h4>
                         <h4> - <b>Vive Con El Alumno: </b> {% if object.familia.vive == True %} Si {% else %} No {% endif %} </h4>
@@ -177,8 +177,8 @@
                       <h2 class="text-center">Datos Laborales</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Nombre De La Empresa: </b>{% if object.empresa.nombre_empre == None %} No Posee {% else %} {{ object.empresa.nombre_empre }}{% endif %} </h4>
-                        <h4> - <b>Nombre Del jefe: </b>{% if object.empresa.nombre_jefe == None %} No Posee {% else %} {{ object.empresa.nombre_jefe }}{% endif %} </h4>
+                        <h4> - <b>Nombre De La Empresa: </b>{% if object.empresa.nombre_empre == None %} No Posee {% else %} {{ object.empresa.nombre_empre|title }}{% endif %} </h4>
+                        <h4> - <b>Nombre Del jefe: </b>{% if object.empresa.nombre_jefe == None %} No Posee {% else %} {{ object.empresa.nombre_jefe|title }}{% endif %} </h4>
                       </ul>
                     </div>
                   </div>
@@ -195,23 +195,23 @@
                       <h2 align="center">Educación Musical</h2>
                       <hr>
                       <ul>
-                        <h4> - <b>Programas Orquestales: </b>{% if object.educamusi.progama_orque == None %} Ninguno {% else %} {{ object.educamusi.progama_orque }}{% endif %} </h4>
-                        <h4> - <b>Instrumento Principal: </b>{% if object.educamusi.instru_princi == None %} Ninguno {% else %} {{ object.educamusi.instru_princi }}{% endif %}</h4>
-                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_ind == None %} Ninguno {% else %} {{ object.educamusi.prof_clas_ind }}{% endif %} </h4>
-                        <h4> - <b>Instrumento Secundario: </b>{% if object.educamusi.instru_secund == None %} Ninguno {% else %} {{ object.educamusi.instru_secund }}{% endif %}  </h4>
-                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_sec == None %} Ninguno {% else %} {{ object.educamusi.prof_clas_sec }}{% endif %} </h4>
+                        <h4> - <b>Programas Orquestales: </b>{% if object.educamusi.progama_orque == None %} Ninguno {% else %} {{ object.educamusi.progama_orque|title }}{% endif %} </h4>
+                        <h4> - <b>Instrumento Principal: </b>{% if object.educamusi.instru_princi == None %} Ninguno {% else %} {{ object.educamusi.instru_princi|title }}{% endif %}</h4>
+                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_ind == None %} Ninguno {% else %} {{ object.educamusi.prof_clas_ind|title }}{% endif %} </h4>
+                        <h4> - <b>Instrumento Secundario: </b>{% if object.educamusi.instru_secund == None %} Ninguno {% else %} {{ object.educamusi.instru_secund|title }}{% endif %}  </h4>
+                        <h4> - <b>Profesor De Clase Individual: </b>{% if object.educamusi.prof_clas_sec == None %} Ninguno {% else %} {{ object.educamusi.prof_clas_sec|title }}{% endif %} </h4>
                         <h4> - <b>Clases Academicas/Catedra Nacional: </b>  
                           {% if object.educamusi.academ_catedr == True %} Si 
-                        <h4> - <b>Nombre De La Catedra: </b> {{ object.educamusi.nombr_academi }} </h4>
+                        <h4> - <b>Nombre De La Catedra: </b> {{ object.educamusi.nombr_academi|title }} </h4>
                           {% else %} No {% endif %} 
                         </h4>
-                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Nacional: </b>{% if object.educamusi.clas_acad_cate == None %} No {% else %} {{ object.educamusi.clas_acad_cate }} {% endif %}</h4>
-                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Regional: </b> {% if object.educamusi.nom_aca_cate == None %} No {% else %}{{ object.educamusi.nom_aca_cate }}{% endif %} </h4>
-                        <h4> - <b>Escuela Especial De Musica: </b>{% if object.educamusi.inst_espc_mus == None %} No {% else %} {{ object.educamusi.inst_espc_mus }} {% endif %}</h4>
+                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Nacional: </b>{% if object.educamusi.clas_acad_cate == None %} No {% else %} {{ object.educamusi.clas_acad_cate|title }} {% endif %}</h4>
+                        <h4> - <b>Seleccionado Para Una Orquesta/Coro Regional: </b> {% if object.educamusi.nom_aca_cate == None %} No {% else %}{{ object.educamusi.nom_aca_cate|title }}{% endif %} </h4>
+                        <h4> - <b>Escuela Especial De Musica: </b>{% if object.educamusi.inst_espc_mus == None %} No {% else %} {{ object.educamusi.inst_espc_mus|title }} {% endif %}</h4>
                         <h4> - <b>Recibe Beca/Ayuda Por Cursar Estudios Musicales: </b> {% if object.educamusi.bec_est_esp == True %} Si 
-                          <h4> - <b>Nombre Del Curso/s: </b> {{ object.educamusi.estu_cur }} 
+                          <h4> - <b>Nombre Del Curso/s: </b> {{ object.educamusi.estu_cur|title }} 
                           </h4>
-                          <h4> - <b>Institución/Empresa Que Otorga La Beca: </b> {{ object.educamusi.inst_empr_bec }} </h4>
+                          <h4> - <b>Institución/Empresa Que Otorga La Beca: </b> {{ object.educamusi.inst_empr_bec|title }} </h4>
                         {% else %} No {% endif %} 
                         </h4>
                       </ul>

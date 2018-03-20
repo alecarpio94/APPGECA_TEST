@@ -83,11 +83,15 @@
   <script src="{% static 'js/forms.js'%}"></script>
   <script src="{% static 'js/bootstrap-datepicker.min.js'%}"></script>
   <script>
+    var max = new Date();
+    max.setYear(max.getFullYear()); 
     $('#demoDate').datepicker({
       format: "dd/mm/yyyy",
       autoclose: true,
+      'endDate': max,
       todayHighlight: true
     });
+    
   </script>
 {% endblock javascript %}
 

@@ -23,8 +23,8 @@
                         <th style="text-align: center;">Cedula</th>
                         <th style="text-align: center;">Nombre</th>
                         <th style="text-align: center;">Apellido</th>
-                        <th style="text-align: center;">Constancia De Estudio</th>
-                        <th style="text-align: center;">Constancia De Instrumento</th>
+                        <th style="text-align: center; width: 175px;">Constancia De Estudio</th>
+                        <th style="text-align: center; width: 195px">Constancia De Instrumento</th>
                       </tr>
                     </thead>
 
@@ -35,8 +35,8 @@
                         <td>{{ alumno.cedula_alumno }}</td>
                         <td>{{ alumno.primer_nombre }}</td>
                         <td>{{ alumno.primer_apellido }}</td>
-                        <td><a href="{% url 'reportes:constan_alumnos' pk=alumno.pk %}" class="btn btn-primary" style="margin-left: 75px; width: 100px;">Ver</a></td>
-                        <td><a href="{% url 'reportes:const_asign' alumno.pk %}" class="btn btn-primary" style="margin-left: 105px; width: 100px;" >Ver</a></td>
+                        <td><a href="{% url 'reportes:constan_alumnos' pk=alumno.pk %}" target="_blank" class="btn btn-primary" style="width: 100%;">Ver</a></td>
+                        <td><a href="{% url 'reportes:const_asign' alumno.pk %}" target="_blank" class="btn btn-primary" style=" width: 100%;" >Ver</a></td>
                       </tr>
                       {% endfor %}
                       {% else %}

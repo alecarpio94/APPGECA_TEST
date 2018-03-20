@@ -10,7 +10,13 @@ urlpatterns = [
 	
 	url(r'^constancia_instrumento/(?P<pk>[-\ \w]+)$', AlumnoInstrumentoPDF.as_view(),name="const_asign"),
 
+	url(r'^lista_constancia_instrumento/(?P<pk>[-\ \w]+)$', ListaAlumnoInstrumentoPDF.as_view(),name="list_const_asign"),
+
 	url(r'^constancia_profesor/(?P<pk>[-\ \w]+)$', ProfesorPDF.as_view(),name="const_trab"),
+
+	url(r'^constancia_evaluacion/(?P<pk>[-\ \w]+)$', EvaluacionAlumnoPDF.as_view(),name="const_eva"),
+
+	url(r'^lista_alumnos_profesor/$', ListaAlumnoProfesor.as_view(),name="lista_alum"),
 
 	url(r'^reporte_lista_alumnos/$',ListaAlumnosPDF.as_view(), name='reporte_alumnos'),
 
