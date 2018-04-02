@@ -7,3 +7,5 @@ from .models import *
 admin.site.register(Profesor)
 admin.site.register(Asignados)
 admin.site.register(Evaluado)
+admin.site.register(PersonalAdmin)
+admin.site.register(PersonalObrero)

@@ -42,7 +42,7 @@ import os
 ######################PROFESOR ADMIN####################
 class ProfCreateView(LoginRequiredMixin,AdminRequiredMixin, CreateView):
 	model = Profesor
-	fields = ['cedula_profesor', 'nombre_profesor', 'apellido_profesor','asignacion']
+	fields = ['cedula_profesor', 'nombre_profesor', 'apellido_profesor','asignacion', 'telefono']
 	template_name = 'profesor/crear_profesor.html'
 	success_url = reverse_lazy('profesor:list_profesor')
 
@@ -185,3 +185,29 @@ class RetiroAlumnoView(LoginRequiredMixin,AdminRequiredMixin, DeleteView):
 	template_name = 'asignacion/asignados_confirm_delete.html'
 	model = Asignados
 	success_url = reverse_lazy('profesor:alumno_profesor')
+
+
+
+
+class PersonalObreCreateView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
+	model = PersonalObrero
+	fields = ['cedula', 'nombre', 'apellido','cargo', 'telefono']
+	template_name = 'personal/crear_obrero.html'
+	success_url = reverse_lazy('profesor:list_obrero')
+
+class PersonalObreListView(LoginRequiredMixin, AdminRequiredMixin,ListView):
+	context_object_name = 'ListaObrero'
+	model = PersonalObrero
+	template_name = 'personal/listado_obreros.html'
+
+
+class PersonalAdminCreateView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
+	model = PersonalAdmin
+	fields = ['cedula', 'nombre', 'apellido','cargo', 'telefono']
+	template_name = 'personal/crear_personal.html'
+	success_url = reverse_lazy('profesor:list_personal')
+
+class PersonalAdminListView(LoginRequiredMixin, AdminRequiredMixin,ListView):
+	context_object_name = 'ListaAdministrativos'
+	model = PersonalAdmin
+	template_name = 'personal/listado_personal.html'

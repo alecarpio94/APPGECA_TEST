@@ -1,6 +1,6 @@
 {% extends  'base_admin.html' %}
 
-{%block title%}Nuevo Profesor{% endblock title%}
+{%block title%}Nuevo Personal Administrativo{% endblock title%}
 
 {% load widget_tweaks %}
 
@@ -9,7 +9,7 @@
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1><i class="fa fa-edit"></i> Nuevo Profesor</h1>
+      <h1><i class="fa fa-edit"></i> Nuevo Personal Adminitrativo</h1>
       <p><b>NOTA: Los campos marcados de rojo son obligadorios.</b></p>
     </div>
   </div>
@@ -27,25 +27,25 @@
                     <div class="cedula_profesor">
                       <div class="col-md-12">
                         <label class="text-danger">Cedula</label>
-                        {{ form.cedula_profesor | add_class:'form-control' |attr:"placeholder:Ingrese Numero De Cedula"|attr:'autocomplete:off'|attr:"minlength=8"| add_error_class:'form-control is-invalid' }}
+                        {{ form.cedula | add_class:'form-control' |attr:"placeholder:Ingrese Numero De Cedula"|attr:'autocomplete:off'|attr:"minlength=8"| add_error_class:'form-control is-invalid' }}
                       </div>
                     </div>
                   </div>
 
                   <div class="FormGroup">
-                    <div class="nombre_profesor">
+                    <div class="nombre">
                       <div class="col-md-12">
-                        <label class="text-danger">Nombre Del Profesor</label>
-                        {{ form.nombre_profesor |add_error_attr:"aria-invalid:true"| add_class:'form-control'| attr:"placeholder:Ingrese Nombre Del Profesor"|attr:'autocomplete:off'| add_error_class:'form-control is-invalid' }}
+                        <label class="text-danger">Nombre Del Personal</label>
+                        {{ form.nombre |add_error_attr:"aria-invalid:true"| add_class:'form-control'| attr:"placeholder:Ingrese Nombre Del Personal"|attr:'autocomplete:off'| add_error_class:'form-control is-invalid' }}
                       </div>
                     </div>
                   </div>
 
                   <div class="FormGroup">
-                    <div class="apellido_profesor">
+                    <div class="apellido">
                       <div class="col-md-12">
-                        <label class="text-danger">Apellido Del Profesor</label>
-                        {{ form.apellido_profesor | add_class:'form-control'|attr:"placeholder:Ingrese Apellido Del   Profesor"| add_error_class:'form-control is-invalid'|attr:'autocomplete:off' }}
+                        <label class="text-danger">Apellido Del Personal</label>
+                        {{ form.apellido | add_class:'form-control'|attr:"placeholder:Ingrese Apellido Del Personal "| add_error_class:'form-control is-invalid'|attr:'autocomplete:off' }}
                       </div>
                     </div>
                   
@@ -60,25 +60,18 @@
                   <div class="FormGroup">
                     <div class="asignacion">
                       <div class="col-md-12">
-                        <label class="text-danger">Asignación</label>
-                        {{ form.asignacion | add_class:'form-control' }}
+                        <label class="text-danger">Cargo</label>
+                        {{ form.cargo | add_class:'form-control'|attr:'placeholder:Cargo Del Personal' }}
                       </div>
                     </div>
                   </div>
 
                     <hr>
-                    {% if form.cedula_profesor.errors %}
+                    {% if form.cedula.errors %}
                       <div class="alert alert-dismissible alert-danger">
                         <button class="close" type="button" data-dismiss="alert">×</button>
                           <h4>Alerta!</h4>                    
-                            <p>Esta Cedula ya esta registrada con otro Profesor.</p>
-                      </div>
-                    {% endif %}
-                    {% if form.asignacion.erros %}
-                      <div class="alert alert-dismissible alert-danger">
-                        <button class="close" type="button" data-dismiss="alert">×</button>
-                          <h4>Alerta!</h4>                    
-                            <p>Este Instrumento ya esta registrado con el Profesor.</p>
+                            <p>Esta Cedula ya esta registrada con otra persona.</p>
                       </div>
                     {% endif %}
                   <div class="col-md-12">

@@ -1,0 +1,63 @@
+{% extends 'base_reportes.html' %}
+{% block content %}
+<style>
+    @page {
+    size: letter;
+    margin: 1cm;
+    margin-top: 1.5cm;
+    margin-right: 1.5cm;
+    margin-left: 1.5cm;
+    margin-bottom: 1cm;
+    }
+  h1{
+    text-align: center;
+  }
+  p{
+    text-align: center;
+  }
+</style>
+<div class="content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <section class="invoice">
+          <div class="row">
+            <div class="col-xs-12">
+              <img src="static/img/banner.png" class="imagen" alt="">
+              <h1 class="page-heade" align="center">Listado Del Personal Administrativo</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-striped">
+                    <thead>
+                      <tr role="row" style="border: 1px solid black; padding: 1 1 1 1px; font-weight: bold;">
+                        <th style="background-color: brown; font-size: 13px;">Cedula</th>
+                        <th style="background-color: brown; font-size: 13px;">Nombre</th>
+                        <th style="background-color: brown; font-size: 13px;">Apellido</th>
+                        <th style="background-color: brown; font-size: 13px;">Telefono</th>
+                        <th style="background-color: brown; font-size: 13px;">Cargo</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for object_list in personal %}
+                      <tr class="row" style="border: 1px solid black; text-align: center; padding: 1 1 1 1px;">
+                        <td style="font-size: 12px;">{{ object_list.cedula|title }}</td>
+                        <td style="font-size: 12px;">{{ object_list.nombre|title }}</td>
+                        <td style="font-size: 12px;">{{ object_list.apellido|title }}</td>
+                        <td style="font-size: 12px;">{{ object_list.telefono|title }}</td>
+                        <td style="font-size: 12px;">{{ object_list.cargo|title }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}  

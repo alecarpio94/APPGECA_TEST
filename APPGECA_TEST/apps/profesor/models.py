@@ -17,6 +17,7 @@ class Profesor(models.Model):
 	cedula_profesor = models.CharField(apodo('Cedula'),max_length=8,primary_key=True, null=False, unique=True)
 	nombre_profesor = models.CharField(apodo('Nombre'),max_length=40)
 	apellido_profesor = models.CharField(apodo('Apellido'),max_length=40)
+	telefono = models.CharField(apodo('Telefono'),max_length=11)
 	asignacion = models.ForeignKey(Instrumento)
 
 	def __unicode__(self):
@@ -54,3 +55,25 @@ class Evaluado(models.Model):
 	def get_full_name(self):
 		return '%s'%(self.asignados)
 	
+
+class PersonalAdmin(models.Model):
+
+	cedula = models.CharField(max_length=8)
+	nombre = models.CharField(max_length=30)
+	apellido = models.CharField(max_length=30)
+	telefono = models.CharField(max_length=11)
+	cargo = models.CharField(max_length=15)
+
+	def __unicode__(self):
+		return '%s %s'%(self.nombre, self.apellido)
+
+class PersonalObrero(models.Model):
+
+	cedula = models.CharField(max_length=8)
+	nombre = models.CharField(max_length=30)
+	apellido = models.CharField(max_length=30)
+	telefono = models.CharField(max_length=11)
+	cargo = models.CharField(max_length=15)
+
+	def __unicode__(self):
+		return '%s %s'%(self.nombre, self.apellido)

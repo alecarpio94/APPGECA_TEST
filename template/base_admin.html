@@ -72,6 +72,8 @@
 							<ul class="treeview-menu">
 								<li><a href="{% url 'alumno:alumnoR' %}"><i class="fa fa-circle-o"></i> Registrar Alumno</a></li>
 								<li><a href="{% url 'profesor:profesorR' %}"><i class="fa fa-circle-o"></i> Registrar Profesor</a></li>
+								<li><a href="{% url 'profesor:personalR' %}"><i class="fa fa-circle-o"></i> Registrar P. Administrativo</a></li>
+								<li><a href="{% url 'profesor:obreroR' %}"><i class="fa fa-circle-o"></i> Registrar P. Obrero</a></li>
 								<li><a href="{% url 'instrumento:instrumentoR' %}"><i class="fa fa-circle-o"></i> Registrar Instrumento</a></li>
 								<li><a href="{% url 'actividad:actividadR' %}"><i class="fa fa-circle-o"></i> Registrar Actividad</a></li>
 							</ul>
@@ -80,6 +82,8 @@
 							<ul class="treeview-menu">
 								<li><a href="{% url 'alumno:list_alumno' %}"><i class="fa fa-circle-o"></i>Lista De Alumnos</a></li>
 								<li><a href="{% url 'profesor:list_profesor' %}"><i class="fa fa-circle-o"></i>Lista De Profesores</a></li>
+								<li><a href="{% url 'profesor:list_personal' %}"><i class="fa fa-circle-o"></i> Lista P. Administrativo</a></li>
+								<li><a href="{% url 'profesor:list_obrero' %}"><i class="fa fa-circle-o"></i> Lista P. Obrero</a></li>
 								<li><a href="{% url 'instrumento:list_instrumento' %}"><i class="fa fa-circle-o"></i>Lista De Instrumentos</a></li>
 								<li><a href="{% url 'actividad:list_actividades' %}"><i class="fa fa-circle-o"></i>Lista De Actividades</a></li>
 								<li><a href="{% url 'profesor:alumno_profesor' %}"><i class="fa fa-circle-o"></i>Lista Alumnos Asignados</a></li>
@@ -100,6 +104,8 @@
 				                	<li><a target="_blank" href="{% url 'reportes:reporte_alumnos' %}"><i class="fa fa-circle-o"></i> Listado De Alumnos</a></li>
 				                	<li><a target="_blank" href="{% url 'reportes:reporte_profesor' %}"><i class="fa fa-circle-o"></i><span> Listado De Profesores</span></a></li>
 				                	<li><a target="_blank" href="{% url 'reportes:reporte_instrumentos' %}"><i class="fa fa-circle-o"></i><span> Listado De Instrumentos</span></a></li>
+				                	<li><a target="_blank" href="{% url 'reportes:reporte_personal' %}"><i class="fa fa-circle-o"></i><span> Personal Administrativo</span></a></li>
+				                	<li><a target="_blank" href="{% url 'reportes:reporte_obrero' %}"><i class="fa fa-circle-o"></i><span> Personal Obrero</span></a></li>
 				              	</ul>
 				            	</li>
 							</ul>
@@ -126,7 +132,7 @@
 						</li>						
 						<li class="treeview"><a href="#"><i class="fa fa-file-pdf-o"></i><span>Reportes</span><i class="fa fa-angle-right"></i></a>
 							<ul class="treeview-menu">
-								<li class="treeview"><a target="_blank" href="{% url 'reportes:const_trab' user.ci %}"><i class="fa fa-circle-o"></i><span>Constancia</span><i></i></a>
+								<!-- <li class="treeview"><a target="_blank" href="{% url 'reportes:const_trab' user.ci %}"><i class="fa fa-circle-o"></i><span>Constancia</span><i></i></a> -->
 								<li class="treeview"><a target="_blank" href="{% url 'reportes:lista_alum' %}"><i class="fa fa-circle-o"></i><span>Lista De Alumnos</span><i></i></a>
 							</ul>
 						</li>

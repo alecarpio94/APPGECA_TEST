@@ -1,14 +1,14 @@
 {% extends  'base_admin.html' %}
-{%block title%}Listado De Profesores{% endblock title%}
+{%block title%}Listado De Personal Administrativo{% endblock title%}
 {% load staticfiles %}
 {% block content %}
 <div class="content-wrapper">
   <div class="page-title">
     <div>
-      <h1>Listado De Profesores</h1>
+      <h1>Listado De Personal Administrativo</h1>
     </div>
     <div>
-      <a class="btn btn-primary btn-flat" href="{% url 'profesor:profesorR' %}"><i class="fa fa-lg fa-plus"></i></a>
+      <a class="btn btn-primary btn-flat" href=""><i class="fa fa-lg fa-plus"></i></a>
     </div>
   </div>
   <div class="row">
@@ -24,30 +24,24 @@
                       <th>Cedula</th>
                       <th>Nombre</th>
                       <th>Apellido</th>
-                      <th>Asignacion</th>
+                      <th>Cargo</th>
                       <th>Telefono</th>
-                      <!-- <th>Constancia</th> -->
-                      <!-- <th>Actualizar</th> -->
-                      <th>Eliminar</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     {% if object_list %}
-                    {% for profesor in object_list %}
+                    {% for personal in object_list %}
                     <tr class="odd">
-                      <td>{{ profesor.cedula_profesor }}</td>
-                      <td>{{ profesor.nombre_profesor|title }}</td>
-                      <td>{{ profesor.apellido_profesor|title }}</td>
-                      <td>{{ profesor.asignacion|title }}</td>
-                      <td>{{ profesor.telefono }}</td>
-                      <!-- <td><a href="{% url 'reportes:const_trab' profesor.pk %}" style="width: 100%;" class="btn btn-primary" >Ver Mas</a></td> -->
-                      <!-- <td><a href="{% url 'profesor:editar_profesor' profesor.cedula_profesor %}"  class="btn btn-info" >ir</a> -->
-                      <td><a href="{% url 'profesor:eliminar_profesor' profesor.cedula_profesor %}" style="width: 100%;" class="btn btn-danger">Eliminar</a></td>
+                      <td>{{ personal.cedula }}</td>
+                      <td>{{ personal.nombre|title }}</td>
+                      <td>{{ personal.apellido|title }}</td>
+                      <td>{{ personal.cargo|title }}</td>
+                      <td>{{ personal.telefono }}</td>
                     </tr>
                     {% endfor %}
                     {% else %}
-                    <td valign="top" colspan="7" class="dataTables_empty">No hay Profesores Registrados</td>
+                    <td valign="top" colspan="7" class="dataTables_empty">No hay Ningun Personal Registrados</td>
                     {% endif %}  
                   </tbody>
                 </div>

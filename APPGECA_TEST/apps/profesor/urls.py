@@ -9,6 +9,13 @@ urlpatterns = [
 	url(r'^borrar_profesor/(?P<pk>\d+)$',ProfDeleteView.as_view(), name='eliminar_profesor'),
 	url(r'^retiro/(?P<pk>\d+)$',RetiroAlumnoView.as_view(), name='retiro_alumno'),
 
+	#################################OBRERO####################################
+	url(r'^nuevo_obrero/$', PersonalObreCreateView.as_view(), name = 'obreroR'),
+	url(r'^listado_de_obreros/$', PersonalObreListView.as_view(),name="list_obrero"),
+
+	###########################PERSONAL ADMINISTRATIVO#########################
+	url(r'^nuevo_personal/$', PersonalAdminCreateView.as_view(), name = 'personalR'),
+	url(r'^listado_de_personal/$', PersonalAdminListView.as_view(),name="list_personal"),	
 
 	url(r'^listado_de_profesor/$', ProfListView.as_view(),name="list_profesor"),
 	url(r'^asignando_alumno/$', AlumAsigView.as_view(),name="asig_alumn"),

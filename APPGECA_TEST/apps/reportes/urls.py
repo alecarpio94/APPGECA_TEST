@@ -24,5 +24,9 @@ urlpatterns = [
 
 	url(r'^reporte_lista_instrumentos/$',ListaInstrumentosPDF.as_view(), name='reporte_instrumentos'),
 
+	url(r'^reporte_lista_personal/$',ListaPersonalAdministrativoPDF.as_view(), name='reporte_personal'),
+
+	url(r'^reporte_lista_obrero/$',ListaPersonalObreroPDF.as_view(), name='reporte_obrero'),
+
 	url(r'^manual/$',ManualPDF.as_view(), name='manual'),
 ]

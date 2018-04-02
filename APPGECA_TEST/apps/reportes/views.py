@@ -7,7 +7,7 @@ from django.views.generic import View
 from django.views.generic import TemplateView, FormView
 from django.views.generic import ListView, TemplateView,DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from ...apps.profesor.models import Profesor, Evaluado, Asignados
+from ...apps.profesor.models import *
 from ...apps.alumno.models import Alumno
 from ...apps.instrumento.models import *
 from datetime import date, datetime
@@ -109,6 +109,18 @@ class ListaProfesoresPDF(LoginRequiredMixin, View):
 	def get(self, *args, **kwargs):
 		profesor = Profesor.objects.all()
 		return write_pdf('reportes/report-prof-list.html', {'profesor':profesor})
+
+####################################################################################
+class ListaPersonalAdministrativoPDF(LoginRequiredMixin, View):
+	def get(self, *args, **kwargs):
+		personal = PersonalAdmin.objects.all()
+		return write_pdf('reportes/listado_personal_adminstrativo.html', {'personal':personal})
+
+####################################################################################
+class ListaPersonalObreroPDF(LoginRequiredMixin, View):
+	def get(self, *args, **kwargs):
+		personal = PersonalObrero.objects.all()
+		return write_pdf('reportes/listado_personal_obrero.html', {'personal':personal})
 
 #####################################################################################
 class ListaInstrumentosPDF(LoginRequiredMixin, View):
