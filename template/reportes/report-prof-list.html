@@ -4,7 +4,7 @@
     @page {
     size: letter;
     margin: 1cm;
-    margin-top: 1.5cm;
+    margin-top: 1cm;
     margin-right: 1.5cm;
     margin-left: 1.5cm;
     margin-bottom: 1cm;
@@ -15,6 +15,7 @@
   p{
     text-align: center;
   }
+
 </style>
 <div class="content-wrapper">
   <div class="row">
@@ -23,8 +24,8 @@
         <section class="invoice">
           <div class="row">
             <div class="col-xs-12">
-              <img src="static/img/banner.png" class="imagen" alt="">
-              <h1 align="center">Listado De Los Profesores</h1>
+              <img src="static/images/header.png" alt="">
+              <h1 style="font-size: 15px;" align="center">Listado De Los Profesores</h1>
             </div>
           </div>
           <div class="row">
@@ -36,6 +37,7 @@
                     <th style="background-color: brown; font-size: 14px;">Nombre</th>
                     <th style="background-color: brown; font-size: 14px;">Apellido</th>
                     <th style="background-color: brown; font-size: 14px;">Asignacion</th>
+                    <th style="background-color: brown; font-size: 14px;">Telefono</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -46,6 +48,7 @@
                     <td>{{ object_list.nombre_profesor|title }}</td>
                     <td>{{ object_list.apellido_profesor|title }}</td>
                     <td>{{ object_list.asignacion|title }}</td>
+                    <td>{{ object_list.telefono }}</td>
                   </tr>
                   {% endfor %}
                   {% else %}

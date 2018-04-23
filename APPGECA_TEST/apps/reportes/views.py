@@ -43,9 +43,10 @@ class AlumnoPDF(LoginRequiredMixin,View):
 #####################################################################################
 class AlumnoInstrumentoPDF(LoginRequiredMixin,View):
 	def get(self, *args, **kwargs):
+		date = datetime.now()
 		asig = Asignatura.objects.filter(alumno=self.kwargs['pk']).first()
 		if asig:
-			return write_pdf('reportes/constancia_instrumento_alumno.html', {'asignatsura':asig ,'request':self.request})
+			return write_pdf('reportes/constancia_instrumento_alumno.html', {'asignatura':asig, 'date':date ,'request':self.request})
 		else:
 			return render(self.request,'reportes/error404.html')
 

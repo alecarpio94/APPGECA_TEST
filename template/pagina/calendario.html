@@ -31,6 +31,7 @@
 <script type='text/javascript' src="{% static 'js/fullcalendar.js' %}"></script>
 <script type='text/javascript' src="{% static 'js/locale-all.js' %}"></script>
 <script type='text/javascript' src="{% static 'js/jquery.qtip.js' %}"></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script type='text/javascript'>
     $(document).ready(function() {
         var tooltip = $('<div/>').qtip({
@@ -68,8 +69,8 @@
               var content = '<h3>'+data.title+'</h3>' + 
                 '<p><b>Inicia:</b> '+data.start.format("DD/MM/YYYY ") +'<br />' + 
                 '<p><b>Hora:</b>'+data.start.format(" h:mmA") + (" - ") + data.end.format("h:mmA") + '<br />' + 
-                (data.end && '<p><b>Culmina:</b> '+data.end.format("DD/MM/YYYY") +'</p>' + 
-                '<p><b>Descripcion:</b> '+data.description+'<br />' || '');
+                (data.end && '<p><b>Culmina:</b> '+data.end.format("DD/MM/YYYY") +'</p>' +
+                 '<p><b>Descripcion:</b> '+data.description+'<br />' || '');
 
               tooltip.set({
                 'content.text': content

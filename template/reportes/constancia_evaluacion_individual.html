@@ -23,9 +23,9 @@
         <section class="invoice">
           <div class="row">
             <div class="col-xs-12">
-              <img src="static/img/banner.png" class="imagen" alt="">
-              <h2 class="page-heade" align="center">Evaluaciones Del Alumno {{ evaluado.asignados }}</h2>
-              <p align="right"><b>{% now "d/F/Y" %}</b></p>
+              <img src="static/images/header.png" alt="">
+              <h1 class="page-heade" style="font-size: 15px;" align="center">Evaluaciones Del Alumno {{ evaluado.asignados }}</h1>
+              <!-- <p align="right"><b>{% now "d/F/Y" %}</b></p> -->
             </div>
           </div>
           <div class="row">
@@ -33,15 +33,15 @@
               <table class="table table-striped">
                     <thead>
                       <tr role="row" style="border: 1px solid black; padding: 1 1 1 1px; font-weight: bold;">
-                        <th style="background-color: #22bbaa; font-size: 11px;">Fecha De Evaluacion</th>
-                        <th style="background-color: #22bbaa; font-size: 11px;">Descripcion</th>
-                        <th style="background-color: #22bbaa; font-size: 11px;">Ponderacion</th>
+                        <th style="background-color: brown; font-size: 13px;">Fecha De Evaluacion</th>
+                        <th style="background-color: brown; font-size: 13px;">Descripcion</th>
+                        <th style="background-color: brown; font-size: 13px;">Ponderacion</th>
                       </tr>
                     </thead>
 
                     <tbody>
                       {% for evaluado in evaluados %}
-                      <tr class="row" style="border: 1px solid black; text-align: center; padding: 1 1 1 1px;">
+                      <tr class="row" style="border: 1px solid black; text-align: center; padding: 1 1 1 1px; font-size: 12px;">
                           <th>{{ evaluado.fecha }}</th>
                           <th>{{ evaluado.descripcion }}</th>
                           <th>{{ evaluado.examen }}</th>

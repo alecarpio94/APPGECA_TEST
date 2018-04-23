@@ -8,9 +8,9 @@
     size: letter;
     margin: 1cm;
     margin-top: 1.5cm;
-    margin-right: 1.5cm;
-    margin-left: 1.5cm;
-    margin-bottom: 1cm;
+    margin-right: 3cm;
+    margin-left: 3cm;
+    margin-bottom: 2.5cm;
     }
   h1{
     text-align: center;
@@ -19,9 +19,11 @@
     text-align: center;
   }
 </style>
-<div class="reporte card">
+<div class="reporte">
   <div class="Topbanner">
-    <img src="static/img/banner.png" class="imagen" alt="">
+    <img src="static/images/header.png" alt="">
+<br>
+<br>
       <h1 class="Title" style="font-size: 22px">Constancia De Instrumento</h1>
 
   </div>
@@ -29,43 +31,27 @@
 
   <div class="Page col-lg-12">
 
-    <p class="content" style="font-size: 14px;" align="justify">
-      El suscrito <strong class="bold">{{ request.user.get_full_name|title }}</strong> titular de la cedula de identidad
-      <strong class="bold">{{ request.user.ci }}</strong>, en mi condición de Coordinador de la Orquesta Sinfonica Simon Bolivar en el
-      Municipio Guanare, hago constar, que el ciudadano(a) <strong class="bold">{{ asignatura.alumno.get_full_name|title }}</strong>,
-      Titular de la cedula de identidad <strong class="bold">{{ asignatura.alumno.cedula_alumno|title }}</strong>, es poseedor del siguiente instrumento: <strong>{{ asignatura.instrumento|title }}</strong> sobre el cual ejerce actividades academicas en
-      <strong class="bold">LA ORQUESTA SINFONICA SIMON BOLIVAR DEL ESTADO PORTUGUESA.</strong>
+    <p class="content" style="font-size: 15px;" align="justify">
+      Quien subscribe, Lcd. <strong class="bold">{{ request.user.get_full_name|title }}</strong> titular de la cedula de identidad
+      <strong class="bold">{{ request.user.ci }}</strong>, en mi condición de Coordinador de la Orquesta Sinfonica y Coros Juveniles e Infantiles de Guanare, hago constar, que el ciudadano(a) <strong class="bold">{{ asignatura.alumno.get_full_name|title }}</strong>, titular de la cedula de identidad <strong class="bold">{{ asignatura.alumno.cedula_alumno|title }}</strong>, es Integrante regular de nuestra Institución e Integrante de "Orquesta Sinfónica Regional Juvenil" bajo la catedra: <strong>{{ asignatura.instrumento|title }}</strong> 
     </p>
 
       <br>
-      <br>
 
-      <p class="content-pOne" style="font-size: 14px;" align="justify">
-        <i>
-          “Bolívar: no araste en el mar, aquí estamos haciendo realidad el sueño
-          de una gran Patria Venezuela y la unidad de América Latina en un mundo
-          en equilibrio y en paz”
-        </i>
-
-        <br><br>
-
-      </p>
-
-      <br>
-
-      <p class="content-pTwo" style="font-size: 14px;" align="justify">
-        Constancia que se expide a petición de la parte interesado(a) en Guanare, a los {{ dia }} días del mes {{ mes }} del año {{ ano }}.
+      <p class="content-pTwo" style="font-size: 15px;" align="justify">
+        Constancia que se expide a petición de la parte interesada, en Guanare el {{ date|date }}.
       </p>
 
       <br>
       <br>
 
-      <p class="content-pTree" style="font-size: 14px;" align="center">
+      <p class="content-pTree" style="font-size: 15px;" align="center">
         <strong class="bold">ATENTAMENTE:</strong> <br><br>
         <strong class="bold">_____________________________</strong> <br>
-        <b>{{ request.user.get_full_name|title }}</b> <br>
-        SECRETARIO(A) DE LA ORQUESTA SINFONICA DEL ESTADO PORTUGUESA<br>
-        EDO GUANARE<br>
+        <b>Lcd. {{ request.user.get_full_name|title }}</b> <br>
+        Coordinadoro(a) del Nucleo
+        Telefono 0257-2517614
+        <br>
       </p>
 
     </p>

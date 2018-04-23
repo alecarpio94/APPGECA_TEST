@@ -23,8 +23,8 @@
         <section class="invoice">
           <div class="row">
             <div class="col-xs-12">
-              <img src="static/img/banner.png" class="imagen" alt="">
-              <h2 class="page-heade" align="center">Listado de los alumnos del profesor {{ request.user.get_full_name|title }}</h2>
+              <img src="static/images/header.png" alt="">
+              <h2 class="page-heade" style="font-size: 15px;" align="center">Listado de los alumnos del profesor {{ request.user.get_full_name|title }}</h2>
             </div>
           </div>
           <div class="row">
@@ -32,16 +32,16 @@
               <table class="table table-striped">
                  <thead>
                       <tr role="row">
-                        <th style="border: 1px solid black; padding: 1 1 1 1px; background-color: brown;">Nombre</th>
-                        <th style="border: 1px solid black; padding: 1 1 1 1px; background-color: brown;">Apellido</th>
+                        <th style="border: 1px solid black; padding: 1 1 1 1px; background-color: brown; font-size: 13px;">Nombre</th>
+                        <th style="border: 1px solid black; padding: 1 1 1 1px; background-color: brown; font-size: 13px;">Apellido</th>
                       </tr>
                     </thead>
 
                     <tbody>
                       {% for asignados in object_list%}
                         <tr class="odd">
-                          <th style="padding: 1 1 1 1px; border: 1px solid black;">{{ asignados.alumno.primer_nombre|title }}</th>
-                          <th style="padding: 1 1 1 1px; border: 1px solid black;">{{ asignados.alumno.primer_apellido|title }}</th>
+                          <th style="padding: 1 1 1 1px; border: 1px solid black; font-size: 12px;">{{ asignados.alumno.primer_nombre|title }}</th>
+                          <th style="padding: 1 1 1 1px; border: 1px solid black; font-size: 12px;">{{ asignados.alumno.primer_apellido|title }}</th>
                         </tr>
                       {% empty %}
                       <td valign="top" colspan="2" class="dataTables_empty">No hay datos disponibles en la tabla</td>
