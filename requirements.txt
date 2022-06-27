@@ -47,7 +47,7 @@ pyPdf==1.13
 PyPDF2==1.26.0
 pytz==2017.2
 queuelib==1.4.2
-reportlab==3.4.0
+reportlab==3.5.55
 Scrapy==1.4.0
 service-identity==17.0.0
 six==1.11.0
