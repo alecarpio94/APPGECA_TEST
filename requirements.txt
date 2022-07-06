@@ -29,7 +29,7 @@ idna==2.6
 incremental==17.5.0
 ipaddress==1.0.18
 kombu==3.0.37
-lxml==4.1.1
+lxml==4.9.1
 olefile==0.44
 parsel==1.2.0
 Pillow==4.3.0
